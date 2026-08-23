@@ -46,6 +46,16 @@ h1{text-align:center}
 .word-table th,.word-table td{border:1px solid #ddd;padding:10px;text-align:left}
 .word-table th{background:#eef3f8}
 .marked-badge{display:inline-block;background:#dc3545;color:#fff;padding:5px 9px;border-radius:5px;font-size:13px}
+
+.answer-section{margin:25px 0;padding:20px;border-radius:10px}
+.answer-section h2{margin-top:0}
+.correct-section{background:#eaf7ee;border:1px solid #b9e2c5}
+.incorrect-section{background:#fff0f0;border:1px solid #efb7b7}
+.unanswered-section{background:#fff8e6;border:1px solid #f0d38a}
+.empty-section{padding:15px;background:#fff;border-radius:7px;color:#666}
+.reattempt-button{display:block;margin:25px auto 5px;background:#0d6efd;color:#fff;border:0;border-radius:7px;padding:13px 28px;font-size:18px;cursor:pointer}
+.reattempt-button:hover{background:#084298}
+
 @media(max-width:600px){body{padding:10px}.question{padding:18px}.option{font-size:16px}.navigation button{flex:1 1 100%}}
 </style>
 </head>
@@ -72,6 +82,9 @@ h1{text-align:center}
 <button class="nav-button" id="nextButton" type="button" onclick="saveAndNext()">Save &amp; Next</button>
 </div>
 <div class="submit-container" id="submitContainer" style="display:none">
+<p id="submitStatus" style="font-weight:bold;margin-bottom:10px;">
+All questions answered. You can submit the test now.
+</p>
 <button class="submit-button" type="button" onclick="submitTest()">Submit Test</button>
 </div>
 </div>
@@ -79,8 +92,22 @@ h1{text-align:center}
 <div id="result">
 <div class="result-title">Test Submitted Successfully!</div>
 <div class="score" id="score"></div>
-<p style="text-align:center">Click <strong>Show Answer</strong> to see the question pattern, word-by-word explanation, formula and calculation.</p>
-<div id="review"></div>
+<p style="text-align:center">
+Click <strong>Show Answer</strong> to see the question pattern, word-by-word explanation,
+formula and step-by-step calculation.
+</p>
+
+<div id="resultSummary" style="text-align:center;font-size:18px;font-weight:bold;"></div>
+
+<div id="correctSection"></div>
+<div id="incorrectSection"></div>
+<div id="unansweredSection"></div>
+
+<button class="reattempt-button" type="button" onclick="reattemptTest()">
+    Reattempt Test
+</button>
+
+<div id="review" style="display:none"></div>
 </div>
 </div>
 
@@ -322,13 +349,20 @@ function startQuestionTimer(){
 
   if(questionTime<=0){
    clearInterval(timer);
+
+   // Time is over: save the answer if selected.
+   // If nothing was selected, this question remains "Not Answered".
    saveCurrentAnswer();
+
    if(currentQuestion<questions.length-1){
     currentQuestion++;
     showQuestion();
     startQuestionTimer();
    }else{
-    checkTestCompletion();
+    // The last question's time is over.
+    // Automatically submit the complete test, even if some questions
+    // were not answered.
+    submitTest(true);
    }
   }
  },1000);
@@ -346,26 +380,47 @@ function saveCurrentAnswer(){
 }
 
 function saveAndNext(){
- // Save this question's current timer value before moving away.
+ // Save current answer and preserve current timer.
  remainingTimes[currentQuestion]=questionTime;
  saveCurrentAnswer();
 
- if(currentQuestion<questions.length-1){
-  clearInterval(timer);
-  currentQuestion++;
-  showQuestion();
-  startQuestionTimer();
- }else{
-  checkTestCompletion();
-  if(answeredQuestions.size===questions.length){
-   document.getElementById("submitContainer").style.display="block";
-   alert("All 24 questions are answered. You can now submit the test.");
-  }else{
-   alert("Please answer all 24 questions before submitting.");
-  }
- }
-}
+ if(currentQuestion < questions.length-1){
 
+  clearInterval(timer);
+
+  currentQuestion++;
+
+  showQuestion();
+
+  startQuestionTimer();
+
+ }else{
+
+  // Q24: do NOT automatically hide Submit Test.
+  // If all questions are answered, keep Submit Test visible.
+  checkTestCompletion();
+
+  if(answeredQuestions.size===questions.length){
+
+   document.getElementById("submitContainer").style.display="block";
+
+   const status=document.getElementById("submitStatus");
+   if(status){
+    status.textContent=
+     "All 24 questions answered. Click Submit Test.";
+   }
+
+  }else{
+
+   document.getElementById("submitContainer").style.display="none";
+
+   alert(
+    "Some questions are not answered. " +
+    "You must answer all 24 questions before manual submission."
+   );
+  }
+}
+}
 function previousQuestion(){
  if(currentQuestion>0){
   // Preserve the exact remaining time of the question being left.
@@ -395,38 +450,90 @@ function updateMarkButton(){
 
 function checkTestCompletion(){
  answeredQuestions.clear();
+
  for(let i=0;i<questions.length;i++){
-  if(document.querySelector('input[name="q'+i+'"]:checked')) answeredQuestions.add(i);
+  const selected=document.querySelector(
+   'input[name="q'+i+'"]:checked'
+  );
+  if(selected) answeredQuestions.add(i);
  }
- document.getElementById("submitContainer").style.display=
-   answeredQuestions.size===questions.length?"block":"none";
+
+ const submitBox=document.getElementById("submitContainer");
+ const submitStatus=document.getElementById("submitStatus");
+
+ if(answeredQuestions.size>0){
+  submitBox.style.display="block";
+  if(submitStatus){
+   submitStatus.textContent=
+    answeredQuestions.size===questions.length
+     ? "All 24 questions answered. Click Submit Test."
+     : answeredQuestions.size+" question(s) attempted. You can submit the test now.";
+  }
+ }else{
+  submitBox.style.display="none";
+  if(submitStatus){
+   submitStatus.textContent="Attempt at least one question to submit.";
+  }
+ }
 }
 
-function submitTest(){
+function submitTest(autoSubmit=false){
  if(submitted)return;
- checkTestCompletion();
- if(answeredQuestions.size!==questions.length){
-  alert("Please answer all 24 questions before submitting the test.");
+
+ // Save the current question before submitting.
+ saveCurrentAnswer();
+
+ // Manual Submit is allowed once the user has attempted at least one
+ // question. Any unanswered questions are recorded as "Not Answered".
+ if(!autoSubmit && answeredQuestions.size===0){
+  alert("Please attempt at least one question before submitting the test.");
   return;
  }
+
  submitted=true;
  clearInterval(timer);
+
  let score=0;
- let review="";
+ let correctCount=0;
+ let incorrectCount=0;
+ let unansweredCount=0;
+
+ let correctHTML="";
+ let incorrectHTML="";
+ let unansweredHTML="";
+
  questions.forEach((d,i)=>{
-  const s=document.querySelector('input[name="q'+i+'"]:checked');
-  const ua=s?s.value:"Not Answered";
-  const ok=ua===d.a;
-  if(ok)score++;
-  const rows=d.words.map(w=>`<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td></tr>`).join("");
-  review+=`
+  const selected=document.querySelector('input[name="q'+i+'"]:checked');
+  const userAnswer=selected ? selected.value : "Not Answered";
+  const isUnanswered=!selected;
+  const isCorrect=selected && userAnswer===d.a;
+
+  if(isCorrect){
+   score++;
+   correctCount++;
+  }else if(isUnanswered){
+   unansweredCount++;
+  }else{
+   incorrectCount++;
+  }
+
+  const rows=d.words.map(w=>
+   `<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td></tr>`
+  ).join("");
+
+  const markedHTML=markedQuestions.has(i)
+   ? '<span class="marked-badge">Marked</span>'
+   : "";
+
+  const card=`
    <div class="review">
-    <h2>Question ${i+1} ${markedQuestions.has(i)?'<span class="marked-badge">Marked</span>':""}</h2>
-    <h3>${d.q}</h3>
-    <p><strong>Your Answer:</strong> ${ua}</p>
-    <p class="${ok?"correct":"wrong"}">${ok?"✅ Correct Answer":"❌ Wrong Answer"}</p>
+    <h3>Question ${i+1} ${markedHTML}</h3>
+    <h4>${d.q}</h4>
+    <p><strong>Your Answer:</strong> ${userAnswer}</p>
     <p><strong>Correct Answer:</strong> ${d.a}</p>
-    <button class="show-answer" type="button" onclick="showAnswer(${i})">Show Answer</button>
+    <button class="show-answer" type="button" onclick="showAnswer(${i})">
+      Show Answer
+    </button>
     <div class="answer-box" id="answerBox${i}">
      <div class="section-title">Question Pattern</div>
      <div class="pattern">${d.pattern}</div>
@@ -445,12 +552,69 @@ function submitTest(){
      <p class="correct">✅ ${d.a}</p>
     </div>
    </div>`;
+
+  if(isCorrect) correctHTML+=card;
+  else if(isUnanswered) unansweredHTML+=card;
+  else incorrectHTML+=card;
  });
+
+ const percentage=((score/questions.length)*100).toFixed(2);
+
  document.getElementById("score").innerHTML=
-   "Score: "+score+" / "+questions.length+"<br>Percentage: "+((score/questions.length)*100).toFixed(2)+"%";
- document.getElementById("review").innerHTML=review;
+  `Score: ${score} / ${questions.length}<br>
+   Percentage: ${percentage}%`;
+
+ document.getElementById("resultSummary").innerHTML=
+  `✅ Correct: ${correctCount}
+   &nbsp;&nbsp; | &nbsp;&nbsp;
+   ❌ Incorrect: ${incorrectCount}
+   &nbsp;&nbsp; | &nbsp;&nbsp;
+   ⏭️ Unsubmitted: ${unansweredCount}`;
+
+ document.getElementById("correctSection").innerHTML=`
+  <div class="answer-section correct-section">
+   <h2>✅ Correct Answers (${correctCount})</h2>
+   ${correctHTML || '<div class="empty-section">No correct answers.</div>'}
+  </div>`;
+
+ document.getElementById("incorrectSection").innerHTML=`
+  <div class="answer-section incorrect-section">
+   <h2>❌ Incorrect Answers (${incorrectCount})</h2>
+   ${incorrectHTML || '<div class="empty-section">No incorrect answers.</div>'}
+  </div>`;
+
+ document.getElementById("unansweredSection").innerHTML=`
+  <div class="answer-section unanswered-section">
+   <h2>⏭️ Unsubmitted / Not Answered (${unansweredCount})</h2>
+   ${unansweredHTML || '<div class="empty-section">All questions were answered.</div>'}
+  </div>`;
+
  document.getElementById("testArea").style.display="none";
  document.getElementById("result").style.display="block";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function reattemptTest(){
+ clearInterval(timer);
+
+ currentQuestion=0;
+ questionTime=30;
+ submitted=false;
+
+ answeredQuestions.clear();
+ markedQuestions.clear();
+
+ remainingTimes=questions.map(()=>30);
+ timerQuestion=-1;
+
+ document.getElementById("result").style.display="none";
+ document.getElementById("testArea").style.display="block";
+ document.getElementById("submitContainer").style.display="none";
+
+ renderQuestions();
+ showQuestion();
+ startQuestionTimer();
+
  window.scrollTo({top:0,behavior:"smooth"});
 }
 
