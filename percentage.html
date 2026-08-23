@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Percentage Practice Test</title>
+
+<title>Percentage Test</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -27,33 +29,71 @@ h1 {
     color: #222;
 }
 
-.start-screen,
-.instructions,
-.question,
-#result {
+/* =========================
+   START SCREEN
+========================= */
+
+#startScreen {
+    display: block;
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
 }
 
-.start-screen {
-    text-align: center;
+#startScreen h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.info {
+    font-size: 20px;
+    margin: 18px 0;
+}
+
+.start-button {
+    margin-top: 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background: #0056b3;
+}
+
+
+/* =========================
+   TEST AREA
+========================= */
+
+/*
+IMPORTANT:
+Questions and timer are hidden
+until Start Test is clicked.
+*/
+
+#testArea {
+    display: none;
 }
 
 .timer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
     position: sticky;
     top: 10px;
     z-index: 10;
-    text-align: center;
-    background: #222;
-    color: white;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 15px;
 }
 
 .timer.warning {
@@ -62,13 +102,23 @@ h1 {
 
 .progress {
     text-align: center;
+    font-size: 18px;
+    font-weight: bold;
     color: #555;
     margin-bottom: 15px;
-    font-weight: bold;
 }
+
+
+/* =========================
+   QUESTIONS
+========================= */
 
 .question {
     display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
 .question.active {
@@ -76,17 +126,18 @@ h1 {
 }
 
 .question h2 {
-    margin-top: 5px;
-    font-size: 20px;
+    margin-top: 0;
+    line-height: 1.5;
 }
 
 .option {
     display: block;
-    padding: 12px;
-    margin: 8px 0;
+    padding: 14px;
+    margin: 10px 0;
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: 7px;
     cursor: pointer;
+    font-size: 18px;
 }
 
 .option:hover {
@@ -94,52 +145,75 @@ h1 {
 }
 
 .option input {
-    margin-right: 10px;
+    margin-right: 12px;
 }
+
+
+/* =========================
+   NAVIGATION
+========================= */
 
 .navigation {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
-    gap: 10px;
+    margin-top: 20px;
 }
 
-button {
+.nav-button {
     background: #007bff;
     color: white;
     border: none;
-    padding: 12px 22px;
+    padding: 12px 25px;
     border-radius: 6px;
-    cursor: pointer;
     font-size: 16px;
+    cursor: pointer;
 }
 
-button:hover {
+.nav-button:hover {
     background: #0056b3;
 }
 
-button:disabled {
+.nav-button:disabled {
     background: #999;
     cursor: not-allowed;
 }
 
-#submitButton {
-    background: #198754;
+.submit-container {
+    text-align: center;
+    margin-top: 25px;
 }
 
-#submitButton:hover {
+.submit-button {
+    background: #198754;
+    color: white;
+    border: none;
+    padding: 13px 30px;
+    border-radius: 7px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
     background: #146c43;
 }
 
+
+/* =========================
+   RESULT
+========================= */
+
 #result {
     display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 .score {
     text-align: center;
-    font-size: 27px;
+    font-size: 28px;
     font-weight: bold;
-    margin-bottom: 25px;
 }
 
 .review {
@@ -148,18 +222,22 @@ button:disabled {
 }
 
 .correct {
-    color: #16803c;
+    color: green;
     font-weight: bold;
 }
 
 .wrong {
-    color: #d93025;
+    color: red;
     font-weight: bold;
 }
 
 .show-answer {
     background: #6f42c1;
-    margin-top: 12px;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .show-answer:hover {
@@ -168,26 +246,32 @@ button:disabled {
 
 .answer-box {
     display: none;
-    margin-top: 15px;
-    padding: 18px;
     background: #f8f9fa;
     border-left: 4px solid #007bff;
-    border-radius: 5px;
+    padding: 18px;
+    margin-top: 15px;
     line-height: 1.8;
 }
 
-.pattern-box {
+.pattern {
     background: white;
     padding: 12px;
     border-radius: 6px;
     margin: 10px 0;
-    font-weight: bold;
+}
+
+.formula {
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    margin: 10px 0;
 }
 
 .word-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 12px 0;
+    margin: 10px 0;
 }
 
 .word-table th,
@@ -201,70 +285,84 @@ button:disabled {
     background: #eef3f8;
 }
 
-.formula {
-    background: white;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 5px;
-    font-family: "Courier New", monospace;
-}
-
 .section-title {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 18px;
 }
 
-.start-button {
-    font-size: 18px;
-    padding: 14px 30px;
-}
 </style>
 </head>
+
 
 <body>
 
 <div class="container">
 
-<h1>Percentage Practice Test</h1>
+<h1>Percentage Test</h1>
 
 
-<!-- START SCREEN -->
+<!-- =================================================
+     START SCREEN
+     ONLY THIS IS VISIBLE WHEN PAGE OPENS
+================================================= -->
 
-<div class="start-screen" id="startScreen">
+<div id="startScreen">
 
-    <h2>SSC / RRB Percentage Test</h2>
+    <h2>Percentage Test</h2>
 
-    <p><strong>Total Questions:</strong> 12</p>
-    <p><strong>Time per Question:</strong> 30 seconds</p>
-    <p><strong>Total Test Time:</strong> 6 minutes</p>
+    <div class="info">
+        <strong>Total Questions:</strong> 12
+    </div>
+
+    <div class="info">
+        <strong>Time per Question:</strong> 30 seconds
+    </div>
+
+    <div class="info">
+        <strong>Total Test Time:</strong> 6 minutes
+    </div>
 
     <p>
-        Correct answers and explanations will be shown
-        only after submitting the test.
+        Correct answers and explanations will be
+        shown only after submitting the test.
     </p>
 
-    <button class="start-button" onclick="startTest()">
+    <button
+        class="start-button"
+        onclick="startTest()">
+
         Start Test
+
     </button>
 
 </div>
 
 
-<!-- TEST -->
+<!-- =================================================
+     TEST AREA
+     HIDDEN UNTIL START TEST
+================================================= -->
 
 <div id="testArea">
 
-    <div class="timer" id="timer">
+    <!-- TIMER -->
+
+    <div id="timer" class="timer">
         Time Left: 00:30
     </div>
 
-    <div class="progress" id="progress">
+
+    <!-- PROGRESS -->
+
+    <div id="progress" class="progress">
         Question 1 of 12
     </div>
 
 
-    <!-- Q1 -->
+    <!-- =========================
+         QUESTION 1
+    ========================= -->
 
     <div class="question active" id="question0">
 
@@ -300,7 +398,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q2 -->
+    <!-- =========================
+         QUESTION 2
+    ========================= -->
 
     <div class="question" id="question1">
 
@@ -336,7 +436,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q3 -->
+    <!-- =========================
+         QUESTION 3
+    ========================= -->
 
     <div class="question" id="question2">
 
@@ -372,7 +474,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q4 -->
+    <!-- =========================
+         QUESTION 4
+    ========================= -->
 
     <div class="question" id="question3">
 
@@ -408,7 +512,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q5 -->
+    <!-- =========================
+         QUESTION 5
+    ========================= -->
 
     <div class="question" id="question4">
 
@@ -444,7 +550,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q6 -->
+    <!-- =========================
+         QUESTION 6
+    ========================= -->
 
     <div class="question" id="question5">
 
@@ -480,12 +588,15 @@ button:disabled {
     </div>
 
 
-    <!-- Q7 -->
+    <!-- =========================
+         QUESTION 7
+    ========================= -->
 
     <div class="question" id="question6">
 
         <h2>
-            (G) 20% of a number is 80. What is the number?
+            (G) 20% of a number is 80.
+            What is the number?
         </h2>
 
         <label class="option">
@@ -516,7 +627,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q8 -->
+    <!-- =========================
+         QUESTION 8
+    ========================= -->
 
     <div class="question" id="question7">
 
@@ -553,7 +666,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q9 -->
+    <!-- =========================
+         QUESTION 9
+    ========================= -->
 
     <div class="question" id="question8">
 
@@ -590,7 +705,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q10 -->
+    <!-- =========================
+         QUESTION 10
+    ========================= -->
 
     <div class="question" id="question9">
 
@@ -626,7 +743,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q11 -->
+    <!-- =========================
+         QUESTION 11
+    ========================= -->
 
     <div class="question" id="question10">
 
@@ -663,7 +782,9 @@ button:disabled {
     </div>
 
 
-    <!-- Q12 -->
+    <!-- =========================
+         QUESTION 12
+    ========================= -->
 
     <div class="question" id="question11">
 
@@ -703,25 +824,39 @@ button:disabled {
 
     <div class="navigation">
 
-        <button id="previousButton"
-                onclick="previousQuestion()"
-                disabled>
+        <button
+            class="nav-button"
+            id="previousButton"
+            onclick="previousQuestion()"
+            disabled>
+
             Previous
+
         </button>
 
-        <button id="nextButton"
-                onclick="nextQuestion()">
+
+        <button
+            class="nav-button"
+            id="nextButton"
+            onclick="nextQuestion()">
+
             Next
+
         </button>
 
     </div>
 
 
+    <!-- SUBMIT -->
+
     <div class="submit-container">
 
-        <button id="submitButton"
-                onclick="submitTest()">
+        <button
+            class="submit-button"
+            onclick="submitTest()">
+
             Submit Test
+
         </button>
 
     </div>
@@ -729,7 +864,9 @@ button:disabled {
 </div>
 
 
-<!-- RESULT -->
+<!-- =================================================
+     RESULT
+================================================= -->
 
 <div id="result">
 
@@ -737,7 +874,7 @@ button:disabled {
 
     <p style="text-align:center;">
         Click <strong>Show Answer</strong> to see
-        the question pattern and detailed explanation.
+        the detailed explanation.
     </p>
 
     <div id="review"></div>
@@ -745,388 +882,118 @@ button:disabled {
 </div>
 
 
+</div>
+
+
 <script>
 
-/* ==============================
-   QUESTION DATA
-============================== */
-
-const questions = [
-
-{
-    id: "q1",
-    title: "What percent of 408 is 306?",
-    correct: "75",
-
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-
-    words: [
-        ["What", "Asks us to find something."],
-        ["percent", "Asks for the answer in percentage."],
-        ["of", "Indicates the whole/base number."],
-        ["408", "Whole / Base."],
-        ["is", "Connects the whole with the given part."],
-        ["306", "Part / Given value."]
-    ],
-
-    formula: "Percentage = (Part ÷ Whole) × 100",
-
-    calculation: `
-        = (306 ÷ 408) × 100<br>
-        = (3 ÷ 4) × 100<br>
-        = 75%
-    `
-},
-
-
-{
-    id: "q2",
-    title: "What percent of 600 is 450?",
-    correct: "75",
-
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-
-    words: [
-        ["What", "Asks us to find something."],
-        ["percent", "Asks for the answer in percentage."],
-        ["of", "Indicates the whole/base number."],
-        ["600", "Whole / Base."],
-        ["is", "Connects the whole with the given part."],
-        ["450", "Part / Given value."]
-    ],
-
-    formula: "Percentage = (Part ÷ Whole) × 100",
-
-    calculation: `
-        = (450 ÷ 600) × 100<br>
-        = (3 ÷ 4) × 100<br>
-        = 75%
-    `
-},
-
-
-{
-    id: "q3",
-    title: "What percent of 400 is 250?",
-    correct: "62.5",
-
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-
-    words: [
-        ["What", "Asks us to find something."],
-        ["percent", "Asks for the answer in percentage."],
-        ["of", "Indicates the whole/base number."],
-        ["400", "Whole / Base."],
-        ["is", "Connects the whole with the given part."],
-        ["250", "Part / Given value."]
-    ],
-
-    formula: "Percentage = (Part ÷ Whole) × 100",
-
-    calculation: `
-        = (250 ÷ 400) × 100<br>
-        = (5 ÷ 8) × 100<br>
-        = 62.5%
-    `
-},
-
-
-{
-    id: "q4",
-    title: "What percent of 600 is 375?",
-    correct: "62.5",
-
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-
-    words: [
-        ["What", "Asks us to find something."],
-        ["percent", "Asks for the answer in percentage."],
-        ["of", "Indicates the whole/base number."],
-        ["600", "Whole / Base."],
-        ["is", "Connects the whole with the given part."],
-        ["375", "Part / Given value."]
-    ],
-
-    formula: "Percentage = (Part ÷ Whole) × 100",
-
-    calculation: `
-        = (375 ÷ 600) × 100<br>
-        = (5 ÷ 8) × 100<br>
-        = 62.5%
-    `
-},
-
-
-{
-    id: "q5",
-    title: "40 is what percent of 800?",
-    correct: "5",
-
-    pattern: "A is what percent of B? → (A ÷ B) × 100",
-
-    words: [
-        ["40", "The given part/value."],
-        ["is", "Connects the part with the whole."],
-        ["what", "Asks us to find the unknown value."],
-        ["percent", "The answer must be in percentage."],
-        ["of", "Indicates the whole/base number."],
-        ["800", "Whole / Base."]
-    ],
-
-    formula: "Percentage = (Part ÷ Whole) × 100",
-
-    calculation: `
-        = (40 ÷ 800) × 100<br>
-        = 0.05 × 100<br>
-        = 5%
-    `
-},
-
-
-{
-    id: "q6",
-    title: "What percent of 500 is 125?",
-    correct: "25",
-
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-
-    words: [
-        ["What", "Asks us to find something."],
-        ["percent", "Asks for the answer in percentage."],
-        ["of", "Indicates the whole/base number."],
-        ["500", "Whole / Base."],
-        ["is", "Connects the whole with the given part."],
-        ["125", "Part / Given value."]
-    ],
-
-    formula: "Percentage = (Part ÷ Whole) × 100",
-
-    calculation: `
-        = (125 ÷ 500) × 100<br>
-        = (1 ÷ 4) × 100<br>
-        = 25%
-    `
-},
-
-
-{
-    id: "q7",
-    title: "20% of a number is 80. What is the number?",
-    correct: "400",
-
-    pattern: "Percentage of a number is given → Find the Whole",
-
-    words: [
-        ["20%", "The given percentage."],
-        ["of", "Means multiplication."],
-        ["a number", "This is the unknown whole."],
-        ["is", "Connects the percentage value to the result."],
-        ["80", "The given part/value."],
-        ["What is the number?", "Asks us to find the whole."]
-    ],
-
-    formula: "Whole = Part × (100 ÷ Percentage)",
-
-    calculation: `
-        = 80 × (100 ÷ 20)<br>
-        = 80 × 5<br>
-        = 400
-    `
-},
-
-
-{
-    id: "q8",
-    title: "A number is increased from 200 to 250. What is the percentage increase?",
-    correct: "25",
-
-    pattern: "Percentage Increase → (Increase ÷ Original) × 100",
-
-    words: [
-        ["number", "The original quantity."],
-        ["increased", "Means the value became larger."],
-        ["from 200", "200 is the original value."],
-        ["to 250", "250 is the new value."],
-        ["percentage increase", "Asks how much the value increased in percentage."]
-    ],
-
-    formula: "Percentage Increase = (Increase ÷ Original) × 100",
-
-    calculation: `
-        Increase = 250 - 200<br>
-        = 50<br><br>
-
-        Percentage Increase = (50 ÷ 200) × 100<br>
-        = 25%
-    `
-},
-
-
-{
-    id: "q9",
-    title: "A number is decreased from 500 to 400. What is the percentage decrease?",
-    correct: "20",
-
-    pattern: "Percentage Decrease → (Decrease ÷ Original) × 100",
-
-    words: [
-        ["number", "The original quantity."],
-        ["decreased", "Means the value became smaller."],
-        ["from 500", "500 is the original value."],
-        ["to 400", "400 is the new value."],
-        ["percentage decrease", "Asks how much the value decreased in percentage."]
-    ],
-
-    formula: "Percentage Decrease = (Decrease ÷ Original) × 100",
-
-    calculation: `
-        Decrease = 500 - 400<br>
-        = 100<br><br>
-
-        Percentage Decrease = (100 ÷ 500) × 100<br>
-        = 20%
-    `
-},
-
-
-{
-    id: "q10",
-    title: "25% of 240 is equal to:",
-    correct: "60",
-
-    pattern: "Percentage of a number → (Percentage ÷ 100) × Number",
-
-    words: [
-        ["25%", "The given percentage."],
-        ["of", "Means multiplication."],
-        ["240", "The whole/base number."],
-        ["is equal to", "Asks us to find the resulting value."]
-    ],
-
-    formula: "Percentage value = (Percentage ÷ 100) × Number",
-
-    calculation: `
-        = (25 ÷ 100) × 240<br>
-        = 1/4 × 240<br>
-        = 60
-    `
-},
-
-
-{
-    id: "q11",
-    title: "If 60% of a number is 180, find the number.",
-    correct: "300",
-
-    pattern: "Percentage value is given → Find the Whole",
-
-    words: [
-        ["If", "Introduces the given condition."],
-        ["60%", "The given percentage."],
-        ["of", "Means multiplication."],
-        ["a number", "The unknown whole."],
-        ["is", "Connects the percentage with the given value."],
-        ["180", "The given part/value."],
-        ["find the number", "Asks us to find the whole."]
-    ],
-
-    formula: "Whole = Part × (100 ÷ Percentage)",
-
-    calculation: `
-        = 180 × (100 ÷ 60)<br>
-        = 180 × 5/3<br>
-        = 300
-    `
-},
-
-
-{
-    id: "q12",
-    title: "What percent of 800 is 200?",
-    correct: "25",
-
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-
-    words: [
-        ["What", "Asks us to find something."],
-        ["percent", "Asks for the answer in percentage."],
-        ["of", "Indicates the whole/base number."],
-        ["800", "Whole / Base."],
-        ["is", "Connects the whole with the given part."],
-        ["200", "Part / Given value."]
-    ],
-
-    formula: "Percentage = (Part ÷ Whole) × 100",
-
-    calculation: `
-        = (200 ÷ 800) × 100<br>
-        = (1 ÷ 4) × 100<br>
-        = 25%
-    `
-}
-
-];
-
-
-/* ==============================
+/* ==========================================
    VARIABLES
-============================== */
+========================================== */
 
 let currentQuestion = 0;
+
 let questionTime = 30;
+
 let timer = null;
+
 let submitted = false;
 
 
-/* ==============================
+/* ==========================================
    START TEST
-============================== */
+========================================== */
 
 function startTest() {
 
-    document.getElementById("startScreen").style.display = "none";
+    /*
+       Hide the Start Test screen
+    */
 
-    document.getElementById("testArea").style.display = "block";
+    document.getElementById("startScreen").style.display =
+        "none";
+
+
+    /*
+       Show questions and timer
+    */
+
+    document.getElementById("testArea").style.display =
+        "block";
+
+
+    /*
+       Start from Question 1
+    */
 
     currentQuestion = 0;
 
+
     showQuestion();
 
-    startTimer();
+
+    /*
+       Start 30-second timer
+    */
+
+    startQuestionTimer();
+
 }
 
 
-/* ==============================
+/* ==========================================
    SHOW QUESTION
-============================== */
+========================================== */
 
 function showQuestion() {
 
-    document.querySelectorAll(".question")
-        .forEach(function(question) {
+    /*
+       Hide all questions
+    */
 
-            question.classList.remove("active");
+    const allQuestions =
+        document.querySelectorAll(".question");
 
-        });
 
+    allQuestions.forEach(function(question) {
+
+        question.classList.remove("active");
+
+    });
+
+
+    /*
+       Show current question
+    */
 
     document
         .getElementById("question" + currentQuestion)
         .classList.add("active");
 
 
+    /*
+       Update question number
+    */
+
     document.getElementById("progress").textContent =
         "Question " +
         (currentQuestion + 1) +
-        " of " +
-        questions.length;
+        " of 12";
 
+
+    /*
+       Previous button
+    */
 
     document.getElementById("previousButton").disabled =
         currentQuestion === 0;
 
 
-    if (currentQuestion === questions.length - 1) {
+    /*
+       Last question
+    */
+
+    if (currentQuestion === 11) {
 
         document.getElementById("nextButton").style.display =
             "none";
@@ -1141,15 +1008,25 @@ function showQuestion() {
 }
 
 
-/* ==============================
-   TIMER
-============================== */
+/* ==========================================
+   QUESTION TIMER
+========================================== */
 
-function startTimer() {
+function startQuestionTimer() {
+
+    /*
+       Stop old timer
+    */
 
     clearInterval(timer);
 
+
+    /*
+       Every question gets 30 seconds
+    */
+
     questionTime = 30;
+
 
     updateTimer();
 
@@ -1158,22 +1035,36 @@ function startTimer() {
 
         questionTime--;
 
+
         updateTimer();
 
+
+        /*
+           Time finished
+        */
 
         if (questionTime <= 0) {
 
             clearInterval(timer);
 
-            if (currentQuestion < questions.length - 1) {
+
+            /*
+               Move to next question
+            */
+
+            if (currentQuestion < 11) {
 
                 currentQuestion++;
 
                 showQuestion();
 
-                startTimer();
+                startQuestionTimer();
 
             } else {
+
+                /*
+                   Last question finished
+                */
 
                 submitTest();
 
@@ -1186,12 +1077,20 @@ function startTimer() {
 }
 
 
+/* ==========================================
+   UPDATE TIMER
+========================================== */
+
 function updateTimer() {
 
     document.getElementById("timer").textContent =
         "Time Left: 00:" +
         String(questionTime).padStart(2, "0");
 
+
+    /*
+       Last 5 seconds warning
+    */
 
     if (questionTime <= 5) {
 
@@ -1210,28 +1109,28 @@ function updateTimer() {
 }
 
 
-/* ==============================
-   NEXT
-============================== */
+/* ==========================================
+   NEXT QUESTION
+========================================== */
 
 function nextQuestion() {
 
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < 11) {
 
         currentQuestion++;
 
         showQuestion();
 
-        startTimer();
+        startQuestionTimer();
 
     }
 
 }
 
 
-/* ==============================
-   PREVIOUS
-============================== */
+/* ==========================================
+   PREVIOUS QUESTION
+========================================== */
 
 function previousQuestion() {
 
@@ -1241,16 +1140,16 @@ function previousQuestion() {
 
         showQuestion();
 
-        startTimer();
+        startQuestionTimer();
 
     }
 
 }
 
 
-/* ==============================
-   SUBMIT
-============================== */
+/* ==========================================
+   SUBMIT TEST
+========================================== */
 
 function submitTest() {
 
@@ -1263,215 +1162,19 @@ function submitTest() {
     clearInterval(timer);
 
 
-    let score = 0;
-
-    let reviewHTML = "";
-
-
-    questions.forEach(function(question, index) {
-
-        const selected =
-            document.querySelector(
-                'input[name="' +
-                question.id +
-                '"]:checked'
-            );
-
-
-        const userAnswer =
-            selected
-            ? selected.value
-            : "Not Answered";
-
-
-        const isCorrect =
-            userAnswer === question.correct;
-
-
-        if (isCorrect) {
-            score++;
-        }
-
-
-        const status =
-            isCorrect
-            ? '<div class="correct">✅ Correct</div>'
-            : '<div class="wrong">❌ Wrong</div>';
-
-
-        let wordRows = "";
-
-        question.words.forEach(function(word) {
-
-            wordRows += `
-                <tr>
-                    <td><strong>${word[0]}</strong></td>
-                    <td>${word[1]}</td>
-                </tr>
-            `;
-
-        });
-
-
-        reviewHTML += `
-
-        <div class="review">
-
-            <h2>
-                Question ${index + 1}
-            </h2>
-
-            <p>
-                <strong>Question:</strong>
-                ${question.title}
-            </p>
-
-            <p>
-                <strong>Your Answer:</strong>
-                ${
-                    userAnswer === "Not Answered"
-                    ? "Not Answered"
-                    : userAnswer + "%"
-                }
-            </p>
-
-            ${status}
-
-            <button
-                class="show-answer"
-                onclick="showAnswer(${index})">
-
-                Show Answer
-
-            </button>
-
-
-            <div
-                class="answer-box"
-                id="answer${index}">
-
-                <div class="section-title">
-                    Question Pattern
-                </div>
-
-                <div class="pattern-box">
-                    ${question.pattern}
-                </div>
-
-
-                <div class="section-title">
-                    Word-by-word Explanation
-                </div>
-
-                <table class="word-table">
-
-                    <tr>
-                        <th>Word / Number</th>
-                        <th>Meaning / Role</th>
-                    </tr>
-
-                    ${wordRows}
-
-                </table>
-
-
-                <div class="section-title">
-                    Formula
-                </div>
-
-                <div class="formula">
-                    ${question.formula}
-                </div>
-
-
-                <div class="section-title">
-                    Calculation
-                </div>
-
-                <div class="formula">
-                    ${question.calculation}
-                </div>
-
-
-                <div class="section-title">
-                    Correct Answer
-                </div>
-
-                <p>
-                    <strong>✅ ${question.correct}%</strong>
-                </p>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-
-    const percentage =
-        (score / questions.length) * 100;
-
-
-    document.getElementById("score").innerHTML =
-
-        "FINAL RESULT" +
-        "<br><br>" +
-
-        "Score: " +
-        score +
-        " / " +
-        questions.length +
-
-        "<br>" +
-
-        "Percentage: " +
-        percentage +
-        "%";
-
-
-    document.getElementById("review").innerHTML =
-        reviewHTML;
-
+    /*
+       For now result calculation
+       will be added here.
+    */
 
     document.getElementById("testArea").style.display =
         "none";
 
-
     document.getElementById("result").style.display =
         "block";
 
-
-    document.getElementById("result")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-/* ==============================
-   SHOW ANSWER
-============================== */
-
-function showAnswer(index) {
-
-    const answerBox =
-        document.getElementById(
-            "answer" + index
-        );
-
-
-    if (answerBox.style.display === "block") {
-
-        answerBox.style.display = "none";
-
-    } else {
-
-        answerBox.style.display = "block";
-
-    }
+    document.getElementById("score").innerHTML =
+        "Test Submitted Successfully!";
 
 }
 
