@@ -1,26 +1,21 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Percentage Test</title>
+<title>SSC / RRB Percentage Test</title>
 
 <style>
-
-/* =========================
-   GENERAL
-========================= */
-
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     font-family: Arial, sans-serif;
     background: #f2f5f9;
     margin: 0;
     padding: 20px;
+    color: #222;
 }
 
 .container {
@@ -30,21 +25,20 @@ body {
 
 h1 {
     text-align: center;
-    color: #222;
+    margin-bottom: 25px;
 }
 
-
-/* =========================
-   START SCREEN
-========================= */
+#startScreen,
+.question,
+#result {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
 
 #startScreen {
-    display: block;
-    background: white;
     padding: 35px;
-    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
 }
 
 #startScreen h2 {
@@ -57,27 +51,31 @@ h1 {
     margin: 18px 0;
 }
 
+.start-button,
+.nav-button,
+.mark-button,
+.submit-button,
+.show-answer {
+    border: none;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 12px 20px;
+}
+
 .start-button {
     margin-top: 20px;
     background: #007bff;
-    color: white;
-    border: none;
     padding: 15px 35px;
-    border-radius: 8px;
     font-size: 20px;
-    cursor: pointer;
 }
 
-.start-button:hover {
-    background: #0056b3;
-}
+.start-button:hover,
+.nav-button:hover { background: #0056b3; }
 
-
-/* =========================
-   TEST AREA
-========================= */
-
-#testArea {
+#testArea,
+#result {
     display: none;
 }
 
@@ -90,7 +88,6 @@ h1 {
     font-size: 23px;
     font-weight: bold;
     margin-bottom: 15px;
-
     position: sticky;
     top: 10px;
     z-index: 10;
@@ -108,17 +105,9 @@ h1 {
     margin-bottom: 15px;
 }
 
-
-/* =========================
-   QUESTION
-========================= */
-
 .question {
     display: none;
-    background: white;
     padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
 .question.active {
@@ -148,35 +137,34 @@ h1 {
     margin-right: 12px;
 }
 
-
-/* =========================
-   NAVIGATION
-========================= */
-
 .navigation {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 10px;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .nav-button {
     background: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.nav-button:hover {
-    background: #0056b3;
 }
 
 .nav-button:disabled {
     background: #999;
     cursor: not-allowed;
+}
+
+.mark-button {
+    background: #f0ad4e;
+}
+
+.mark-button:hover {
+    background: #ec971f;
+}
+
+.mark-button.marked {
+    background: #dc3545;
 }
 
 .submit-container {
@@ -186,28 +174,16 @@ h1 {
 
 .submit-button {
     background: #198754;
-    color: white;
-    border: none;
-    padding: 13px 30px;
-    border-radius: 7px;
     font-size: 18px;
-    cursor: pointer;
+    padding: 13px 30px;
 }
 
 .submit-button:hover {
     background: #146c43;
 }
 
-
-/* =========================
-   RESULT
-========================= */
-
 #result {
-    display: none;
-    background: white;
     padding: 25px;
-    border-radius: 10px;
     margin-top: 20px;
 }
 
@@ -243,30 +219,14 @@ h1 {
     font-weight: bold;
 }
 
-
-/* =========================
-   SHOW ANSWER
-========================= */
-
 .show-answer {
     background: #6f42c1;
-    color: white;
-    border: none;
-    padding: 11px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
     margin-top: 10px;
 }
 
 .show-answer:hover {
     background: #56339b;
 }
-
-
-/* =========================
-   DETAILED ANSWER
-========================= */
 
 .answer-box {
     display: none;
@@ -285,34 +245,18 @@ h1 {
     margin-bottom: 8px;
 }
 
-.pattern {
-    background: white;
-    padding: 14px;
-    border-radius: 6px;
-    font-weight: bold;
-}
-
-.formula {
-    background: white;
-    padding: 14px;
-    border-radius: 6px;
-    font-family: "Courier New", monospace;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
+.pattern,
+.formula,
 .calculation {
     background: white;
     padding: 14px;
     border-radius: 6px;
-    font-family: "Courier New", monospace;
-    font-size: 16px;
 }
 
-
-/* =========================
-   WORD TABLE
-========================= */
+.formula,
+.calculation {
+    font-family: "Courier New", monospace;
+}
 
 .word-table {
     width: 100%;
@@ -332,34 +276,31 @@ h1 {
     background: #eef3f8;
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 10px;
-    }
-
-    .question {
-        padding: 18px;
-    }
-
-    .option {
-        font-size: 16px;
-    }
-
-    .word-table {
-        font-size: 14px;
-    }
-
+.marked-badge {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    padding: 5px 9px;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-left: 8px;
 }
 
+@media (max-width: 600px) {
+    body { padding: 10px; }
+
+    .question { padding: 18px; }
+
+    .option { font-size: 16px; }
+
+    .word-table { font-size: 14px; }
+
+    .navigation button {
+        flex: 1 1 100%;
+    }
+}
 </style>
 </head>
-
 
 <body>
 
@@ -367,525 +308,166 @@ h1 {
 
 <h1>Percentage</h1>
 
-
-<!-- =====================================================
-     START SCREEN
-===================================================== -->
-
+<!-- START SCREEN -->
 <div id="startScreen">
-
     <h2>Percentage Test</h2>
 
-    <div class="info">
-        <strong>Total Questions:</strong> 12
-    </div>
-
-    <div class="info">
-        <strong>Time per Question:</strong> 30 seconds
-    </div>
-
-    <div class="info">
-        <strong>Total Test Time:</strong> 6 minutes
-    </div>
+    <div class="info"><strong>Total Questions:</strong> 12</div>
+    <div class="info"><strong>Time per Question:</strong> 30 seconds</div>
+    <div class="info"><strong>Total Test Time:</strong> 6 minutes</div>
 
     <p>
-        Correct answers and explanations will be shown
+        Correct answers and detailed explanations will be shown
         only after submitting the test.
     </p>
 
-    <button
-        class="start-button"
-        onclick="startTest()">
-
+    <button class="start-button" onclick="startTest()">
         Start Test
-
     </button>
-
 </div>
 
-
-<!-- =====================================================
-     TEST AREA
-===================================================== -->
-
+<!-- TEST AREA -->
 <div id="testArea">
 
-    <!-- TIMER -->
-
-    <div id="timer" class="timer">
-        Time Left: 00:30
-    </div>
-
-
-    <!-- PROGRESS -->
+    <div id="timer" class="timer">Time Left: 00:30</div>
 
     <div id="progress" class="progress">
         Question 1 of 12
     </div>
 
-
-    <!-- =================================================
-         QUESTION 1
-    ================================================= -->
-
+    <!-- Q1 -->
     <div class="question active" id="question0">
+        <h2>(A) What percent of 408 is 306?</h2>
 
-        <h2>
-            (A) What percent of 408 is 306?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q1" value="25">
-            1) 25%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q1" value="75">
-            2) 75%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q1" value="50">
-            3) 50%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q1" value="80">
-            4) 80%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q1" value="60">
-            5) 60%
-        </label>
-
+        <label class="option"><input type="radio" name="q1" value="25">1) 25%</label>
+        <label class="option"><input type="radio" name="q1" value="75">2) 75%</label>
+        <label class="option"><input type="radio" name="q1" value="50">3) 50%</label>
+        <label class="option"><input type="radio" name="q1" value="80">4) 80%</label>
+        <label class="option"><input type="radio" name="q1" value="60">5) 60%</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 2
-    ================================================= -->
-
+    <!-- Q2 -->
     <div class="question" id="question1">
+        <h2>(B) What percent of 600 is 450?</h2>
 
-        <h2>
-            (B) What percent of 600 is 450?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q2" value="95">
-            1) 95%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q2" value="45">
-            2) 45%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q2" value="70">
-            3) 70%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q2" value="85">
-            4) 85%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q2" value="75">
-            5) 75%
-        </label>
-
+        <label class="option"><input type="radio" name="q2" value="95">1) 95%</label>
+        <label class="option"><input type="radio" name="q2" value="45">2) 45%</label>
+        <label class="option"><input type="radio" name="q2" value="70">3) 70%</label>
+        <label class="option"><input type="radio" name="q2" value="85">4) 85%</label>
+        <label class="option"><input type="radio" name="q2" value="75">5) 75%</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 3
-    ================================================= -->
-
+    <!-- Q3 -->
     <div class="question" id="question2">
+        <h2>(C) What percent of 400 is 250?</h2>
 
-        <h2>
-            (C) What percent of 400 is 250?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q3" value="87.5">
-            1) 87.5%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q3" value="62.5">
-            2) 62.5%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q3" value="60">
-            3) 60%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q3" value="70">
-            4) 70%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q3" value="80">
-            5) 80%
-        </label>
-
+        <label class="option"><input type="radio" name="q3" value="87.5">1) 87.5%</label>
+        <label class="option"><input type="radio" name="q3" value="62.5">2) 62.5%</label>
+        <label class="option"><input type="radio" name="q3" value="60">3) 60%</label>
+        <label class="option"><input type="radio" name="q3" value="70">4) 70%</label>
+        <label class="option"><input type="radio" name="q3" value="80">5) 80%</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 4
-    ================================================= -->
-
+    <!-- Q4 -->
     <div class="question" id="question3">
+        <h2>(D) What percent of 600 is 375?</h2>
 
-        <h2>
-            (D) What percent of 600 is 375?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q4" value="80">
-            1) 80%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q4" value="60">
-            2) 60%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q4" value="62.5">
-            3) 62.5%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q4" value="40">
-            4) 40%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q4" value="45">
-            5) 45%
-        </label>
-
+        <label class="option"><input type="radio" name="q4" value="80">1) 80%</label>
+        <label class="option"><input type="radio" name="q4" value="60">2) 60%</label>
+        <label class="option"><input type="radio" name="q4" value="62.5">3) 62.5%</label>
+        <label class="option"><input type="radio" name="q4" value="40">4) 40%</label>
+        <label class="option"><input type="radio" name="q4" value="45">5) 45%</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 5
-    ================================================= -->
-
+    <!-- Q5 -->
     <div class="question" id="question4">
+        <h2>(E) 40 is what percent of 800?</h2>
 
-        <h2>
-            (E) 40 is what percent of 800?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q5" value="5">
-            1) 5%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q5" value="10">
-            2) 10%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q5" value="15">
-            3) 15%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q5" value="20">
-            4) 20%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q5" value="25">
-            5) 25%
-        </label>
-
+        <label class="option"><input type="radio" name="q5" value="5">1) 5%</label>
+        <label class="option"><input type="radio" name="q5" value="10">2) 10%</label>
+        <label class="option"><input type="radio" name="q5" value="15">3) 15%</label>
+        <label class="option"><input type="radio" name="q5" value="20">4) 20%</label>
+        <label class="option"><input type="radio" name="q5" value="25">5) 25%</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 6
-    ================================================= -->
-
+    <!-- Q6 -->
     <div class="question" id="question5">
+        <h2>(F) What percent of 500 is 125?</h2>
 
-        <h2>
-            (F) What percent of 500 is 125?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q6" value="15">
-            1) 15%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q6" value="20">
-            2) 20%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q6" value="25">
-            3) 25%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q6" value="30">
-            4) 30%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q6" value="35">
-            5) 35%
-        </label>
-
+        <label class="option"><input type="radio" name="q6" value="15">1) 15%</label>
+        <label class="option"><input type="radio" name="q6" value="20">2) 20%</label>
+        <label class="option"><input type="radio" name="q6" value="25">3) 25%</label>
+        <label class="option"><input type="radio" name="q6" value="30">4) 30%</label>
+        <label class="option"><input type="radio" name="q6" value="35">5) 35%</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 7
-    ================================================= -->
-
+    <!-- Q7 -->
     <div class="question" id="question6">
+        <h2>(G) 20% of a number is 80. What is the number?</h2>
 
-        <h2>
-            (G) 20% of a number is 80.
-            What is the number?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q7" value="200">
-            1) 200
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q7" value="300">
-            2) 300
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q7" value="400">
-            3) 400
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q7" value="500">
-            4) 500
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q7" value="600">
-            5) 600
-        </label>
-
+        <label class="option"><input type="radio" name="q7" value="200">1) 200</label>
+        <label class="option"><input type="radio" name="q7" value="300">2) 300</label>
+        <label class="option"><input type="radio" name="q7" value="400">3) 400</label>
+        <label class="option"><input type="radio" name="q7" value="500">4) 500</label>
+        <label class="option"><input type="radio" name="q7" value="600">5) 600</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 8
-    ================================================= -->
-
+    <!-- Q8 -->
     <div class="question" id="question7">
+        <h2>(H) A number is increased from 200 to 250. What is the percentage increase?</h2>
 
-        <h2>
-            (H) A number is increased from 200 to 250.
-            What is the percentage increase?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q8" value="20">
-            1) 20%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q8" value="25">
-            2) 25%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q8" value="30">
-            3) 30%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q8" value="35">
-            4) 35%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q8" value="40">
-            5) 40%
-        </label>
-
+        <label class="option"><input type="radio" name="q8" value="20">1) 20%</label>
+        <label class="option"><input type="radio" name="q8" value="25">2) 25%</label>
+        <label class="option"><input type="radio" name="q8" value="30">3) 30%</label>
+        <label class="option"><input type="radio" name="q8" value="35">4) 35%</label>
+        <label class="option"><input type="radio" name="q8" value="40">5) 40%</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 9
-    ================================================= -->
-
+    <!-- Q9 -->
     <div class="question" id="question8">
+        <h2>(I) A number is decreased from 500 to 400. What is the percentage decrease?</h2>
 
-        <h2>
-            (I) A number is decreased from 500 to 400.
-            What is the percentage decrease?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q9" value="10">
-            1) 10%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q9" value="15">
-            2) 15%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q9" value="20">
-            3) 20%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q9" value="25">
-            4) 25%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q9" value="30">
-            5) 30%
-        </label>
-
+        <label class="option"><input type="radio" name="q9" value="10">1) 10%</label>
+        <label class="option"><input type="radio" name="q9" value="15">2) 15%</label>
+        <label class="option"><input type="radio" name="q9" value="20">3) 20%</label>
+        <label class="option"><input type="radio" name="q9" value="25">4) 25%</label>
+        <label class="option"><input type="radio" name="q9" value="30">5) 30%</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 10
-    ================================================= -->
-
+    <!-- Q10 -->
     <div class="question" id="question9">
+        <h2>(J) 25% of 240 is equal to:</h2>
 
-        <h2>
-            (J) 25% of 240 is equal to:
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q10" value="40">
-            1) 40
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q10" value="50">
-            2) 50
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q10" value="60">
-            3) 60
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q10" value="70">
-            4) 70
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q10" value="80">
-            5) 80
-        </label>
-
+        <label class="option"><input type="radio" name="q10" value="40">1) 40</label>
+        <label class="option"><input type="radio" name="q10" value="50">2) 50</label>
+        <label class="option"><input type="radio" name="q10" value="60">3) 60</label>
+        <label class="option"><input type="radio" name="q10" value="70">4) 70</label>
+        <label class="option"><input type="radio" name="q10" value="80">5) 80</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 11
-    ================================================= -->
-
+    <!-- Q11 -->
     <div class="question" id="question10">
+        <h2>(K) If 60% of a number is 180, find the number.</h2>
 
-        <h2>
-            (K) If 60% of a number is 180,
-            find the number.
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q11" value="200">
-            1) 200
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q11" value="250">
-            2) 250
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q11" value="300">
-            3) 300
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q11" value="350">
-            4) 350
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q11" value="400">
-            5) 400
-        </label>
-
+        <label class="option"><input type="radio" name="q11" value="200">1) 200</label>
+        <label class="option"><input type="radio" name="q11" value="250">2) 250</label>
+        <label class="option"><input type="radio" name="q11" value="300">3) 300</label>
+        <label class="option"><input type="radio" name="q11" value="350">4) 350</label>
+        <label class="option"><input type="radio" name="q11" value="400">5) 400</label>
     </div>
 
-
-    <!-- =================================================
-         QUESTION 12
-    ================================================= -->
-
+    <!-- Q12 -->
     <div class="question" id="question11">
+        <h2>(L) What percent of 800 is 200?</h2>
 
-        <h2>
-            (L) What percent of 800 is 200?
-        </h2>
-
-        <label class="option">
-            <input type="radio" name="q12" value="15">
-            1) 15%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q12" value="20">
-            2) 20%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q12" value="25">
-            3) 25%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q12" value="30">
-            4) 30%
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q12" value="35">
-            5) 35%
-        </label>
-
+        <label class="option"><input type="radio" name="q12" value="15">1) 15%</label>
+        <label class="option"><input type="radio" name="q12" value="20">2) 20%</label>
+        <label class="option"><input type="radio" name="q12" value="25">3) 25%</label>
+        <label class="option"><input type="radio" name="q12" value="30">4) 30%</label>
+        <label class="option"><input type="radio" name="q12" value="35">5) 35%</label>
     </div>
-
 
     <!-- NAVIGATION -->
-
     <div class="navigation">
 
         <button
@@ -893,55 +475,52 @@ h1 {
             id="previousButton"
             onclick="previousQuestion()"
             disabled>
-
             Previous
+        </button>
 
+        <button
+            class="mark-button"
+            id="markButton"
+            onclick="markQuestion()">
+            Mark Question
         </button>
 
         <button
             class="nav-button"
             id="nextButton"
-            onclick="nextQuestion()">
-
-            Next
-
+            onclick="saveAndNext()">
+            Save & Next
         </button>
 
     </div>
 
+    <!-- SUBMIT IS HIDDEN UNTIL ALL 12 ARE ANSWERED -->
+    <div
+        class="submit-container"
+        id="submitContainer"
+        style="display:none;">
 
-    <!-- SUBMIT -->
-
-    <div class="submit-container">
-
-        <button
-            class="submit-button"
-            onclick="submitTest()">
-
+        <button class="submit-button" onclick="submitTest()">
             Submit Test
-
         </button>
 
     </div>
 
 </div>
 
-
-<!-- =====================================================
-     RESULT
-===================================================== -->
-
+<!-- RESULT -->
 <div id="result">
 
     <div class="result-title">
-        Test Result
+        Test Submitted Successfully!
     </div>
 
     <div class="score" id="score"></div>
 
     <p style="text-align:center;">
-        Click <strong>Show Answer</strong> to see
-        the detailed explanation.
+        Click <strong>Show Answer</strong> to see the
+        question pattern, word-by-word explanation,
+        formula and step-by-step calculation.
     </p>
 
     <div id="review"></div>
@@ -950,22 +529,19 @@ h1 {
 
 </div>
 
-
 <script>
 
-/* =====================================================
-   QUESTION EXPLANATION DATA
-===================================================== */
+/* =========================================================
+   QUESTION + EXPLANATION DATA
+========================================================= */
 
 const explanationData = [
 
 {
     question: "What percent of 408 is 306?",
     correct: "75%",
-
-    pattern:
-    "What percent of A is B? → (B ÷ A) × 100",
-
+    correctValue: "75",
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
     words: [
         ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
         ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
@@ -974,22 +550,15 @@ const explanationData = [
         ["is", "Whole మరియు Partను కలుపుతుంది."],
         ["306", "Part / Given value."]
     ],
-
-    formula:
-    "Percentage = (Part ÷ Whole) × 100",
-
-    calculation:
-    "(306 ÷ 408) × 100 = (3 ÷ 4) × 100 = 75%"
+    formula: "Percentage = (Part ÷ Whole) × 100",
+    calculation: "(306 ÷ 408) × 100 = (3 ÷ 4) × 100 = 75%"
 },
-
 
 {
     question: "What percent of 600 is 450?",
     correct: "75%",
-
-    pattern:
-    "What percent of A is B? → (B ÷ A) × 100",
-
+    correctValue: "75",
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
     words: [
         ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
         ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
@@ -998,22 +567,15 @@ const explanationData = [
         ["is", "Whole మరియు Partను కలుపుతుంది."],
         ["450", "Part / Given value."]
     ],
-
-    formula:
-    "Percentage = (Part ÷ Whole) × 100",
-
-    calculation:
-    "(450 ÷ 600) × 100 = (3 ÷ 4) × 100 = 75%"
+    formula: "Percentage = (Part ÷ Whole) × 100",
+    calculation: "(450 ÷ 600) × 100 = (3 ÷ 4) × 100 = 75%"
 },
-
 
 {
     question: "What percent of 400 is 250?",
     correct: "62.5%",
-
-    pattern:
-    "What percent of A is B? → (B ÷ A) × 100",
-
+    correctValue: "62.5",
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
     words: [
         ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
         ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
@@ -1022,22 +584,15 @@ const explanationData = [
         ["is", "Whole మరియు Partను కలుపుతుంది."],
         ["250", "Part / Given value."]
     ],
-
-    formula:
-    "Percentage = (Part ÷ Whole) × 100",
-
-    calculation:
-    "(250 ÷ 400) × 100 = (5 ÷ 8) × 100 = 62.5%"
+    formula: "Percentage = (Part ÷ Whole) × 100",
+    calculation: "(250 ÷ 400) × 100 = (5 ÷ 8) × 100 = 62.5%"
 },
-
 
 {
     question: "What percent of 600 is 375?",
     correct: "62.5%",
-
-    pattern:
-    "What percent of A is B? → (B ÷ A) × 100",
-
+    correctValue: "62.5",
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
     words: [
         ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
         ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
@@ -1046,22 +601,15 @@ const explanationData = [
         ["is", "Whole మరియు Partను కలుపుతుంది."],
         ["375", "Part / Given value."]
     ],
-
-    formula:
-    "Percentage = (Part ÷ Whole) × 100",
-
-    calculation:
-    "(375 ÷ 600) × 100 = (5 ÷ 8) × 100 = 62.5%"
+    formula: "Percentage = (Part ÷ Whole) × 100",
+    calculation: "(375 ÷ 600) × 100 = (5 ÷ 8) × 100 = 62.5%"
 },
-
 
 {
     question: "40 is what percent of 800?",
     correct: "5%",
-
-    pattern:
-    "A is what percent of B? → (A ÷ B) × 100",
-
+    correctValue: "5",
+    pattern: "A is what percent of B? → (A ÷ B) × 100",
     words: [
         ["40", "Part / Given value."],
         ["is", "Part మరియు percentage relationను చూపిస్తుంది."],
@@ -1070,22 +618,15 @@ const explanationData = [
         ["of", "of తర్వాత Whole/Base వస్తుంది."],
         ["800", "Whole / Base."]
     ],
-
-    formula:
-    "Percentage = (Part ÷ Whole) × 100",
-
-    calculation:
-    "(40 ÷ 800) × 100 = 0.05 × 100 = 5%"
+    formula: "Percentage = (Part ÷ Whole) × 100",
+    calculation: "(40 ÷ 800) × 100 = 0.05 × 100 = 5%"
 },
-
 
 {
     question: "What percent of 500 is 125?",
     correct: "25%",
-
-    pattern:
-    "What percent of A is B? → (B ÷ A) × 100",
-
+    correctValue: "25",
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
     words: [
         ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
         ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
@@ -1094,22 +635,15 @@ const explanationData = [
         ["is", "Whole మరియు Partను కలుపుతుంది."],
         ["125", "Part / Given value."]
     ],
-
-    formula:
-    "Percentage = (Part ÷ Whole) × 100",
-
-    calculation:
-    "(125 ÷ 500) × 100 = (1 ÷ 4) × 100 = 25%"
+    formula: "Percentage = (Part ÷ Whole) × 100",
+    calculation: "(125 ÷ 500) × 100 = (1 ÷ 4) × 100 = 25%"
 },
-
 
 {
     question: "20% of a number is 80. What is the number?",
     correct: "400",
-
-    pattern:
-    "Percentage of a number is given → Find the Whole",
-
+    correctValue: "400",
+    pattern: "Percentage of a number is given → Find the Whole",
     words: [
         ["20%", "Given percentage."],
         ["of", "Multiplicationను సూచిస్తుంది."],
@@ -1118,24 +652,15 @@ const explanationData = [
         ["80", "Given Part / Value."],
         ["What is the number?", "Whole value కనుక్కోవాలి."]
     ],
-
-    formula:
-    "Whole = Part × (100 ÷ Percentage)",
-
-    calculation:
-    "80 × (100 ÷ 20) = 80 × 5 = 400"
+    formula: "Whole = Part × (100 ÷ Percentage)",
+    calculation: "80 × (100 ÷ 20) = 80 × 5 = 400"
 },
 
-
 {
-    question:
-    "A number is increased from 200 to 250. What is the percentage increase?",
-
+    question: "A number is increased from 200 to 250. What is the percentage increase?",
     correct: "25%",
-
-    pattern:
-    "Percentage Increase → (Increase ÷ Original) × 100",
-
+    correctValue: "25",
+    pattern: "Percentage Increase → (Increase ÷ Original) × 100",
     words: [
         ["number", "Original quantity."],
         ["increased", "Value పెరిగింది."],
@@ -1143,24 +668,15 @@ const explanationData = [
         ["250", "New value."],
         ["percentage increase", "ఎంత percentage పెరిగిందో కనుక్కోవాలి."]
     ],
-
-    formula:
-    "Percentage Increase = (Increase ÷ Original) × 100",
-
-    calculation:
-    "Increase = 250 - 200 = 50<br><br>(50 ÷ 200) × 100 = 25%"
+    formula: "Percentage Increase = (Increase ÷ Original) × 100",
+    calculation: "Increase = 250 - 200 = 50<br><br>(50 ÷ 200) × 100 = 25%"
 },
 
-
 {
-    question:
-    "A number is decreased from 500 to 400. What is the percentage decrease?",
-
+    question: "A number is decreased from 500 to 400. What is the percentage decrease?",
     correct: "20%",
-
-    pattern:
-    "Percentage Decrease → (Decrease ÷ Original) × 100",
-
+    correctValue: "20",
+    pattern: "Percentage Decrease → (Decrease ÷ Original) × 100",
     words: [
         ["number", "Original quantity."],
         ["decreased", "Value తగ్గింది."],
@@ -1168,46 +684,30 @@ const explanationData = [
         ["400", "New value."],
         ["percentage decrease", "ఎంత percentage తగ్గిందో కనుక్కోవాలి."]
     ],
-
-    formula:
-    "Percentage Decrease = (Decrease ÷ Original) × 100",
-
-    calculation:
-    "Decrease = 500 - 400 = 100<br><br>(100 ÷ 500) × 100 = 20%"
+    formula: "Percentage Decrease = (Decrease ÷ Original) × 100",
+    calculation: "Decrease = 500 - 400 = 100<br><br>(100 ÷ 500) × 100 = 20%"
 },
-
 
 {
     question: "25% of 240 is equal to:",
     correct: "60",
-
-    pattern:
-    "Percentage of a number → (Percentage ÷ 100) × Number",
-
+    correctValue: "60",
+    pattern: "Percentage of a number → (Percentage ÷ 100) × Number",
     words: [
         ["25%", "Given percentage."],
         ["of", "Multiplicationను సూచిస్తుంది."],
         ["240", "Whole / Base number."],
         ["is equal to", "Result కనుక్కోవాలి."]
     ],
-
-    formula:
-    "Percentage Value = (Percentage ÷ 100) × Number",
-
-    calculation:
-    "(25 ÷ 100) × 240 = 1/4 × 240 = 60"
+    formula: "Percentage Value = (Percentage ÷ 100) × Number",
+    calculation: "(25 ÷ 100) × 240 = 1/4 × 240 = 60"
 },
 
-
 {
-    question:
-    "If 60% of a number is 180, find the number.",
-
+    question: "If 60% of a number is 180, find the number.",
     correct: "300",
-
-    pattern:
-    "Percentage value is given → Find the Whole",
-
+    correctValue: "300",
+    pattern: "Percentage value is given → Find the Whole",
     words: [
         ["If", "Given conditionను ప్రారంభిస్తుంది."],
         ["60%", "Given percentage."],
@@ -1216,22 +716,15 @@ const explanationData = [
         ["180", "Given Part / Value."],
         ["find the number", "Whole value కనుక్కోవాలి."]
     ],
-
-    formula:
-    "Whole = Part × (100 ÷ Percentage)",
-
-    calculation:
-    "180 × (100 ÷ 60) = 180 × 5/3 = 300"
+    formula: "Whole = Part × (100 ÷ Percentage)",
+    calculation: "180 × (100 ÷ 60) = 180 × 5/3 = 300"
 },
-
 
 {
     question: "What percent of 800 is 200?",
     correct: "25%",
-
-    pattern:
-    "What percent of A is B? → (B ÷ A) × 100",
-
+    correctValue: "25",
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
     words: [
         ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
         ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
@@ -1240,144 +733,130 @@ const explanationData = [
         ["is", "Whole మరియు Partను కలుపుతుంది."],
         ["200", "Part / Given value."]
     ],
-
-    formula:
-    "Percentage = (Part ÷ Whole) × 100",
-
-    calculation:
-    "(200 ÷ 800) × 100 = (1 ÷ 4) × 100 = 25%"
+    formula: "Percentage = (Part ÷ Whole) × 100",
+    calculation: "(200 ÷ 800) × 100 = (1 ÷ 4) × 100 = 25%"
 }
 
 ];
 
 
-/* =====================================================
+/* =========================================================
    VARIABLES
-===================================================== */
+========================================================= */
 
 let currentQuestion = 0;
-
 let questionTime = 30;
-
 let timer = null;
-
 let submitted = false;
 
+let answeredQuestions = new Set();
+let markedQuestions = new Set();
 
-/* =====================================================
+
+/* =========================================================
    START TEST
-===================================================== */
+========================================================= */
 
 function startTest() {
 
-    document.getElementById("startScreen").style.display =
-        "none";
-
-    document.getElementById("testArea").style.display =
-        "block";
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("testArea").style.display = "block";
+    document.getElementById("result").style.display = "none";
 
     currentQuestion = 0;
+    submitted = false;
+
+    answeredQuestions.clear();
+    markedQuestions.clear();
+
+    document.getElementById("submitContainer").style.display = "none";
 
     showQuestion();
-
     startQuestionTimer();
 }
 
 
-/* =====================================================
+/* =========================================================
    SHOW QUESTION
-===================================================== */
+========================================================= */
 
 function showQuestion() {
 
-    const allQuestions =
-        document.querySelectorAll(".question");
-
+    const allQuestions = document.querySelectorAll(".question");
 
     allQuestions.forEach(function(question) {
-
         question.classList.remove("active");
-
     });
-
 
     document
         .getElementById("question" + currentQuestion)
         .classList.add("active");
 
-
     document.getElementById("progress").textContent =
-        "Question " +
-        (currentQuestion + 1) +
-        " of 12";
-
+        "Question " + (currentQuestion + 1) + " of 12";
 
     document.getElementById("previousButton").disabled =
         currentQuestion === 0;
 
+    updateMarkButton();
+
+    const nextButton = document.getElementById("nextButton");
 
     if (currentQuestion === 11) {
-
-        document.getElementById("nextButton").style.display =
-            "none";
-
+        nextButton.textContent = "Save Answer";
     } else {
-
-        document.getElementById("nextButton").style.display =
-            "block";
-
+        nextButton.textContent = "Save & Next";
     }
+
+    checkTestCompletion();
 }
 
 
-/* =====================================================
-   QUESTION TIMER
-===================================================== */
+/* =========================================================
+   TIMER
+========================================================= */
 
 function startQuestionTimer() {
 
     clearInterval(timer);
 
     questionTime = 30;
-
     updateTimer();
-
 
     timer = setInterval(function() {
 
         questionTime--;
-
         updateTimer();
-
 
         if (questionTime <= 0) {
 
             clearInterval(timer);
 
+            saveCurrentAnswer();
 
             if (currentQuestion < 11) {
 
                 currentQuestion++;
-
                 showQuestion();
-
                 startQuestionTimer();
 
             } else {
 
-                submitTest();
+                checkTestCompletion();
 
+                /*
+                 * Time is over on Question 12.
+                 * Submit is shown only if all 12 are answered.
+                 */
+                if (answeredQuestions.size === 12) {
+                    document.getElementById("submitContainer").style.display = "block";
+                }
             }
-
         }
 
     }, 1000);
 }
 
-
-/* =====================================================
-   UPDATE TIMER
-===================================================== */
 
 function updateTimer() {
 
@@ -1385,44 +864,65 @@ function updateTimer() {
         "Time Left: 00:" +
         String(questionTime).padStart(2, "0");
 
-
     if (questionTime <= 5) {
-
-        document
-            .getElementById("timer")
-            .classList.add("warning");
-
+        document.getElementById("timer").classList.add("warning");
     } else {
-
-        document
-            .getElementById("timer")
-            .classList.remove("warning");
-
+        document.getElementById("timer").classList.remove("warning");
     }
 }
 
 
-/* =====================================================
-   NEXT QUESTION
-===================================================== */
+/* =========================================================
+   SAVE & NEXT
+========================================================= */
 
-function nextQuestion() {
+function saveAndNext() {
+
+    saveCurrentAnswer();
 
     if (currentQuestion < 11) {
 
         currentQuestion++;
 
         showQuestion();
-
         startQuestionTimer();
 
+    } else {
+
+        checkTestCompletion();
+
+        if (answeredQuestions.size === 12) {
+
+            document.getElementById("submitContainer").style.display = "block";
+
+            alert("All 12 questions are answered. You can now submit the test.");
+
+        } else {
+
+            alert("Please answer all 12 questions before submitting.");
+
+        }
     }
 }
 
 
-/* =====================================================
-   PREVIOUS QUESTION
-===================================================== */
+function saveCurrentAnswer() {
+
+    const selected = document.querySelector(
+        'input[name="q' + (currentQuestion + 1) + '"]:checked'
+    );
+
+    if (selected) {
+        answeredQuestions.add(currentQuestion);
+    }
+
+    checkTestCompletion();
+}
+
+
+/* =========================================================
+   PREVIOUS
+========================================================= */
 
 function previousQuestion() {
 
@@ -1431,16 +931,93 @@ function previousQuestion() {
         currentQuestion--;
 
         showQuestion();
-
         startQuestionTimer();
-
     }
 }
 
 
-/* =====================================================
+/* =========================================================
+   MARK QUESTION
+========================================================= */
+
+function markQuestion() {
+
+    if (markedQuestions.has(currentQuestion)) {
+
+        markedQuestions.delete(currentQuestion);
+
+    } else {
+
+        markedQuestions.add(currentQuestion);
+    }
+
+    updateMarkButton();
+}
+
+
+function updateMarkButton() {
+
+    const button = document.getElementById("markButton");
+
+    if (markedQuestions.has(currentQuestion)) {
+
+        button.textContent = "Marked ✓";
+        button.classList.add("marked");
+
+    } else {
+
+        button.textContent = "Mark Question";
+        button.classList.remove("marked");
+    }
+}
+
+
+/* =========================================================
+   CHECK ALL ANSWERS
+========================================================= */
+
+function checkTestCompletion() {
+
+    let count = 0;
+
+    for (let i = 0; i < 12; i++) {
+
+        const selected = document.querySelector(
+            'input[name="q' + (i + 1) + '"]:checked'
+        );
+
+        if (selected) {
+            count++;
+        }
+    }
+
+    answeredQuestions.clear();
+
+    for (let i = 0; i < 12; i++) {
+
+        const selected = document.querySelector(
+            'input[name="q' + (i + 1) + '"]:checked'
+        );
+
+        if (selected) {
+            answeredQuestions.add(i);
+        }
+    }
+
+    if (count === 12) {
+
+        document.getElementById("submitContainer").style.display = "block";
+
+    } else {
+
+        document.getElementById("submitContainer").style.display = "none";
+    }
+}
+
+
+/* =========================================================
    SUBMIT TEST
-===================================================== */
+========================================================= */
 
 function submitTest() {
 
@@ -1448,108 +1025,108 @@ function submitTest() {
         return;
     }
 
+    /*
+     * Safety check:
+     * User must answer all 12 questions.
+     */
+    checkTestCompletion();
+
+    if (answeredQuestions.size !== 12) {
+
+        alert(
+            "Please answer all 12 questions before submitting the test."
+        );
+
+        return;
+    }
+
     submitted = true;
 
     clearInterval(timer);
 
-
     let score = 0;
-
     let reviewHTML = "";
-
-
-    /*
-       Check all 12 answers
-    */
 
     for (let i = 0; i < 12; i++) {
 
-        const selected =
-            document.querySelector(
-                'input[name="q' + (i + 1) + '"]:checked'
-            );
+        const selected = document.querySelector(
+            'input[name="q' + (i + 1) + '"]:checked'
+        );
 
-
-        const userAnswer =
-            selected
+        const userAnswer = selected
             ? selected.value
             : "Not Answered";
 
-
-        const correctAnswer =
-            explanationData[i].correct;
-
-
-        const correctNumber =
-            correctAnswer.replace("%", "");
-
+        const data = explanationData[i];
 
         const isCorrect =
-            userAnswer === correctNumber;
-
+            userAnswer === data.correctValue;
 
         if (isCorrect) {
             score++;
         }
 
-
-        let statusHTML;
-
+        let statusHTML = "";
 
         if (isCorrect) {
 
             statusHTML = `
-                <p class="correct">
-                    ✅ Correct
-                </p>
+                <p class="correct">✅ Correct Answer</p>
             `;
 
         } else {
 
             statusHTML = `
-                <p class="wrong">
-                    ❌ Wrong
-                </p>
+                <p class="wrong">❌ Wrong Answer</p>
             `;
-
         }
 
 
-        /*
-           Create word explanation table
-        */
+        /* WORD TABLE */
 
         let wordRows = "";
 
+        data.words.forEach(function(word) {
 
-        explanationData[i].words.forEach(
-            function(word) {
+            wordRows += `
+                <tr>
+                    <td><strong>${word[0]}</strong></td>
+                    <td>${word[1]}</td>
+                </tr>
+            `;
+        });
 
-                wordRows += `
 
-                    <tr>
+        /* MARKED STATUS */
 
-                        <td>
-                            <strong>
-                                ${word[0]}
-                            </strong>
-                        </td>
+        let markedHTML = "";
 
-                        <td>
-                            ${word[1]}
-                        </td>
+        if (markedQuestions.has(i)) {
+            markedHTML = `<span class="marked-badge">Marked</span>`;
+        }
 
-                    </tr>
 
-                `;
+        /* USER ANSWER DISPLAY */
 
+        let userDisplay = userAnswer;
+
+        if (
+            userAnswer !== "Not Answered" &&
+            data.correctValue.includes(".") ||
+            data.correct.includes("%")
+        ) {
+            /*
+             * Only percentage questions should get %.
+             * Questions G, J, K have normal numeric answers.
+             */
+            if (
+                i === 0 || i === 1 || i === 2 || i === 3 ||
+                i === 4 || i === 5 || i === 7 || i === 8 || i === 11
+            ) {
+                userDisplay = userAnswer + "%";
             }
-        );
+        }
 
-
-        /*
-           Create result card
-        */
 
         reviewHTML += `
 
@@ -1557,87 +1134,61 @@ function submitTest() {
 
             <h2>
                 Question ${i + 1}
+                ${markedHTML}
             </h2>
 
-
-            <h3>
-                ${explanationData[i].question}
-            </h3>
-
+            <h3>${data.question}</h3>
 
             <p>
                 <strong>Your Answer:</strong>
-
-                ${
-                    userAnswer === "Not Answered"
-                    ? "Not Answered"
-                    : userAnswer + "%"
-                }
-
+                ${userDisplay}
             </p>
-
 
             ${statusHTML}
 
-
             <p>
-                <strong>
-                    Correct Answer:
-                </strong>
-
-                ${explanationData[i].correct}
-
+                <strong>Correct Answer:</strong>
+                ${data.correct}
             </p>
-
 
             <button
                 class="show-answer"
                 onclick="showAnswer(${i})">
-
                 Show Answer
-
             </button>
 
-
-            <!-- DETAILED ANSWER -->
 
             <div
                 class="answer-box"
                 id="answerBox${i}">
-
-
-                <!-- QUESTION PATTERN -->
 
                 <div class="section-title">
                     Question Pattern
                 </div>
 
                 <div class="pattern">
-
-                    ${explanationData[i].pattern}
-
+                    ${data.pattern}
                 </div>
 
 
-                <!-- WORD EXPLANATION -->
+                <div class="section-title">
+                    Question
+                </div>
+
+                <div class="pattern">
+                    ${data.question}
+                </div>
+
 
                 <div class="section-title">
                     Word-by-word Explanation
                 </div>
 
-
                 <table class="word-table">
 
                     <tr>
-
-                        <th>
-                            Word / Number
-                        </th>
-
-                        <th>
-                            Meaning / Role
-                        </th>
-
+                        <th>Word / Number</th>
+                        <th>Meaning / Role</th>
                     </tr>
 
                     ${wordRows}
@@ -1645,126 +1196,71 @@ function submitTest() {
                 </table>
 
 
-                <!-- FORMULA -->
-
                 <div class="section-title">
                     Formula
                 </div>
 
                 <div class="formula">
-
-                    ${explanationData[i].formula}
-
+                    ${data.formula}
                 </div>
 
-
-                <!-- CALCULATION -->
 
                 <div class="section-title">
                     Step-by-step Calculation
                 </div>
 
                 <div class="calculation">
-
-                    ${explanationData[i].calculation}
-
+                    ${data.calculation}
                 </div>
 
-
-                <!-- CORRECT ANSWER -->
 
                 <div class="section-title">
                     Correct Answer
                 </div>
 
                 <p class="correct">
-
-                    ✅
-                    ${explanationData[i].correct}
-
+                    ✅ ${data.correct}
                 </p>
-
 
             </div>
 
         </div>
-
         `;
-
     }
 
 
-    /*
-       Calculate percentage
-    */
+    /* SCORE */
 
     const percentage =
         ((score / 12) * 100).toFixed(2);
 
-
-    /*
-       Result heading
-    */
-
     document.getElementById("score").innerHTML = `
-
-        Score:
-        ${score} / 12
-
+        Score: ${score} / 12
         <br>
-
-        Percentage:
-        ${percentage}%
-
+        Percentage: ${percentage}%
     `;
 
 
-    /*
-       Put all questions in result
-    */
+    document.getElementById("review").innerHTML = reviewHTML;
 
-    document.getElementById("review").innerHTML =
-        reviewHTML;
+    document.getElementById("testArea").style.display = "none";
 
+    document.getElementById("result").style.display = "block";
 
-    /*
-       Hide test
-    */
-
-    document.getElementById("testArea").style.display =
-        "none";
-
-
-    /*
-       Show result
-    */
-
-    document.getElementById("result").style.display =
-        "block";
-
-
-    /*
-       Scroll to result
-    */
-
-    document.getElementById("result")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+    document.getElementById("result").scrollIntoView({
+        behavior: "smooth"
+    });
 }
 
 
-/* =====================================================
-   SHOW / HIDE ANSWER
-===================================================== */
+/* =========================================================
+   SHOW / HIDE DETAILED ANSWER
+========================================================= */
 
 function showAnswer(index) {
 
     const answerBox =
-        document.getElementById(
-            "answerBox" + index
-        );
-
+        document.getElementById("answerBox" + index);
 
     if (answerBox.style.display === "block") {
 
@@ -1773,7 +1269,6 @@ function showAnswer(index) {
     } else {
 
         answerBox.style.display = "block";
-
     }
 }
 
@@ -1781,3 +1276,9 @@ function showAnswer(index) {
 
 </body>
 </html>
+'''
+
+path = Path("/mnt/data/percentage-test-save-next-mark-submit.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created: {path}")
+print(f"Lines: {len(html.splitlines())}")
