@@ -310,9 +310,9 @@ h1 {
 <div id="startScreen">
     <h2>Percentage Test</h2>
 
-    <div class="info"><strong>Total Questions:</strong> 12</div>
+    <div class="info"><strong>Total Questions:</strong> 24</div>
     <div class="info"><strong>Time per Question:</strong> 30 seconds</div>
-    <div class="info"><strong>Total Test Time:</strong> 6 minutes</div>
+    <div class="info"><strong>Total Test Time:</strong> 12 minutes</div>
 
     <p>
         Correct answers and detailed explanations will be shown
@@ -529,747 +529,302 @@ h1 {
 
 <script>
 
-/* =========================================================
-   QUESTION + EXPLANATION DATA
-========================================================= */
-
-const explanationData = [
-
+const questions = [
 {
-    question: "What percent of 408 is 306?",
-    correct: "75%",
-    correctValue: "75",
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-    words: [
-        ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
-        ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
-        ["of", "of తర్వాత ఉన్న సంఖ్య Whole/Base."],
-        ["408", "Whole / Base."],
-        ["is", "Whole మరియు Partను కలుపుతుంది."],
-        ["306", "Part / Given value."]
-    ],
-    formula: "Percentage = (Part ÷ Whole) × 100",
-    calculation: "(306 ÷ 408) × 100 = (3 ÷ 4) × 100 = 75%"
+ q:"(A) What percent of 408 is 306?", o:["25%","75%","50%","80%","60%"], a:"75%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates the Whole/Base."],["408","Whole / Base."],["is","Connects the Whole and Part."],["306","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(306 ÷ 408) × 100 = (3 ÷ 4) × 100 = 75%"
 },
-
 {
-    question: "What percent of 600 is 450?",
-    correct: "75%",
-    correctValue: "75",
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-    words: [
-        ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
-        ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
-        ["of", "of తర్వాత ఉన్న సంఖ్య Whole/Base."],
-        ["600", "Whole / Base."],
-        ["is", "Whole మరియు Partను కలుపుతుంది."],
-        ["450", "Part / Given value."]
-    ],
-    formula: "Percentage = (Part ÷ Whole) × 100",
-    calculation: "(450 ÷ 600) × 100 = (3 ÷ 4) × 100 = 75%"
+ q:"(B) What percent of 600 is 450?", o:["95%","45%","70%","85%","75%"], a:"75%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates the Whole/Base."],["600","Whole / Base."],["is","Connects the Whole and Part."],["450","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(450 ÷ 600) × 100 = (3 ÷ 4) × 100 = 75%"
 },
-
 {
-    question: "What percent of 400 is 250?",
-    correct: "62.5%",
-    correctValue: "62.5",
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-    words: [
-        ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
-        ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
-        ["of", "of తర్వాత ఉన్న సంఖ్య Whole/Base."],
-        ["400", "Whole / Base."],
-        ["is", "Whole మరియు Partను కలుపుతుంది."],
-        ["250", "Part / Given value."]
-    ],
-    formula: "Percentage = (Part ÷ Whole) × 100",
-    calculation: "(250 ÷ 400) × 100 = (5 ÷ 8) × 100 = 62.5%"
+ q:"(C) What percent of 400 is 250?", o:["87.5%","62.5%","60%","70%","80%"], a:"62.5%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates the Whole/Base."],["400","Whole / Base."],["is","Connects the Whole and Part."],["250","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(250 ÷ 400) × 100 = (5 ÷ 8) × 100 = 62.5%"
 },
-
 {
-    question: "What percent of 600 is 375?",
-    correct: "62.5%",
-    correctValue: "62.5",
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-    words: [
-        ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
-        ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
-        ["of", "of తర్వాత ఉన్న సంఖ్య Whole/Base."],
-        ["600", "Whole / Base."],
-        ["is", "Whole మరియు Partను కలుపుతుంది."],
-        ["375", "Part / Given value."]
-    ],
-    formula: "Percentage = (Part ÷ Whole) × 100",
-    calculation: "(375 ÷ 600) × 100 = (5 ÷ 8) × 100 = 62.5%"
+ q:"(D) What percent of 600 is 375?", o:["80%","60%","62.5%","40%","45%"], a:"62.5%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates the Whole/Base."],["600","Whole / Base."],["is","Connects the Whole and Part."],["375","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(375 ÷ 600) × 100 = (5 ÷ 8) × 100 = 62.5%"
 },
-
 {
-    question: "40 is what percent of 800?",
-    correct: "5%",
-    correctValue: "5",
-    pattern: "A is what percent of B? → (A ÷ B) × 100",
-    words: [
-        ["40", "Part / Given value."],
-        ["is", "Part మరియు percentage relationను చూపిస్తుంది."],
-        ["what", "Unknown value కనుక్కోవాలి."],
-        ["percent", "Answer percentageలో ఉంటుంది."],
-        ["of", "of తర్వాత Whole/Base వస్తుంది."],
-        ["800", "Whole / Base."]
-    ],
-    formula: "Percentage = (Part ÷ Whole) × 100",
-    calculation: "(40 ÷ 800) × 100 = 0.05 × 100 = 5%"
+ q:"(E) 40 is what percent of 800?", o:["5%","10%","15%","20%","25%"], a:"5%",
+ pattern:"A is what percent of B? → (A ÷ B) × 100",
+ words:[["40","Part / Given value."],["is","Connects the part with the unknown percentage."],["what","Asks for the unknown value."],["percent","Answer is required in percentage."],["of","Indicates the Whole/Base."],["800","Whole / Base."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(40 ÷ 800) × 100 = 0.05 × 100 = 5%"
 },
-
 {
-    question: "What percent of 500 is 125?",
-    correct: "25%",
-    correctValue: "25",
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-    words: [
-        ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
-        ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
-        ["of", "of తర్వాత Whole/Base."],
-        ["500", "Whole / Base."],
-        ["is", "Whole మరియు Partను కలుపుతుంది."],
-        ["125", "Part / Given value."]
-    ],
-    formula: "Percentage = (Part ÷ Whole) × 100",
-    calculation: "(125 ÷ 500) × 100 = (1 ÷ 4) × 100 = 25%"
+ q:"(F) What percent of 500 is 125?", o:["15%","20%","25%","30%","35%"], a:"25%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates the Whole/Base."],["500","Whole / Base."],["is","Connects the Whole and Part."],["125","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(125 ÷ 500) × 100 = (1 ÷ 4) × 100 = 25%"
 },
-
 {
-    question: "20% of a number is 80. What is the number?",
-    correct: "400",
-    correctValue: "400",
-    pattern: "Percentage of a number is given → Find the Whole",
-    words: [
-        ["20%", "Given percentage."],
-        ["of", "Multiplicationను సూచిస్తుంది."],
-        ["a number", "Unknown Whole."],
-        ["is", "Given resultతో relation చూపిస్తుంది."],
-        ["80", "Given Part / Value."],
-        ["What is the number?", "Whole value కనుక్కోవాలి."]
-    ],
-    formula: "Whole = Part × (100 ÷ Percentage)",
-    calculation: "80 × (100 ÷ 20) = 80 × 5 = 400"
+ q:"(G) 20% of a number is 80. What is the number?", o:["200","300","400","500","600"], a:"400",
+ pattern:"Percentage of a number is given → Find the Whole",
+ words:[["20%","Given percentage."],["of","Indicates multiplication."],["a number","Unknown Whole."],["is","Connects the percentage value with the given result."],["80","Given Part / Value."],["What is the number?","Find the Whole."]],
+ formula:"Whole = Part × (100 ÷ Percentage)",
+ calc:"80 × (100 ÷ 20) = 80 × 5 = 400"
 },
-
 {
-    question: "A number is increased from 200 to 250. What is the percentage increase?",
-    correct: "25%",
-    correctValue: "25",
-    pattern: "Percentage Increase → (Increase ÷ Original) × 100",
-    words: [
-        ["number", "Original quantity."],
-        ["increased", "Value పెరిగింది."],
-        ["200", "Original value."],
-        ["250", "New value."],
-        ["percentage increase", "ఎంత percentage పెరిగిందో కనుక్కోవాలి."]
-    ],
-    formula: "Percentage Increase = (Increase ÷ Original) × 100",
-    calculation: "Increase = 250 - 200 = 50<br><br>(50 ÷ 200) × 100 = 25%"
+ q:"(H) A number is increased from 200 to 250. What is the percentage increase?", o:["20%","25%","30%","35%","40%"], a:"25%",
+ pattern:"Percentage Increase → (Increase ÷ Original) × 100",
+ words:[["number","Original quantity."],["increased","The value becomes larger."],["200","Original value."],["250","New value."],["percentage increase","Find how much the value increased in percentage."]],
+ formula:"Percentage Increase = (Increase ÷ Original) × 100",
+ calc:"Increase = 250 − 200 = 50<br><br>(50 ÷ 200) × 100 = 25%"
 },
-
 {
-    question: "A number is decreased from 500 to 400. What is the percentage decrease?",
-    correct: "20%",
-    correctValue: "20",
-    pattern: "Percentage Decrease → (Decrease ÷ Original) × 100",
-    words: [
-        ["number", "Original quantity."],
-        ["decreased", "Value తగ్గింది."],
-        ["500", "Original value."],
-        ["400", "New value."],
-        ["percentage decrease", "ఎంత percentage తగ్గిందో కనుక్కోవాలి."]
-    ],
-    formula: "Percentage Decrease = (Decrease ÷ Original) × 100",
-    calculation: "Decrease = 500 - 400 = 100<br><br>(100 ÷ 500) × 100 = 20%"
+ q:"(I) A number is decreased from 500 to 400. What is the percentage decrease?", o:["10%","15%","20%","25%","30%"], a:"20%",
+ pattern:"Percentage Decrease → (Decrease ÷ Original) × 100",
+ words:[["number","Original quantity."],["decreased","The value becomes smaller."],["500","Original value."],["400","New value."],["percentage decrease","Find how much the value decreased in percentage."]],
+ formula:"Percentage Decrease = (Decrease ÷ Original) × 100",
+ calc:"Decrease = 500 − 400 = 100<br><br>(100 ÷ 500) × 100 = 20%"
 },
-
 {
-    question: "25% of 240 is equal to:",
-    correct: "60",
-    correctValue: "60",
-    pattern: "Percentage of a number → (Percentage ÷ 100) × Number",
-    words: [
-        ["25%", "Given percentage."],
-        ["of", "Multiplicationను సూచిస్తుంది."],
-        ["240", "Whole / Base number."],
-        ["is equal to", "Result కనుక్కోవాలి."]
-    ],
-    formula: "Percentage Value = (Percentage ÷ 100) × Number",
-    calculation: "(25 ÷ 100) × 240 = 1/4 × 240 = 60"
+ q:"(J) 25% of 240 is equal to:", o:["40","50","60","70","80"], a:"60",
+ pattern:"Percentage of a number → (Percentage ÷ 100) × Number",
+ words:[["25%","Given percentage."],["of","Indicates multiplication."],["240","Whole / Base number."],["is equal to","Asks for the resulting value."]],
+ formula:"Percentage Value = (Percentage ÷ 100) × Number",
+ calc:"(25 ÷ 100) × 240 = 1/4 × 240 = 60"
 },
-
 {
-    question: "If 60% of a number is 180, find the number.",
-    correct: "300",
-    correctValue: "300",
-    pattern: "Percentage value is given → Find the Whole",
-    words: [
-        ["If", "Given conditionను ప్రారంభిస్తుంది."],
-        ["60%", "Given percentage."],
-        ["of", "Multiplicationను సూచిస్తుంది."],
-        ["a number", "Unknown Whole."],
-        ["180", "Given Part / Value."],
-        ["find the number", "Whole value కనుక్కోవాలి."]
-    ],
-    formula: "Whole = Part × (100 ÷ Percentage)",
-    calculation: "180 × (100 ÷ 60) = 180 × 5/3 = 300"
+ q:"(K) If 60% of a number is 180, find the number.", o:["200","250","300","350","400"], a:"300",
+ pattern:"Percentage value is given → Find the Whole",
+ words:[["If","Introduces the given condition."],["60%","Given percentage."],["of","Indicates multiplication."],["a number","Unknown Whole."],["180","Given Part / Value."],["find the number","Find the Whole."]],
+ formula:"Whole = Part × (100 ÷ Percentage)",
+ calc:"180 × (100 ÷ 60) = 180 × 5/3 = 300"
 },
-
 {
-    question: "What percent of 800 is 200?",
-    correct: "25%",
-    correctValue: "25",
-    pattern: "What percent of A is B? → (B ÷ A) × 100",
-    words: [
-        ["What", "ఏమి కనుక్కోవాలో అడుగుతోంది."],
-        ["percent", "సమాధానం percentageలో ఇవ్వాలి."],
-        ["of", "of తర్వాత Whole/Base."],
-        ["800", "Whole / Base."],
-        ["is", "Whole మరియు Partను కలుపుతుంది."],
-        ["200", "Part / Given value."]
-    ],
-    formula: "Percentage = (Part ÷ Whole) × 100",
-    calculation: "(200 ÷ 800) × 100 = (1 ÷ 4) × 100 = 25%"
+ q:"(L) What percent of 800 is 200?", o:["15%","20%","25%","30%","35%"], a:"25%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates the Whole/Base."],["800","Whole / Base."],["is","Connects the Whole and Part."],["200","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(200 ÷ 800) × 100 = (1 ÷ 4) × 100 = 25%"
+},
+{
+ q:"(M) (a%) of (b) + (b%) of (a) = (x%) of (ab). Find (x).", o:["1","2","a","b"], a:"2",
+ pattern:"(a%) of b + (b%) of a = (x%) of ab → Find x",
+ words:[["a%","a percent means a/100."],["of","Indicates multiplication."],["b","First number."],["b%","b percent means b/100."],["a","Second number."],["x%","Unknown percentage."],["ab","Product of a and b."]],
+ formula:"(a/100 × b) + (b/100 × a) = (x/100)ab",
+ calc:"ab/100 + ab/100 = xab/100<br><br>2ab/100 = xab/100<br><br>x = 2"
+},
+{
+ q:"(N) (p%) of (q) + (q%) of (p) = (x%) of (pq). Find (x).", o:["pq","1","2","p+q"], a:"2",
+ pattern:"(p%) of q + (q%) of p = (x%) of pq → Find x",
+ words:[["p%","p percent means p/100."],["of","Indicates multiplication."],["q","First number."],["q%","q percent means q/100."],["p","Second number."],["x%","Unknown percentage."],["pq","Product of p and q."]],
+ formula:"(p/100 × q) + (q/100 × p) = (x/100)pq",
+ calc:"pq/100 + pq/100 = xpq/100<br><br>2pq/100 = xpq/100<br><br>x = 2"
+},
+{
+ q:"(O) (m%) of (n) + (n%) of (m) = (x%) of (mn). Find (x).", o:["m","n","2","mn"], a:"2",
+ pattern:"(m%) of n + (n%) of m = (x%) of mn → Find x",
+ words:[["m%","m percent means m/100."],["of","Indicates multiplication."],["n","First number."],["n%","n percent means n/100."],["m","Second number."],["x%","Unknown percentage."],["mn","Product of m and n."]],
+ formula:"(m/100 × n) + (n/100 × m) = (x/100)mn",
+ calc:"mn/100 + mn/100 = xmn/100<br><br>2mn/100 = xmn/100<br><br>x = 2"
+},
+{
+ q:"(P) (r%) of (s) + (s%) of (r) = (x%) of (rs). Find (x).", o:["2","1","r","s"], a:"2",
+ pattern:"(r%) of s + (s%) of r = (x%) of rs → Find x",
+ words:[["r%","r percent means r/100."],["of","Indicates multiplication."],["s","First number."],["s%","s percent means s/100."],["r","Second number."],["x%","Unknown percentage."],["rs","Product of r and s."]],
+ formula:"(r/100 × s) + (s/100 × r) = (x/100)rs",
+ calc:"rs/100 + rs/100 = xrs/100<br><br>2rs/100 = xrs/100<br><br>x = 2"
+},
+{
+ q:"(Q) (a%) of (b) + (b%) of (a) = 10% of (a+b). The sum of the reciprocals of (a) and (b) is:", o:["1/5","1/10","1/20","1/2"], a:"1/5",
+ pattern:"a% of b + b% of a = 10% of (a+b) → Find 1/a + 1/b",
+ words:[["a%","a percent means a/100."],["b%","b percent means b/100."],["10%","Given percentage of (a+b)."],["a+b","Sum of a and b."],["reciprocals","Reciprocal of a is 1/a and of b is 1/b."]],
+ formula:"ab/100 + ab/100 = 10(a+b)/100",
+ calc:"2ab = 10(a+b)<br><br>ab = 5(a+b)<br><br>1/a + 1/b = (a+b)/ab = 1/5"
+},
+{
+ q:"(R) (p%) of (q) + (q%) of (p) = 20% of (p+q). The sum of the reciprocals of (p) and (q) is:", o:["1/5","1/10","1/20","1/2"], a:"1/10",
+ pattern:"p% of q + q% of p = 20% of (p+q) → Find 1/p + 1/q",
+ words:[["p%","p percent means p/100."],["q%","q percent means q/100."],["20%","Given percentage of (p+q)."],["p+q","Sum of p and q."],["reciprocals","Reciprocals are 1/p and 1/q."]],
+ formula:"pq/100 + pq/100 = 20(p+q)/100",
+ calc:"2pq = 20(p+q)<br><br>pq = 10(p+q)<br><br>1/p + 1/q = (p+q)/pq = 1/10"
+},
+{
+ q:"(S) (x%) of (y) + (y%) of (x) = 40% of (x+y). The sum of the reciprocals of (x) and (y) is:", o:["1/10","1/20","1/40","1/5"], a:"1/20",
+ pattern:"x% of y + y% of x = 40% of (x+y) → Find 1/x + 1/y",
+ words:[["x%","x percent means x/100."],["y%","y percent means y/100."],["40%","Given percentage of (x+y)."],["x+y","Sum of x and y."],["reciprocals","Reciprocals are 1/x and 1/y."]],
+ formula:"xy/100 + xy/100 = 40(x+y)/100",
+ calc:"2xy = 40(x+y)<br><br>xy = 20(x+y)<br><br>1/x + 1/y = (x+y)/xy = 1/20"
+},
+{
+ q:"(T) (c%) of (d) + (d%) of (c) = 50% of (c+d). The sum of the reciprocals of (c) and (d) is:", o:["1/10","1/20","1/25","1/50"], a:"1/25",
+ pattern:"c% of d + d% of c = 50% of (c+d) → Find 1/c + 1/d",
+ words:[["c%","c percent means c/100."],["d%","d percent means d/100."],["50%","Given percentage of (c+d)."],["c+d","Sum of c and d."],["reciprocals","Reciprocals are 1/c and 1/d."]],
+ formula:"cd/100 + cd/100 = 50(c+d)/100",
+ calc:"2cd = 50(c+d)<br><br>cd = 25(c+d)<br><br>1/c + 1/d = (c+d)/cd = 1/25"
+},
+{
+ q:"(U) What percent of 500 is 75?", o:["10%","15%","20%","25%"], a:"15%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates Whole/Base."],["500","Whole / Base."],["is","Connects Whole and Part."],["75","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(75 ÷ 500) × 100 = 15%"
+},
+{
+ q:"(V) What percent of 800 is 120?", o:["10%","12%","15%","20%"], a:"15%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates Whole/Base."],["800","Whole / Base."],["is","Connects Whole and Part."],["120","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(120 ÷ 800) × 100 = 15%"
+},
+{
+ q:"(W) What percent of 600 is 150?", o:["20%","25%","30%","35%"], a:"25%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates Whole/Base."],["600","Whole / Base."],["is","Connects Whole and Part."],["150","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(150 ÷ 600) × 100 = 25%"
+},
+{
+ q:"(X) What percent of 400 is 50?", o:["10%","12.5%","15%","20%"], a:"12.5%",
+ pattern:"What percent of A is B? → (B ÷ A) × 100",
+ words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates Whole/Base."],["400","Whole / Base."],["is","Connects Whole and Part."],["50","Part / Given value."]],
+ formula:"Percentage = (Part ÷ Whole) × 100",
+ calc:"(50 ÷ 400) × 100 = 12.5%"
 }
-
 ];
 
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+let currentQuestion=0, questionTime=30, timer=null, submitted=false;
+let answeredQuestions=new Set(), markedQuestions=new Set();
 
-let currentQuestion = 0;
-let questionTime = 30;
-let timer = null;
-let submitted = false;
-
-let answeredQuestions = new Set();
-let markedQuestions = new Set();
-
-
-/* =========================================================
-   START TEST
-========================================================= */
-
-function startTest() {
-
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("testArea").style.display = "block";
-    document.getElementById("result").style.display = "none";
-
-    currentQuestion = 0;
-    submitted = false;
-
-    answeredQuestions.clear();
-    markedQuestions.clear();
-
-    document.getElementById("submitContainer").style.display = "none";
-
-    showQuestion();
-    startQuestionTimer();
+function renderQuestions(){
+ const c=document.getElementById("questionContainer");
+ c.innerHTML=questions.map((q,i)=>`<div class="question ${i===0?"active":""}" id="question${i}">
+ <h2>${q.q}</h2>
+ ${q.o.map((x,j)=>`<label class="option"><input type="radio" name="q${i}" value="${x}">${j+1}) ${x}</label>`).join("")}
+ </div>`).join("");
 }
 
-
-/* =========================================================
-   SHOW QUESTION
-========================================================= */
-
-function showQuestion() {
-
-    const allQuestions = document.querySelectorAll(".question");
-
-    allQuestions.forEach(function(question) {
-        question.classList.remove("active");
-    });
-
-    document
-        .getElementById("question" + currentQuestion)
-        .classList.add("active");
-
-    document.getElementById("progress").textContent =
-        "Question " + (currentQuestion + 1) + " of 12";
-
-    document.getElementById("previousButton").disabled =
-        currentQuestion === 0;
-
-    updateMarkButton();
-
-    const nextButton = document.getElementById("nextButton");
-
-    if (currentQuestion === 11) {
-        nextButton.textContent = "Save Answer";
-    } else {
-        nextButton.textContent = "Save & Next";
-    }
-
-    checkTestCompletion();
+function startTest(){
+ renderQuestions();
+ document.getElementById("startScreen").style.display="none";
+ document.getElementById("testArea").style.display="block";
+ currentQuestion=0; submitted=false; answeredQuestions.clear(); markedQuestions.clear();
+ document.getElementById("submitContainer").style.display="none";
+ showQuestion(); startQuestionTimer();
 }
 
-
-/* =========================================================
-   TIMER
-========================================================= */
-
-function startQuestionTimer() {
-
-    clearInterval(timer);
-
-    questionTime = 30;
-    updateTimer();
-
-    timer = setInterval(function() {
-
-        questionTime--;
-        updateTimer();
-
-        if (questionTime <= 0) {
-
-            clearInterval(timer);
-
-            saveCurrentAnswer();
-
-            if (currentQuestion < 11) {
-
-                currentQuestion++;
-                showQuestion();
-                startQuestionTimer();
-
-            } else {
-
-                checkTestCompletion();
-
-                /*
-                 * Time is over on Question 12.
-                 * Submit is shown only if all 12 are answered.
-                 */
-                if (answeredQuestions.size === 12) {
-                    document.getElementById("submitContainer").style.display = "block";
-                }
-            }
-        }
-
-    }, 1000);
+function showQuestion(){
+ document.querySelectorAll(".question").forEach(q=>q.classList.remove("active"));
+ document.getElementById("question"+currentQuestion).classList.add("active");
+ document.getElementById("progress").textContent=`Question ${currentQuestion+1} of ${questions.length}`;
+ document.getElementById("previousButton").disabled=currentQuestion===0;
+ document.getElementById("nextButton").textContent=currentQuestion===questions.length-1?"Save Answer":"Save & Next";
+ updateMarkButton(); checkTestCompletion();
 }
 
-
-function updateTimer() {
-
-    document.getElementById("timer").textContent =
-        "Time Left: 00:" +
-        String(questionTime).padStart(2, "0");
-
-    if (questionTime <= 5) {
-        document.getElementById("timer").classList.add("warning");
-    } else {
-        document.getElementById("timer").classList.remove("warning");
-    }
+function startQuestionTimer(){
+ clearInterval(timer); questionTime=30; updateTimer();
+ timer=setInterval(()=>{
+  questionTime--; updateTimer();
+  if(questionTime<=0){
+   clearInterval(timer); saveCurrentAnswer();
+   if(currentQuestion<questions.length-1){currentQuestion++;showQuestion();startQuestionTimer();}
+   else checkTestCompletion();
+  }
+ },1000);
 }
 
-
-/* =========================================================
-   SAVE & NEXT
-========================================================= */
-
-function saveAndNext() {
-
-    saveCurrentAnswer();
-
-    if (currentQuestion < 11) {
-
-        currentQuestion++;
-
-        showQuestion();
-        startQuestionTimer();
-
-    } else {
-
-        checkTestCompletion();
-
-        if (answeredQuestions.size === 12) {
-
-            document.getElementById("submitContainer").style.display = "block";
-
-            alert("All 12 questions are answered. You can now submit the test.");
-
-        } else {
-
-            alert("Please answer all 12 questions before submitting.");
-
-        }
-    }
+function updateTimer(){
+ document.getElementById("timer").textContent="Time Left: 00:"+String(questionTime).padStart(2,"0");
+ document.getElementById("timer").classList.toggle("warning",questionTime<=5);
 }
 
-
-function saveCurrentAnswer() {
-
-    const selected = document.querySelector(
-        'input[name="q' + (currentQuestion + 1) + '"]:checked'
-    );
-
-    if (selected) {
-        answeredQuestions.add(currentQuestion);
-    }
-
-    checkTestCompletion();
+function saveCurrentAnswer(){
+ const s=document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+ if(s) answeredQuestions.add(currentQuestion);
+ checkTestCompletion();
 }
 
-
-/* =========================================================
-   PREVIOUS
-========================================================= */
-
-function previousQuestion() {
-
-    if (currentQuestion > 0) {
-
-        currentQuestion--;
-
-        showQuestion();
-        startQuestionTimer();
-    }
+function saveAndNext(){
+ saveCurrentAnswer();
+ if(currentQuestion<questions.length-1){currentQuestion++;showQuestion();startQuestionTimer();}
+ else if(answeredQuestions.size===questions.length){
+  document.getElementById("submitContainer").style.display="block";
+  alert("All 24 questions are answered. You can now submit the test.");
+ }else alert("Please answer all 24 questions before submitting.");
 }
 
-
-/* =========================================================
-   MARK QUESTION
-========================================================= */
-
-function markQuestion() {
-
-    if (markedQuestions.has(currentQuestion)) {
-
-        markedQuestions.delete(currentQuestion);
-
-    } else {
-
-        markedQuestions.add(currentQuestion);
-    }
-
-    updateMarkButton();
+function previousQuestion(){
+ if(currentQuestion>0){currentQuestion--;showQuestion();startQuestionTimer();}
 }
 
-
-function updateMarkButton() {
-
-    const button = document.getElementById("markButton");
-
-    if (markedQuestions.has(currentQuestion)) {
-
-        button.textContent = "Marked ✓";
-        button.classList.add("marked");
-
-    } else {
-
-        button.textContent = "Mark Question";
-        button.classList.remove("marked");
-    }
+function markQuestion(){
+ markedQuestions.has(currentQuestion)?markedQuestions.delete(currentQuestion):markedQuestions.add(currentQuestion);
+ updateMarkButton();
 }
 
-
-/* =========================================================
-   CHECK ALL ANSWERS
-========================================================= */
-
-function checkTestCompletion() {
-
-    let count = 0;
-
-    for (let i = 0; i < 12; i++) {
-
-        const selected = document.querySelector(
-            'input[name="q' + (i + 1) + '"]:checked'
-        );
-
-        if (selected) {
-            count++;
-        }
-    }
-
-    answeredQuestions.clear();
-
-    for (let i = 0; i < 12; i++) {
-
-        const selected = document.querySelector(
-            'input[name="q' + (i + 1) + '"]:checked'
-        );
-
-        if (selected) {
-            answeredQuestions.add(i);
-        }
-    }
-
-    if (count === 12) {
-
-        document.getElementById("submitContainer").style.display = "block";
-
-    } else {
-
-        document.getElementById("submitContainer").style.display = "none";
-    }
+function updateMarkButton(){
+ const b=document.getElementById("markButton");
+ const marked=markedQuestions.has(currentQuestion);
+ b.textContent=marked?"Marked ✓":"Mark Question";
+ b.classList.toggle("marked",marked);
 }
 
-
-/* =========================================================
-   SUBMIT TEST
-========================================================= */
-
-function submitTest() {
-
-    if (submitted) {
-        return;
-    }
-
-    /*
-     * Safety check:
-     * User must answer all 12 questions.
-     */
-    checkTestCompletion();
-
-    if (answeredQuestions.size !== 12) {
-
-        alert(
-            "Please answer all 12 questions before submitting the test."
-        );
-
-        return;
-    }
-
-    submitted = true;
-
-    clearInterval(timer);
-
-    let score = 0;
-    let reviewHTML = "";
-
-    for (let i = 0; i < 12; i++) {
-
-        const selected = document.querySelector(
-            'input[name="q' + (i + 1) + '"]:checked'
-        );
-
-        const userAnswer = selected
-            ? selected.value
-            : "Not Answered";
-
-        const data = explanationData[i];
-
-        const isCorrect =
-            userAnswer === data.correctValue;
-
-        if (isCorrect) {
-            score++;
-        }
-
-        let statusHTML = "";
-
-        if (isCorrect) {
-
-            statusHTML = `
-                <p class="correct">✅ Correct Answer</p>
-            `;
-
-        } else {
-
-            statusHTML = `
-                <p class="wrong">❌ Wrong Answer</p>
-            `;
-        }
-
-
-        /* WORD TABLE */
-
-        let wordRows = "";
-
-        data.words.forEach(function(word) {
-
-            wordRows += `
-                <tr>
-                    <td><strong>${word[0]}</strong></td>
-                    <td>${word[1]}</td>
-                </tr>
-            `;
-        });
-
-
-        /* MARKED STATUS */
-
-        let markedHTML = "";
-
-        if (markedQuestions.has(i)) {
-            markedHTML = `<span class="marked-badge">Marked</span>`;
-        }
-
-
-        /* USER ANSWER DISPLAY */
-
-        let userDisplay = userAnswer;
-
-        if (
-            userAnswer !== "Not Answered" &&
-            data.correctValue.includes(".") ||
-            data.correct.includes("%")
-        ) {
-            /*
-             * Only percentage questions should get %.
-             * Questions G, J, K have normal numeric answers.
-             */
-            if (
-                i === 0 || i === 1 || i === 2 || i === 3 ||
-                i === 4 || i === 5 || i === 7 || i === 8 || i === 11
-            ) {
-                userDisplay = userAnswer + "%";
-            }
-        }
-
-
-        reviewHTML += `
-
-        <div class="review">
-
-            <h2>
-                Question ${i + 1}
-                ${markedHTML}
-            </h2>
-
-            <h3>${data.question}</h3>
-
-            <p>
-                <strong>Your Answer:</strong>
-                ${userDisplay}
-            </p>
-
-            ${statusHTML}
-
-            <p>
-                <strong>Correct Answer:</strong>
-                ${data.correct}
-            </p>
-
-            <button
-                class="show-answer"
-                onclick="showAnswer(${i})">
-                Show Answer
-            </button>
-
-
-            <div
-                class="answer-box"
-                id="answerBox${i}">
-
-                <div class="section-title">
-                    Question Pattern
-                </div>
-
-                <div class="pattern">
-                    ${data.pattern}
-                </div>
-
-
-                <div class="section-title">
-                    Question
-                </div>
-
-                <div class="pattern">
-                    ${data.question}
-                </div>
-
-
-                <div class="section-title">
-                    Word-by-word Explanation
-                </div>
-
-                <table class="word-table">
-
-                    <tr>
-                        <th>Word / Number</th>
-                        <th>Meaning / Role</th>
-                    </tr>
-
-                    ${wordRows}
-
-                </table>
-
-
-                <div class="section-title">
-                    Formula
-                </div>
-
-                <div class="formula">
-                    ${data.formula}
-                </div>
-
-
-                <div class="section-title">
-                    Step-by-step Calculation
-                </div>
-
-                <div class="calculation">
-                    ${data.calculation}
-                </div>
-
-
-                <div class="section-title">
-                    Correct Answer
-                </div>
-
-                <p class="correct">
-                    ✅ ${data.correct}
-                </p>
-
-            </div>
-
-        </div>
-        `;
-    }
-
-
-    /* SCORE */
-
-    const percentage =
-        ((score / 12) * 100).toFixed(2);
-
-    document.getElementById("score").innerHTML = `
-        Score: ${score} / 12
-        <br>
-        Percentage: ${percentage}%
-    `;
-
-
-    document.getElementById("review").innerHTML = reviewHTML;
-
-    document.getElementById("testArea").style.display = "none";
-
-    document.getElementById("result").style.display = "block";
-
-    document.getElementById("result").scrollIntoView({
-        behavior: "smooth"
-    });
+function checkTestCompletion(){
+ answeredQuestions.clear();
+ for(let i=0;i<questions.length;i++){
+  if(document.querySelector(`input[name="q${i}"]:checked`)) answeredQuestions.add(i);
+ }
+ document.getElementById("submitContainer").style.display=answeredQuestions.size===questions.length?"block":"none";
 }
 
-
-/* =========================================================
-   SHOW / HIDE DETAILED ANSWER
-========================================================= */
-
-function showAnswer(index) {
-
-    const answerBox =
-        document.getElementById("answerBox" + index);
-
-    if (answerBox.style.display === "block") {
-
-        answerBox.style.display = "none";
-
-    } else {
-
-        answerBox.style.display = "block";
-    }
+function submitTest(){
+ if(submitted)return;
+ checkTestCompletion();
+ if(answeredQuestions.size!==questions.length){alert("Please answer all 24 questions before submitting the test.");return;}
+ submitted=true;clearInterval(timer);
+ let score=0,review="";
+ questions.forEach((d,i)=>{
+  const s=document.querySelector(`input[name="q${i}"]:checked`);
+  const ua=s?s.value:"Not Answered", ok=ua===d.a; if(ok)score++;
+  const rows=d.words.map(w=>`<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td></tr>`).join("");
+  review+=`<div class="review">
+   <h2>Question ${i+1} ${markedQuestions.has(i)?'<span class="marked-badge">Marked</span>':''}</h2>
+   <h3>${d.q}</h3>
+   <p><strong>Your Answer:</strong> ${ua}</p>
+   <p class="${ok?'correct':'wrong'}">${ok?'✅ Correct Answer':'❌ Wrong Answer'}</p>
+   <p><strong>Correct Answer:</strong> ${d.a}</p>
+   <button class="show-answer" onclick="showAnswer(${i})">Show Answer</button>
+   <div class="answer-box" id="answerBox${i}">
+    <div class="section-title">Question Pattern</div><div class="pattern">${d.pattern}</div>
+    <div class="section-title">Question</div><div class="pattern">${d.q}</div>
+    <div class="section-title">Word-by-word Explanation</div>
+    <table class="word-table"><tr><th>Word / Number</th><th>Meaning / Role</th></tr>${rows}</table>
+    <div class="section-title">Formula</div><div class="formula">${d.formula}</div>
+    <div class="section-title">Step-by-step Calculation</div><div class="calculation">${d.calc}</div>
+    <div class="section-title">Correct Answer</div><p class="correct">✅ ${d.a}</p>
+   </div>
+  </div>`;
+ });
+ document.getElementById("score").innerHTML=`Score: ${score} / ${questions.length}<br>Percentage: ${((score/questions.length)*100).toFixed(2)}%`;
+ document.getElementById("review").innerHTML=review;
+ document.getElementById("testArea").style.display="none";
+ document.getElementById("result").style.display="block";
+ document.getElementById("result").scrollIntoView({behavior:"smooth"});
 }
 
+function showAnswer(i){
+ const b=document.getElementById("answerBox"+i);
+ b.style.display=b.style.display==="block"?"none":"block";
+}
 </script>
 
 </body>
