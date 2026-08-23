@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +51,10 @@
             margin-bottom: 20px;
         }
 
+        .time-up {
+            background: #d93025;
+        }
+
         .question {
             background: white;
             padding: 20px;
@@ -69,7 +74,7 @@
 
         .option {
             display: block;
-            padding: 10px;
+            padding: 12px;
             margin: 8px 0;
             border: 1px solid #ddd;
             border-radius: 6px;
@@ -108,6 +113,8 @@
             cursor: not-allowed;
         }
 
+        /* Result */
+
         #result {
             display: none;
             background: white;
@@ -119,14 +126,18 @@
 
         .score {
             text-align: center;
-            font-size: 25px;
+            font-size: 28px;
             font-weight: bold;
             margin-bottom: 25px;
         }
 
         .review {
             border-top: 1px solid #ddd;
-            padding: 20px 0;
+            padding: 25px 0;
+        }
+
+        .review h2 {
+            margin-top: 0;
         }
 
         .correct {
@@ -142,7 +153,7 @@
         .show-answer {
             margin-top: 10px;
             background: #6f42c1;
-            padding: 9px 18px;
+            padding: 10px 18px;
             font-size: 15px;
         }
 
@@ -154,21 +165,34 @@
             display: none;
             background: #f8f9fa;
             border-left: 4px solid #007bff;
-            padding: 15px;
-            margin-top: 12px;
+            padding: 18px;
+            margin-top: 15px;
             border-radius: 5px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
-        .time-up {
-            background: #d93025;
+        .explanation-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .note {
+        .formula {
+            background: white;
+            padding: 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: "Courier New", monospace;
+        }
+
+        .final-message {
+            text-align: center;
+            margin-top: 10px;
             color: #555;
         }
     </style>
 </head>
+
 
 <body>
 
@@ -176,31 +200,38 @@
 
     <h1>Percentage Questions - Mock Test</h1>
 
+
     <!-- Instructions -->
-    <div class="instructions" id="instructions">
+
+    <div class="instructions">
 
         <h2>Instructions</h2>
 
         <p>1. Answer all questions.</p>
-        <p>2. Correct answers will not be shown before submission.</p>
-        <p>3. Click <strong>Submit Test</strong> after answering.</p>
-        <p>4. After submission, you can see the result.</p>
-        <p>5. Click <strong>Show Answer</strong> to see the correct answer and explanation.</p>
 
-        <p class="note">
-            Time limit: <strong>5 minutes</strong>
+        <p>2. Correct answers will not be shown before submission.</p>
+
+        <p>3. Click <strong>Submit Test</strong> after answering.</p>
+
+        <p>4. After submission, your result will be displayed.</p>
+
+        <p>5. Click <strong>Show Answer</strong> to see the correct answer and detailed explanation.</p>
+
+        <p>
+            <strong>Time Limit: 5 Minutes</strong>
         </p>
 
     </div>
 
 
     <!-- Timer -->
+
     <div class="timer" id="timer">
         Time Left: 05:00
     </div>
 
 
-    <!-- Questions -->
+    <!-- QUESTION A -->
 
     <div class="question">
 
@@ -238,6 +269,8 @@
     </div>
 
 
+    <!-- QUESTION B -->
+
     <div class="question">
 
         <h2>(B) What percent of 600 is 450?</h2>
@@ -273,6 +306,8 @@
 
     </div>
 
+
+    <!-- QUESTION C -->
 
     <div class="question">
 
@@ -310,6 +345,8 @@
     </div>
 
 
+    <!-- QUESTION D -->
+
     <div class="question">
 
         <h2>(D) What percent of 600 is 375?</h2>
@@ -346,7 +383,8 @@
     </div>
 
 
-    <!-- Submit -->
+    <!-- SUBMIT -->
+
     <div class="submit-container">
 
         <button id="submitButton" onclick="submitTest()">
@@ -356,11 +394,15 @@
     </div>
 
 
-    <!-- Result -->
+    <!-- RESULT -->
 
     <div id="result">
 
         <div class="score" id="score"></div>
+
+        <p class="final-message">
+            Click <strong>Show Answer</strong> to view the correct answer and explanation.
+        </p>
 
         <div id="review"></div>
 
@@ -372,77 +414,285 @@
 <script>
 
     /*
-        Correct Answers
-    */
-
-    const correctAnswers = {
-        q1: "75",
-        q2: "75",
-        q3: "62.5",
-        q4: "62.5"
-    };
-
-
-    /*
-        Question information
+        Question Data
     */
 
     const questions = [
 
         {
             id: "q1",
+
             title: "(A) What percent of 408 is 306?",
+
             correct: "75",
-            explanation:
-                "Percentage = (Part ÷ Whole) × 100<br><br>" +
-                "= (306 ÷ 408) × 100<br><br>" +
-                "= 75%"
+
+            explanation: `
+                <div class="explanation-title">
+                    Step-by-Step Explanation
+                </div>
+
+                <p>
+                    <strong>Step 1: Identify the numbers</strong>
+                </p>
+
+                <p>
+                    In the question, <strong>408</strong> comes after
+                    the word <strong>"of"</strong>.
+                </p>
+
+                <p>
+                    <strong>306</strong> comes after the word
+                    <strong>"is"</strong>.
+                </p>
+
+                <p>
+                    So, we need to find:
+                </p>
+
+                <div class="formula">
+                    Percentage = (Part ÷ Whole) × 100
+                </div>
+
+                <p>
+                    Here:
+                </p>
+
+                <div class="formula">
+                    Part = 306<br>
+                    Whole = 408
+                </div>
+
+                <p>
+                    <strong>Step 2: Substitute the values</strong>
+                </p>
+
+                <div class="formula">
+                    Percentage = (306 ÷ 408) × 100
+                </div>
+
+                <p>
+                    <strong>Step 3: Simplify</strong>
+                </p>
+
+                <div class="formula">
+                    306 ÷ 408 = 3/4
+                </div>
+
+                <p>
+                    <strong>Step 4: Multiply by 100</strong>
+                </p>
+
+                <div class="formula">
+                    (3/4) × 100 = 75%
+                </div>
+
+                <p>
+                    Therefore, the correct answer is
+                    <strong>75%</strong>.
+                </p>
+            `
         },
+
 
         {
             id: "q2",
+
             title: "(B) What percent of 600 is 450?",
+
             correct: "75",
-            explanation:
-                "Percentage = (Part ÷ Whole) × 100<br><br>" +
-                "= (450 ÷ 600) × 100<br><br>" +
-                "= 75%"
+
+            explanation: `
+                <div class="explanation-title">
+                    Step-by-Step Explanation
+                </div>
+
+                <p>
+                    <strong>Step 1: Identify the numbers</strong>
+                </p>
+
+                <p>
+                    Whole = <strong>600</strong>
+                </p>
+
+                <p>
+                    Part = <strong>450</strong>
+                </p>
+
+                <div class="formula">
+                    Percentage = (Part ÷ Whole) × 100
+                </div>
+
+                <p>
+                    <strong>Step 2: Substitute the values</strong>
+                </p>
+
+                <div class="formula">
+                    Percentage = (450 ÷ 600) × 100
+                </div>
+
+                <p>
+                    <strong>Step 3: Simplify</strong>
+                </p>
+
+                <div class="formula">
+                    450 ÷ 600 = 3/4
+                </div>
+
+                <p>
+                    <strong>Step 4: Multiply by 100</strong>
+                </p>
+
+                <div class="formula">
+                    (3/4) × 100 = 75%
+                </div>
+
+                <p>
+                    Therefore, the correct answer is
+                    <strong>75%</strong>.
+                </p>
+            `
         },
+
 
         {
             id: "q3",
+
             title: "(C) What percent of 400 is 250?",
+
             correct: "62.5",
-            explanation:
-                "Percentage = (Part ÷ Whole) × 100<br><br>" +
-                "= (250 ÷ 400) × 100<br><br>" +
-                "= 62.5%"
+
+            explanation: `
+                <div class="explanation-title">
+                    Step-by-Step Explanation
+                </div>
+
+                <p>
+                    <strong>Step 1: Identify the numbers</strong>
+                </p>
+
+                <p>
+                    Whole = <strong>400</strong>
+                </p>
+
+                <p>
+                    Part = <strong>250</strong>
+                </p>
+
+                <div class="formula">
+                    Percentage = (Part ÷ Whole) × 100
+                </div>
+
+                <p>
+                    <strong>Step 2: Substitute the values</strong>
+                </p>
+
+                <div class="formula">
+                    Percentage = (250 ÷ 400) × 100
+                </div>
+
+                <p>
+                    <strong>Step 3: Simplify</strong>
+                </p>
+
+                <div class="formula">
+                    250 ÷ 400 = 5/8
+                </div>
+
+                <p>
+                    <strong>Step 4: Multiply by 100</strong>
+                </p>
+
+                <div class="formula">
+                    (5/8) × 100 = 62.5%
+                </div>
+
+                <p>
+                    Therefore, the correct answer is
+                    <strong>62.5%</strong>.
+                </p>
+            `
         },
+
 
         {
             id: "q4",
+
             title: "(D) What percent of 600 is 375?",
+
             correct: "62.5",
-            explanation:
-                "Percentage = (Part ÷ Whole) × 100<br><br>" +
-                "= (375 ÷ 600) × 100<br><br>" +
-                "= 62.5%"
+
+            explanation: `
+                <div class="explanation-title">
+                    Step-by-Step Explanation
+                </div>
+
+                <p>
+                    <strong>Step 1: Identify the numbers</strong>
+                </p>
+
+                <p>
+                    Whole = <strong>600</strong>
+                </p>
+
+                <p>
+                    Part = <strong>375</strong>
+                </p>
+
+                <div class="formula">
+                    Percentage = (Part ÷ Whole) × 100
+                </div>
+
+                <p>
+                    <strong>Step 2: Substitute the values</strong>
+                </p>
+
+                <div class="formula">
+                    Percentage = (375 ÷ 600) × 100
+                </div>
+
+                <p>
+                    <strong>Step 3: Simplify</strong>
+                </p>
+
+                <div class="formula">
+                    375 ÷ 600 = 5/8
+                </div>
+
+                <p>
+                    <strong>Step 4: Multiply by 100</strong>
+                </p>
+
+                <div class="formula">
+                    (5/8) × 100 = 62.5%
+                </div>
+
+                <p>
+                    Therefore, the correct answer is
+                    <strong>62.5%</strong>.
+                </p>
+            `
         }
 
     ];
 
 
     /*
-        Timer
-        5 minutes = 300 seconds
+        TIMER
+        5 Minutes = 300 Seconds
     */
 
     let timeLeft = 300;
 
-    let timerInterval = setInterval(updateTimer, 1000);
+    let submitted = false;
+
+    const timerInterval = setInterval(updateTimer, 1000);
 
 
     function updateTimer() {
+
+        if (submitted) {
+            return;
+        }
 
         const minutes = Math.floor(timeLeft / 60);
 
@@ -466,6 +716,7 @@
 
             submitTest();
 
+            return;
         }
 
         timeLeft--;
@@ -474,10 +725,16 @@
 
 
     /*
-        Submit Test
+        SUBMIT TEST
     */
 
     function submitTest() {
+
+        if (submitted) {
+            return;
+        }
+
+        submitted = true;
 
         clearInterval(timerInterval);
 
@@ -494,11 +751,11 @@
                 );
 
 
-            let userAnswer =
+            const userAnswer =
                 selected ? selected.value : "Not Answered";
 
 
-            let isCorrect =
+            const isCorrect =
                 userAnswer === question.correct;
 
 
@@ -507,9 +764,19 @@
             }
 
 
-            let statusHTML = isCorrect
-                ? '<div class="correct">✅ Correct</div>'
-                : '<div class="wrong">❌ Wrong</div>';
+            let statusHTML = "";
+
+            if (isCorrect) {
+
+                statusHTML =
+                    '<div class="correct">✅ Correct</div>';
+
+            } else {
+
+                statusHTML =
+                    '<div class="wrong">❌ Wrong</div>';
+
+            }
 
 
             reviewHTML += `
@@ -520,9 +787,11 @@
 
                     <p>
                         <strong>Your Answer:</strong>
-                        ${userAnswer === "Not Answered"
+                        ${
+                            userAnswer === "Not Answered"
                             ? "Not Answered"
-                            : userAnswer + "%"}
+                            : userAnswer + "%"
+                        }
                     </p>
 
                     ${statusHTML}
@@ -535,18 +804,15 @@
 
                     </button>
 
+
                     <div
                         id="explanation${index}"
                         class="explanation">
 
-                        <strong>Correct Answer:</strong>
-                        ${question.correct}%
-
-                        <br><br>
-
-                        <strong>Explanation:</strong>
-
-                        <br><br>
+                        <p>
+                            <strong>Correct Answer:</strong>
+                            ${question.correct}%
+                        </p>
 
                         ${question.explanation}
 
@@ -560,12 +826,29 @@
 
 
         /*
-            Show final result
+            FINAL RESULT
         */
 
+        const percentageScore =
+            (score / questions.length) * 100;
+
+
         document.getElementById("score").innerHTML =
-            "FINAL RESULT<br><br>" +
-            "Score: " + score + " / " + questions.length;
+
+            "FINAL RESULT" +
+
+            "<br><br>" +
+
+            "Score: " +
+            score +
+            " / " +
+            questions.length +
+
+            "<br>" +
+
+            "Percentage: " +
+            percentageScore +
+            "%";
 
 
         document.getElementById("review").innerHTML =
@@ -577,7 +860,7 @@
 
 
         /*
-            Disable Submit button
+            Disable submit button
         */
 
         document.getElementById("submitButton").disabled =
@@ -585,7 +868,7 @@
 
 
         /*
-            Disable all options
+            Disable all answers
         */
 
         const allInputs =
@@ -614,7 +897,7 @@
 
 
     /*
-        Show Answer + Explanation
+        SHOW ANSWER + EXPLANATION
     */
 
     function showExplanation(index) {
