@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Questions</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .question h2 {
+            margin-top: 0;
+        }
+
+        .options {
+            margin: 15px 0;
+            line-height: 2;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .answer {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #e8f5e9;
+            border-radius: 6px;
+            color: #155724;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Percentage Questions</h1>
+
+    <!-- Question A -->
+    <div class="question">
+        <h2>(A) What percent of 408 is 306?</h2>
+
+        <div class="options">
+            1) 25% <br>
+            2) 75% <br>
+            3) 50% <br>
+            4) 80% <br>
+            5) 60%
+        </div>
+
+        <button onclick="showAnswer('answerA')">
+            Show Answer
+        </button>
+
+        <div id="answerA" class="answer">
+            <strong>Answer: 75%</strong><br><br>
+            Formula: (306 ÷ 408) × 100 = 75%
+        </div>
+    </div>
+
+
+    <!-- Question B -->
+    <div class="question">
+        <h2>(B) What percent of 600 is 450?</h2>
+
+        <div class="options">
+            1) 95% <br>
+            2) 45% <br>
+            3) 70% <br>
+            4) 85% <br>
+            5) 75%
+        </div>
+
+        <button onclick="showAnswer('answerB')">
+            Show Answer
+        </button>
+
+        <div id="answerB" class="answer">
+            <strong>Answer: 75%</strong><br><br>
+            Formula: (450 ÷ 600) × 100 = 75%
+        </div>
+    </div>
+
+
+    <!-- Question C -->
+    <div class="question">
+        <h2>(C) What percent of 400 is 250?</h2>
+
+        <div class="options">
+            1) 87.5% <br>
+            2) 62.5% <br>
+            3) 60% <br>
+            4) 70% <br>
+            5) 80%
+        </div>
+
+        <button onclick="showAnswer('answerC')">
+            Show Answer
+        </button>
+
+        <div id="answerC" class="answer">
+            <strong>Answer: 62.5%</strong><br><br>
+            Formula: (250 ÷ 400) × 100 = 62.5%
+        </div>
+    </div>
+
+
+    <!-- Question D -->
+    <div class="question">
+        <h2>(D) What percent of 600 is 375?</h2>
+
+        <div class="options">
+            1) 80% <br>
+            2) 60% <br>
+            3) 62.5% <br>
+            4) 40% <br>
+            5) 45%
+        </div>
+
+        <button onclick="showAnswer('answerD')">
+            Show Answer
+        </button>
+
+        <div id="answerD" class="answer">
+            <strong>Answer: 62.5%</strong><br><br>
+            Formula: (375 ÷ 600) × 100 = 62.5%
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    function showAnswer(answerId) {
+        const answer = document.getElementById(answerId);
+
+        if (answer.style.display === "none" || answer.style.display === "") {
+            answer.style.display = "block";
+        } else {
+            answer.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
