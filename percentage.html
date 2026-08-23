@@ -56,6 +56,55 @@ h1{text-align:center}
 .reattempt-button{display:block;margin:25px auto 5px;background:#0d6efd;color:#fff;border:0;border-radius:7px;padding:13px 28px;font-size:18px;cursor:pointer}
 .reattempt-button:hover{background:#084298}
 
+
+/* Reciprocal Pattern Styling */
+.reciprocal-pattern{
+    margin-top:16px;
+    padding:18px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#eef6ff,#f8fbff);
+    border:1px solid #b9d7f7;
+    box-shadow:0 2px 6px rgba(0,0,0,.06);
+}
+.reciprocal-pattern .pattern-heading{
+    font-size:18px;
+    font-weight:700;
+    color:#145da0;
+    margin-bottom:12px;
+}
+.reciprocal-pattern .equation{
+    background:#fff;
+    border-left:4px solid #007bff;
+    padding:12px 14px;
+    margin:10px 0;
+    border-radius:6px;
+    font-family:"Cambria Math","Times New Roman",serif;
+    font-size:20px;
+    line-height:1.7;
+}
+.reciprocal-pattern .use-pattern{
+    background:#fff8df;
+    border:1px solid #f0d47a;
+    border-radius:8px;
+    padding:14px;
+    margin-top:12px;
+}
+.reciprocal-pattern .use-title{
+    font-weight:700;
+    color:#9a6700;
+    margin-bottom:8px;
+}
+.reciprocal-pattern .result-equation{
+    background:#eaf7ee;
+    border-left:4px solid #198754;
+    padding:12px 14px;
+    border-radius:6px;
+    margin-top:10px;
+    font-weight:700;
+    font-family:"Cambria Math","Times New Roman",serif;
+    font-size:20px;
+}
+
 @media(max-width:600px){body{padding:10px}.question{padding:18px}.option{font-size:16px}.navigation button{flex:1 1 100%}}
 </style>
 </head>
@@ -65,7 +114,7 @@ h1{text-align:center}
 
 <div id="startScreen">
 <h2>SSC / RRB Percentage Test</h2>
-<div class="info"><strong>Total Questions:</strong> 24</div>
+<div class="info"><strong>Total Questions:</strong> 25</div>
 <div class="info"><strong>Time per Question:</strong> 30 seconds</div>
 <div class="info"><strong>Total Test Time:</strong> 12 minutes</div>
 <p>Correct answers and detailed explanations will be shown only after submitting the test.</p>
@@ -74,7 +123,7 @@ h1{text-align:center}
 
 <div id="testArea">
 <div id="timer" class="timer">Time Left: 00:30</div>
-<div id="progress" class="progress">Question 1 of 24</div>
+<div id="progress" class="progress">Question 1 of 25</div>
 <div id="questionContainer"></div>
 <div class="navigation">
 <button class="nav-button" id="previousButton" type="button" onclick="previousQuestion()" disabled>Previous</button>
@@ -227,28 +276,36 @@ const questions = [
 },
 {
  q:"(Q) (a%) of (b) + (b%) of (a) = 10% of (a+b). The sum of the reciprocals of (a) and (b) is:", o:["1/5","1/10","1/20","1/2"], a:"1/5",
- pattern:"a% of b + b% of a = 10% of (a+b) → Find 1/a + 1/b",
+ pattern:"p% of q + q% of p = k% of (p+q)<br><br>🧠 Use the pattern:<br>1/p + 1/q = 2/k<br><br>Here k = 10, so:<br>1/a + 1/b = 2/10 = 1/5",
  words:[["a%","a percent means a/100."],["b%","b percent means b/100."],["10%","Given percentage of (a+b)."],["a+b","Sum of a and b."],["reciprocals","Reciprocal of a is 1/a and of b is 1/b."]],
  formula:"ab/100 + ab/100 = 10(a+b)/100",
  calc:"2ab = 10(a+b)<br><br>ab = 5(a+b)<br><br>1/a + 1/b = (a+b)/ab = 1/5"
 },
 {
  q:"(R) (p%) of (q) + (q%) of (p) = 20% of (p+q). The sum of the reciprocals of (p) and (q) is:", o:["1/5","1/10","1/20","1/2"], a:"1/10",
- pattern:"p% of q + q% of p = 20% of (p+q) → Find 1/p + 1/q",
+ pattern:"<div class="reciprocal-pattern">
+<div class="pattern-heading">📌 Question Pattern</div>
+<div class="equation">p% of q + q% of p = k% of (p + q)</div>
+<div class="use-pattern">
+<div class="use-title">🧠 Use the pattern</div>
+<div class="equation">1/p + 1/q = 2/k</div>
+</div>
+<div class="result-equation">Here k = 20 → 1/p + 1/q = 2/20 = 1/10</div>
+</div>",
  words:[["p%","p percent means p/100."],["q%","q percent means q/100."],["20%","Given percentage of (p+q)."],["p+q","Sum of p and q."],["reciprocals","Reciprocals are 1/p and 1/q."]],
  formula:"pq/100 + pq/100 = 20(p+q)/100",
  calc:"2pq = 20(p+q)<br><br>pq = 10(p+q)<br><br>1/p + 1/q = (p+q)/pq = 1/10"
 },
 {
  q:"(S) (x%) of (y) + (y%) of (x) = 40% of (x+y). The sum of the reciprocals of (x) and (y) is:", o:["1/10","1/20","1/40","1/5"], a:"1/20",
- pattern:"x% of y + y% of x = 40% of (x+y) → Find 1/x + 1/y",
+ pattern:"p% of q + q% of p = k% of (p+q)<br><br>🧠 Use the pattern:<br>1/p + 1/q = 2/k<br><br>Here k = 40, so:<br>1/x + 1/y = 2/40 = 1/20",
  words:[["x%","x percent means x/100."],["y%","y percent means y/100."],["40%","Given percentage of (x+y)."],["x+y","Sum of x and y."],["reciprocals","Reciprocals are 1/x and 1/y."]],
  formula:"xy/100 + xy/100 = 40(x+y)/100",
  calc:"2xy = 40(x+y)<br><br>xy = 20(x+y)<br><br>1/x + 1/y = (x+y)/xy = 1/20"
 },
 {
  q:"(T) (c%) of (d) + (d%) of (c) = 50% of (c+d). The sum of the reciprocals of (c) and (d) is:", o:["1/10","1/20","1/25","1/50"], a:"1/25",
- pattern:"c% of d + d% of c = 50% of (c+d) → Find 1/c + 1/d",
+ pattern:"p% of q + q% of p = k% of (p+q)<br><br>🧠 Use the pattern:<br>1/p + 1/q = 2/k<br><br>Here k = 50, so:<br>1/c + 1/d = 2/50 = 1/25",
  words:[["c%","c percent means c/100."],["d%","d percent means d/100."],["50%","Given percentage of (c+d)."],["c+d","Sum of c and d."],["reciprocals","Reciprocals are 1/c and 1/d."]],
  formula:"cd/100 + cd/100 = 50(c+d)/100",
  calc:"2cd = 50(c+d)<br><br>cd = 25(c+d)<br><br>1/c + 1/d = (c+d)/cd = 1/25"
@@ -280,6 +337,28 @@ const questions = [
  words:[["What","Asks what must be found."],["percent","Answer is required in percentage."],["of","Indicates Whole/Base."],["400","Whole / Base."],["is","Connects Whole and Part."],["50","Part / Given value."]],
  formula:"Percentage = (Part ÷ Whole) × 100",
  calc:"(50 ÷ 400) × 100 = 12.5%"
+},
+{
+ q:"(Y) If p% of q + q% of p = 30% of (p+q), then 1/p + 1/q = ?", 
+ o:["10","15","20","30"], a:"15",
+ pattern:"<div class="reciprocal-pattern">
+<div class="pattern-heading">📌 Question Pattern</div>
+<div class="equation">p% of q + q% of p = k% of (p + q)</div>
+<div class="use-pattern">
+<div class="use-title">🧠 Use the pattern</div>
+<div class="equation">1/p + 1/q = 2/k</div>
+</div>
+<div class="result-equation">Here k = 30 → 1/p + 1/q = 2/30 = 1/15</div>
+</div>",
+ words:[
+  ["p% of q","pq/100"],
+  ["q% of p","pq/100"],
+  ["30%","Given percentage k = 30"],
+  ["p+q","Sum of p and q"],
+  ["1/p + 1/q","Sum of reciprocals to be found."]
+ ],
+ formula:"1/p + 1/q = 2/k",
+ calc:"Here k = 30<br><br>1/p + 1/q = 2/30<br><br>= 1/15"
 }
 ];
 let currentQuestion=0;
@@ -322,15 +401,40 @@ function startTest(){
 
 function showQuestion(){
  document.querySelectorAll(".question").forEach(q=>q.classList.remove("active"));
+
  const q=document.getElementById("question"+currentQuestion);
  if(q) q.classList.add("active");
- document.getElementById("progress").textContent="Question "+(currentQuestion+1)+" of "+questions.length;
- document.getElementById("previousButton").disabled=currentQuestion===0;
- document.getElementById("nextButton").textContent=currentQuestion===questions.length-1?"Save Answer":"Save & Next";
- updateMarkButton();
- checkTestCompletion();
-}
 
+ document.getElementById("progress").textContent=
+  "Question "+(currentQuestion+1)+" of "+questions.length;
+
+ document.getElementById("previousButton").disabled=currentQuestion===0;
+
+ document.getElementById("nextButton").textContent=
+  currentQuestion===questions.length-1
+   ? "Save Answer"
+   : "Save & Next";
+
+ updateMarkButton();
+
+ // Submit Test is shown ONLY on the last question.
+ const submitBox=document.getElementById("submitContainer");
+
+ if(currentQuestion===questions.length-1){
+  submitBox.style.display="block";
+
+  const status=document.getElementById("submitStatus");
+  if(status){
+   const attempted=answeredQuestions.size;
+   status.textContent=
+    attempted===questions.length
+     ? "All 25 questions answered. Click Submit Test."
+     : "You are on the last question. You can submit the test now.";
+  }
+ }else{
+  submitBox.style.display="none";
+ }
+}
 function startQuestionTimer(){
  clearInterval(timer);
  timerQuestion=currentQuestion;
@@ -380,12 +484,10 @@ function saveCurrentAnswer(){
 }
 
 function saveAndNext(){
- // Save current answer and preserve current timer.
  remainingTimes[currentQuestion]=questionTime;
  saveCurrentAnswer();
 
  if(currentQuestion < questions.length-1){
-
   clearInterval(timer);
 
   currentQuestion++;
@@ -395,31 +497,20 @@ function saveAndNext(){
   startQuestionTimer();
 
  }else{
-
-  // Q24: do NOT automatically hide Submit Test.
-  // If all questions are answered, keep Submit Test visible.
+  // Last question: Save Answer keeps Submit Test visible.
   checkTestCompletion();
 
-  if(answeredQuestions.size===questions.length){
+  const submitBox=document.getElementById("submitContainer");
+  submitBox.style.display="block";
 
-   document.getElementById("submitContainer").style.display="block";
-
-   const status=document.getElementById("submitStatus");
-   if(status){
-    status.textContent=
-     "All 24 questions answered. Click Submit Test.";
-   }
-
-  }else{
-
-   document.getElementById("submitContainer").style.display="none";
-
-   alert(
-    "Some questions are not answered. " +
-    "You must answer all 24 questions before manual submission."
-   );
+  const status=document.getElementById("submitStatus");
+  if(status){
+   status.textContent=
+    answeredQuestions.size===questions.length
+     ? "All 25 questions answered. Click Submit Test."
+     : "You are on the last question. You can submit the test now.";
   }
-}
+ }
 }
 function previousQuestion(){
  if(currentQuestion>0){
@@ -461,35 +552,28 @@ function checkTestCompletion(){
  const submitBox=document.getElementById("submitContainer");
  const submitStatus=document.getElementById("submitStatus");
 
- if(answeredQuestions.size>0){
+ // Submit Test is ONLY available on the last question.
+ if(currentQuestion===questions.length-1){
   submitBox.style.display="block";
+
   if(submitStatus){
    submitStatus.textContent=
     answeredQuestions.size===questions.length
-     ? "All 24 questions answered. Click Submit Test."
-     : answeredQuestions.size+" question(s) attempted. You can submit the test now.";
+     ? "All 25 questions answered. Click Submit Test."
+     : "You are on the last question. You can submit the test now.";
   }
  }else{
   submitBox.style.display="none";
-  if(submitStatus){
-   submitStatus.textContent="Attempt at least one question to submit.";
-  }
  }
 }
-
 function submitTest(autoSubmit=false){
  if(submitted)return;
 
  // Save the current question before submitting.
  saveCurrentAnswer();
 
- // Manual Submit is allowed once the user has attempted at least one
- // question. Any unanswered questions are recorded as "Not Answered".
- if(!autoSubmit && answeredQuestions.size===0){
-  alert("Please attempt at least one question before submitting the test.");
-  return;
- }
-
+ // Manual Submit is allowed at any time.
+ // Any unanswered questions are recorded as "Not Answered".
  submitted=true;
  clearInterval(timer);
 
