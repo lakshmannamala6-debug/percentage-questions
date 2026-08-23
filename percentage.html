@@ -27,6 +27,7 @@ h1 {
     color: #222;
 }
 
+.start-screen,
 .instructions,
 .question,
 #result {
@@ -35,6 +36,10 @@ h1 {
     border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.start-screen {
+    text-align: center;
 }
 
 .timer {
@@ -48,11 +53,18 @@ h1 {
     border-radius: 8px;
     font-size: 22px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.time-warning {
+.timer.warning {
     background: #d93025;
+}
+
+.progress {
+    text-align: center;
+    color: #555;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .question {
@@ -63,9 +75,9 @@ h1 {
     display: block;
 }
 
-.question-number {
-    color: #666;
-    font-size: 15px;
+.question h2 {
+    margin-top: 5px;
+    font-size: 20px;
 }
 
 .option {
@@ -88,8 +100,8 @@ h1 {
 .navigation {
     display: flex;
     justify-content: space-between;
+    margin: 20px 0;
     gap: 10px;
-    margin-top: 20px;
 }
 
 button {
@@ -119,18 +131,13 @@ button:disabled {
     background: #146c43;
 }
 
-.submit-container {
-    text-align: center;
-    margin: 25px 0;
-}
-
 #result {
     display: none;
 }
 
 .score {
     text-align: center;
-    font-size: 26px;
+    font-size: 27px;
     font-weight: bold;
     margin-bottom: 25px;
 }
@@ -152,46 +159,65 @@ button:disabled {
 
 .show-answer {
     background: #6f42c1;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 .show-answer:hover {
     background: #56339b;
 }
 
-.explanation {
+.answer-box {
     display: none;
+    margin-top: 15px;
+    padding: 18px;
     background: #f8f9fa;
     border-left: 4px solid #007bff;
-    padding: 18px;
-    margin-top: 15px;
+    border-radius: 5px;
     line-height: 1.8;
+}
+
+.pattern-box {
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.word-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+}
+
+.word-table th,
+.word-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.word-table th {
+    background: #eef3f8;
 }
 
 .formula {
     background: white;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
     border-radius: 5px;
     font-family: "Courier New", monospace;
 }
 
-.progress {
-    text-align: center;
-    color: #555;
-    margin-bottom: 15px;
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
 }
 
-.start-screen {
-    text-align: center;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-#testArea {
-    display: none;
+.start-button {
+    font-size: 18px;
+    padding: 14px 30px;
 }
 </style>
 </head>
@@ -202,33 +228,35 @@ button:disabled {
 
 <h1>Percentage Practice Test</h1>
 
+
 <!-- START SCREEN -->
 
 <div class="start-screen" id="startScreen">
 
-    <h2>Percentage Test</h2>
+    <h2>SSC / RRB Percentage Test</h2>
 
     <p><strong>Total Questions:</strong> 12</p>
     <p><strong>Time per Question:</strong> 30 seconds</p>
-    <p><strong>Total Time:</strong> 6 minutes</p>
+    <p><strong>Total Test Time:</strong> 6 minutes</p>
 
     <p>
-        Answers and explanations will be shown only after submission.
+        Correct answers and explanations will be shown
+        only after submitting the test.
     </p>
 
-    <button onclick="startTest()">
+    <button class="start-button" onclick="startTest()">
         Start Test
     </button>
 
 </div>
 
 
-<!-- TEST AREA -->
+<!-- TEST -->
 
 <div id="testArea">
 
     <div class="timer" id="timer">
-        Question Time: 00:30
+        Time Left: 00:30
     </div>
 
     <div class="progress" id="progress">
@@ -236,13 +264,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 1 -->
+    <!-- Q1 -->
 
     <div class="question active" id="question0">
 
-        <div class="question-number">Question 1 of 12</div>
-
-        <h2>What percent of 408 is 306?</h2>
+        <h2>
+            (A) What percent of 408 is 306?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q1" value="25">
@@ -272,13 +300,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 2 -->
+    <!-- Q2 -->
 
     <div class="question" id="question1">
 
-        <div class="question-number">Question 2 of 12</div>
-
-        <h2>What percent of 600 is 450?</h2>
+        <h2>
+            (B) What percent of 600 is 450?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q2" value="95">
@@ -308,13 +336,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 3 -->
+    <!-- Q3 -->
 
     <div class="question" id="question2">
 
-        <div class="question-number">Question 3 of 12</div>
-
-        <h2>What percent of 400 is 250?</h2>
+        <h2>
+            (C) What percent of 400 is 250?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q3" value="87.5">
@@ -344,13 +372,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 4 -->
+    <!-- Q4 -->
 
     <div class="question" id="question3">
 
-        <div class="question-number">Question 4 of 12</div>
-
-        <h2>What percent of 600 is 375?</h2>
+        <h2>
+            (D) What percent of 600 is 375?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q4" value="80">
@@ -380,13 +408,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 5 -->
+    <!-- Q5 -->
 
     <div class="question" id="question4">
 
-        <div class="question-number">Question 5 of 12</div>
-
-        <h2>40 is what percent of 800?</h2>
+        <h2>
+            (E) 40 is what percent of 800?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q5" value="5">
@@ -416,13 +444,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 6 -->
+    <!-- Q6 -->
 
     <div class="question" id="question5">
 
-        <div class="question-number">Question 6 of 12</div>
-
-        <h2>What percent of 500 is 125?</h2>
+        <h2>
+            (F) What percent of 500 is 125?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q6" value="15">
@@ -452,13 +480,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 7 -->
+    <!-- Q7 -->
 
     <div class="question" id="question6">
 
-        <div class="question-number">Question 7 of 12</div>
-
-        <h2>20% of a number is 80. What is the number?</h2>
+        <h2>
+            (G) 20% of a number is 80. What is the number?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q7" value="200">
@@ -488,13 +516,14 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 8 -->
+    <!-- Q8 -->
 
     <div class="question" id="question7">
 
-        <div class="question-number">Question 8 of 12</div>
-
-        <h2>A number is increased from 200 to 250. What is the percentage increase?</h2>
+        <h2>
+            (H) A number is increased from 200 to 250.
+            What is the percentage increase?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q8" value="20">
@@ -524,13 +553,14 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 9 -->
+    <!-- Q9 -->
 
     <div class="question" id="question8">
 
-        <div class="question-number">Question 9 of 12</div>
-
-        <h2>A number is decreased from 500 to 400. What is the percentage decrease?</h2>
+        <h2>
+            (I) A number is decreased from 500 to 400.
+            What is the percentage decrease?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q9" value="10">
@@ -560,13 +590,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 10 -->
+    <!-- Q10 -->
 
     <div class="question" id="question9">
 
-        <div class="question-number">Question 10 of 12</div>
-
-        <h2>25% of 240 is equal to:</h2>
+        <h2>
+            (J) 25% of 240 is equal to:
+        </h2>
 
         <label class="option">
             <input type="radio" name="q10" value="40">
@@ -596,13 +626,14 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 11 -->
+    <!-- Q11 -->
 
     <div class="question" id="question10">
 
-        <div class="question-number">Question 11 of 12</div>
-
-        <h2>If 60% of a number is 180, find the number.</h2>
+        <h2>
+            (K) If 60% of a number is 180,
+            find the number.
+        </h2>
 
         <label class="option">
             <input type="radio" name="q11" value="200">
@@ -632,13 +663,13 @@ button:disabled {
     </div>
 
 
-    <!-- QUESTION 12 -->
+    <!-- Q12 -->
 
     <div class="question" id="question11">
 
-        <div class="question-number">Question 12 of 12</div>
-
-        <h2>What percent of 800 is 200?</h2>
+        <h2>
+            (L) What percent of 800 is 200?
+        </h2>
 
         <label class="option">
             <input type="radio" name="q12" value="15">
@@ -672,11 +703,14 @@ button:disabled {
 
     <div class="navigation">
 
-        <button id="previousButton" onclick="previousQuestion()" disabled>
+        <button id="previousButton"
+                onclick="previousQuestion()"
+                disabled>
             Previous
         </button>
 
-        <button id="nextButton" onclick="nextQuestion()">
+        <button id="nextButton"
+                onclick="nextQuestion()">
             Next
         </button>
 
@@ -685,7 +719,8 @@ button:disabled {
 
     <div class="submit-container">
 
-        <button id="submitButton" onclick="submitTest()">
+        <button id="submitButton"
+                onclick="submitTest()">
             Submit Test
         </button>
 
@@ -701,7 +736,8 @@ button:disabled {
     <div class="score" id="score"></div>
 
     <p style="text-align:center;">
-        Click <strong>Show Answer</strong> to see the detailed explanation.
+        Click <strong>Show Answer</strong> to see
+        the question pattern and detailed explanation.
     </p>
 
     <div id="review"></div>
@@ -709,390 +745,342 @@ button:disabled {
 </div>
 
 
-</div>
-
-
 <script>
 
-/* =========================
-   QUESTIONS
-========================= */
+/* ==============================
+   QUESTION DATA
+============================== */
 
 const questions = [
 
-    {
-        id: "q1",
-        title: "What percent of 408 is 306?",
-        correct: "75",
-        explanation: `
-        <strong>Step 1:</strong> Use the formula.<br><br>
+{
+    id: "q1",
+    title: "What percent of 408 is 306?",
+    correct: "75",
 
-        <div class="formula">
-        Percentage = (Part ÷ Whole) × 100
-        </div>
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
 
-        <strong>Step 2:</strong> Here, Part = 306 and Whole = 408.<br><br>
+    words: [
+        ["What", "Asks us to find something."],
+        ["percent", "Asks for the answer in percentage."],
+        ["of", "Indicates the whole/base number."],
+        ["408", "Whole / Base."],
+        ["is", "Connects the whole with the given part."],
+        ["306", "Part / Given value."]
+    ],
 
-        <div class="formula">
-        = (306 ÷ 408) × 100
-        </div>
+    formula: "Percentage = (Part ÷ Whole) × 100",
 
-        <strong>Step 3:</strong> Simplify 306/408 = 3/4.<br><br>
-
-        <div class="formula">
-        = (3/4) × 100
-        </div>
-
-        <strong>Step 4:</strong><br><br>
-
-        <div class="formula">
+    calculation: `
+        = (306 ÷ 408) × 100<br>
+        = (3 ÷ 4) × 100<br>
         = 75%
-        </div>
+    `
+},
 
-        Therefore, the correct answer is <strong>75%</strong>.
-        `
-    },
 
-    {
-        id: "q2",
-        title: "What percent of 600 is 450?",
-        correct: "75",
-        explanation: `
-        <strong>Step 1:</strong> Percentage = (Part ÷ Whole) × 100.<br><br>
+{
+    id: "q2",
+    title: "What percent of 600 is 450?",
+    correct: "75",
 
-        <div class="formula">
-        = (450 ÷ 600) × 100
-        </div>
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
 
-        <strong>Step 2:</strong> 450/600 = 3/4.<br><br>
+    words: [
+        ["What", "Asks us to find something."],
+        ["percent", "Asks for the answer in percentage."],
+        ["of", "Indicates the whole/base number."],
+        ["600", "Whole / Base."],
+        ["is", "Connects the whole with the given part."],
+        ["450", "Part / Given value."]
+    ],
 
-        <div class="formula">
-        = (3/4) × 100
-        </div>
+    formula: "Percentage = (Part ÷ Whole) × 100",
 
-        <strong>Step 3:</strong><br><br>
-
-        <div class="formula">
+    calculation: `
+        = (450 ÷ 600) × 100<br>
+        = (3 ÷ 4) × 100<br>
         = 75%
-        </div>
+    `
+},
 
-        Therefore, the correct answer is <strong>75%</strong>.
-        `
-    },
 
-    {
-        id: "q3",
-        title: "What percent of 400 is 250?",
-        correct: "62.5",
-        explanation: `
-        <strong>Step 1:</strong> Percentage = (Part ÷ Whole) × 100.<br><br>
+{
+    id: "q3",
+    title: "What percent of 400 is 250?",
+    correct: "62.5",
 
-        <div class="formula">
-        = (250 ÷ 400) × 100
-        </div>
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
 
-        <strong>Step 2:</strong> 250/400 = 5/8.<br><br>
+    words: [
+        ["What", "Asks us to find something."],
+        ["percent", "Asks for the answer in percentage."],
+        ["of", "Indicates the whole/base number."],
+        ["400", "Whole / Base."],
+        ["is", "Connects the whole with the given part."],
+        ["250", "Part / Given value."]
+    ],
 
-        <div class="formula">
-        = (5/8) × 100
-        </div>
+    formula: "Percentage = (Part ÷ Whole) × 100",
 
-        <strong>Step 3:</strong><br><br>
-
-        <div class="formula">
+    calculation: `
+        = (250 ÷ 400) × 100<br>
+        = (5 ÷ 8) × 100<br>
         = 62.5%
-        </div>
+    `
+},
 
-        Therefore, the correct answer is <strong>62.5%</strong>.
-        `
-    },
 
-    {
-        id: "q4",
-        title: "What percent of 600 is 375?",
-        correct: "62.5",
-        explanation: `
-        <strong>Step 1:</strong> Percentage = (Part ÷ Whole) × 100.<br><br>
+{
+    id: "q4",
+    title: "What percent of 600 is 375?",
+    correct: "62.5",
 
-        <div class="formula">
-        = (375 ÷ 600) × 100
-        </div>
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
 
-        <strong>Step 2:</strong> 375/600 = 5/8.<br><br>
+    words: [
+        ["What", "Asks us to find something."],
+        ["percent", "Asks for the answer in percentage."],
+        ["of", "Indicates the whole/base number."],
+        ["600", "Whole / Base."],
+        ["is", "Connects the whole with the given part."],
+        ["375", "Part / Given value."]
+    ],
 
-        <div class="formula">
-        = (5/8) × 100
-        </div>
+    formula: "Percentage = (Part ÷ Whole) × 100",
 
-        <strong>Step 3:</strong><br><br>
-
-        <div class="formula">
+    calculation: `
+        = (375 ÷ 600) × 100<br>
+        = (5 ÷ 8) × 100<br>
         = 62.5%
-        </div>
+    `
+},
 
-        Therefore, the correct answer is <strong>62.5%</strong>.
-        `
-    },
 
-    {
-        id: "q5",
-        title: "40 is what percent of 800?",
-        correct: "5",
-        explanation: `
-        <strong>Step 1:</strong> Use Percentage = (Part ÷ Whole) × 100.<br><br>
+{
+    id: "q5",
+    title: "40 is what percent of 800?",
+    correct: "5",
 
-        <div class="formula">
-        = (40 ÷ 800) × 100
-        </div>
+    pattern: "A is what percent of B? → (A ÷ B) × 100",
 
-        <strong>Step 2:</strong><br><br>
+    words: [
+        ["40", "The given part/value."],
+        ["is", "Connects the part with the whole."],
+        ["what", "Asks us to find the unknown value."],
+        ["percent", "The answer must be in percentage."],
+        ["of", "Indicates the whole/base number."],
+        ["800", "Whole / Base."]
+    ],
 
-        <div class="formula">
-        = 0.05 × 100
-        </div>
+    formula: "Percentage = (Part ÷ Whole) × 100",
 
-        <strong>Step 3:</strong><br><br>
-
-        <div class="formula">
+    calculation: `
+        = (40 ÷ 800) × 100<br>
+        = 0.05 × 100<br>
         = 5%
-        </div>
+    `
+},
 
-        Therefore, the correct answer is <strong>5%</strong>.
-        `
-    },
 
-    {
-        id: "q6",
-        title: "What percent of 500 is 125?",
-        correct: "25",
-        explanation: `
-        <strong>Step 1:</strong><br><br>
+{
+    id: "q6",
+    title: "What percent of 500 is 125?",
+    correct: "25",
 
-        <div class="formula">
-        Percentage = (125 ÷ 500) × 100
-        </div>
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
 
-        <strong>Step 2:</strong> 125/500 = 1/4.<br><br>
+    words: [
+        ["What", "Asks us to find something."],
+        ["percent", "Asks for the answer in percentage."],
+        ["of", "Indicates the whole/base number."],
+        ["500", "Whole / Base."],
+        ["is", "Connects the whole with the given part."],
+        ["125", "Part / Given value."]
+    ],
 
-        <div class="formula">
-        (1/4) × 100 = 25%
-        </div>
+    formula: "Percentage = (Part ÷ Whole) × 100",
 
-        Therefore, the correct answer is <strong>25%</strong>.
-        `
-    },
-
-    {
-        id: "q7",
-        title: "20% of a number is 80. What is the number?",
-        correct: "400",
-        explanation: `
-        <strong>Step 1:</strong> Let the number be x.<br><br>
-
-        <div class="formula">
-        20% of x = 80
-        </div>
-
-        <strong>Step 2:</strong><br><br>
-
-        <div class="formula">
-        (20/100) × x = 80
-        </div>
-
-        <strong>Step 3:</strong><br><br>
-
-        <div class="formula">
-        x = 80 × (100/20)
-        </div>
-
-        <strong>Step 4:</strong><br><br>
-
-        <div class="formula">
-        x = 400
-        </div>
-
-        Therefore, the correct answer is <strong>400</strong>.
-        `
-    },
-
-    {
-        id: "q8",
-        title: "A number is increased from 200 to 250. What is the percentage increase?",
-        correct: "25",
-        explanation: `
-        <strong>Step 1:</strong> Find the increase.<br><br>
-
-        <div class="formula">
-        Increase = 250 - 200 = 50
-        </div>
-
-        <strong>Step 2:</strong> Use the percentage increase formula.<br><br>
-
-        <div class="formula">
-        Percentage Increase = (Increase ÷ Original) × 100
-        </div>
-
-        <strong>Step 3:</strong><br><br>
-
-        <div class="formula">
-        = (50 ÷ 200) × 100
-        </div>
-
-        <strong>Step 4:</strong><br><br>
-
-        <div class="formula">
+    calculation: `
+        = (125 ÷ 500) × 100<br>
+        = (1 ÷ 4) × 100<br>
         = 25%
-        </div>
+    `
+},
 
-        Therefore, the correct answer is <strong>25%</strong>.
-        `
-    },
 
-    {
-        id: "q9",
-        title: "A number is decreased from 500 to 400. What is the percentage decrease?",
-        correct: "20",
-        explanation: `
-        <strong>Step 1:</strong> Find the decrease.<br><br>
+{
+    id: "q7",
+    title: "20% of a number is 80. What is the number?",
+    correct: "400",
 
-        <div class="formula">
-        Decrease = 500 - 400 = 100
-        </div>
+    pattern: "Percentage of a number is given → Find the Whole",
 
-        <strong>Step 2:</strong><br><br>
+    words: [
+        ["20%", "The given percentage."],
+        ["of", "Means multiplication."],
+        ["a number", "This is the unknown whole."],
+        ["is", "Connects the percentage value to the result."],
+        ["80", "The given part/value."],
+        ["What is the number?", "Asks us to find the whole."]
+    ],
 
-        <div class="formula">
-        Percentage Decrease = (Decrease ÷ Original) × 100
-        </div>
+    formula: "Whole = Part × (100 ÷ Percentage)",
 
-        <strong>Step 3:</strong><br><br>
+    calculation: `
+        = 80 × (100 ÷ 20)<br>
+        = 80 × 5<br>
+        = 400
+    `
+},
 
-        <div class="formula">
-        = (100 ÷ 500) × 100
-        </div>
 
-        <strong>Step 4:</strong><br><br>
+{
+    id: "q8",
+    title: "A number is increased from 200 to 250. What is the percentage increase?",
+    correct: "25",
 
-        <div class="formula">
+    pattern: "Percentage Increase → (Increase ÷ Original) × 100",
+
+    words: [
+        ["number", "The original quantity."],
+        ["increased", "Means the value became larger."],
+        ["from 200", "200 is the original value."],
+        ["to 250", "250 is the new value."],
+        ["percentage increase", "Asks how much the value increased in percentage."]
+    ],
+
+    formula: "Percentage Increase = (Increase ÷ Original) × 100",
+
+    calculation: `
+        Increase = 250 - 200<br>
+        = 50<br><br>
+
+        Percentage Increase = (50 ÷ 200) × 100<br>
+        = 25%
+    `
+},
+
+
+{
+    id: "q9",
+    title: "A number is decreased from 500 to 400. What is the percentage decrease?",
+    correct: "20",
+
+    pattern: "Percentage Decrease → (Decrease ÷ Original) × 100",
+
+    words: [
+        ["number", "The original quantity."],
+        ["decreased", "Means the value became smaller."],
+        ["from 500", "500 is the original value."],
+        ["to 400", "400 is the new value."],
+        ["percentage decrease", "Asks how much the value decreased in percentage."]
+    ],
+
+    formula: "Percentage Decrease = (Decrease ÷ Original) × 100",
+
+    calculation: `
+        Decrease = 500 - 400<br>
+        = 100<br><br>
+
+        Percentage Decrease = (100 ÷ 500) × 100<br>
         = 20%
-        </div>
+    `
+},
 
-        Therefore, the correct answer is <strong>20%</strong>.
-        `
-    },
 
-    {
-        id: "q10",
-        title: "25% of 240 is equal to:",
-        correct: "60",
-        explanation: `
-        <strong>Step 1:</strong> Write 25% as a fraction.<br><br>
+{
+    id: "q10",
+    title: "25% of 240 is equal to:",
+    correct: "60",
 
-        <div class="formula">
-        25% = 25/100 = 1/4
-        </div>
+    pattern: "Percentage of a number → (Percentage ÷ 100) × Number",
 
-        <strong>Step 2:</strong><br><br>
+    words: [
+        ["25%", "The given percentage."],
+        ["of", "Means multiplication."],
+        ["240", "The whole/base number."],
+        ["is equal to", "Asks us to find the resulting value."]
+    ],
 
-        <div class="formula">
-        25% of 240 = (1/4) × 240
-        </div>
+    formula: "Percentage value = (Percentage ÷ 100) × Number",
 
-        <strong>Step 3:</strong><br><br>
-
-        <div class="formula">
+    calculation: `
+        = (25 ÷ 100) × 240<br>
+        = 1/4 × 240<br>
         = 60
-        </div>
+    `
+},
 
-        Therefore, the correct answer is <strong>60</strong>.
-        `
-    },
 
-    {
-        id: "q11",
-        title: "If 60% of a number is 180, find the number.",
-        correct: "300",
-        explanation: `
-        <strong>Step 1:</strong> Let the number be x.<br><br>
+{
+    id: "q11",
+    title: "If 60% of a number is 180, find the number.",
+    correct: "300",
 
-        <div class="formula">
-        60% of x = 180
-        </div>
+    pattern: "Percentage value is given → Find the Whole",
 
-        <strong>Step 2:</strong><br><br>
+    words: [
+        ["If", "Introduces the given condition."],
+        ["60%", "The given percentage."],
+        ["of", "Means multiplication."],
+        ["a number", "The unknown whole."],
+        ["is", "Connects the percentage with the given value."],
+        ["180", "The given part/value."],
+        ["find the number", "Asks us to find the whole."]
+    ],
 
-        <div class="formula">
-        (60/100) × x = 180
-        </div>
+    formula: "Whole = Part × (100 ÷ Percentage)",
 
-        <strong>Step 3:</strong><br><br>
+    calculation: `
+        = 180 × (100 ÷ 60)<br>
+        = 180 × 5/3<br>
+        = 300
+    `
+},
 
-        <div class="formula">
-        x = 180 × (100/60)
-        </div>
 
-        <strong>Step 4:</strong><br><br>
+{
+    id: "q12",
+    title: "What percent of 800 is 200?",
+    correct: "25",
 
-        <div class="formula">
-        x = 300
-        </div>
+    pattern: "What percent of A is B? → (B ÷ A) × 100",
 
-        Therefore, the correct answer is <strong>300</strong>.
-        `
-    },
+    words: [
+        ["What", "Asks us to find something."],
+        ["percent", "Asks for the answer in percentage."],
+        ["of", "Indicates the whole/base number."],
+        ["800", "Whole / Base."],
+        ["is", "Connects the whole with the given part."],
+        ["200", "Part / Given value."]
+    ],
 
-    {
-        id: "q12",
-        title: "What percent of 800 is 200?",
-        correct: "25",
-        explanation: `
-        <strong>Step 1:</strong> Use the percentage formula.<br><br>
+    formula: "Percentage = (Part ÷ Whole) × 100",
 
-        <div class="formula">
-        Percentage = (Part ÷ Whole) × 100
-        </div>
-
-        <strong>Step 2:</strong><br><br>
-
-        <div class="formula">
-        = (200 ÷ 800) × 100
-        </div>
-
-        <strong>Step 3:</strong> 200/800 = 1/4.<br><br>
-
-        <div class="formula">
-        = (1/4) × 100
-        </div>
-
-        <strong>Step 4:</strong><br><br>
-
-        <div class="formula">
+    calculation: `
+        = (200 ÷ 800) × 100<br>
+        = (1 ÷ 4) × 100<br>
         = 25%
-        </div>
-
-        Therefore, the correct answer is <strong>25%</strong>.
-        `
-    }
+    `
+}
 
 ];
 
 
-/* =========================
+/* ==============================
    VARIABLES
-========================= */
+============================== */
 
 let currentQuestion = 0;
-
 let questionTime = 30;
-
-let timer;
-
+let timer = null;
 let submitted = false;
 
 
-/* =========================
+/* ==============================
    START TEST
-========================= */
+============================== */
 
 function startTest() {
 
@@ -1104,22 +1092,22 @@ function startTest() {
 
     showQuestion();
 
-    startQuestionTimer();
+    startTimer();
 }
 
 
-/* =========================
+/* ==============================
    SHOW QUESTION
-========================= */
+============================== */
 
 function showQuestion() {
 
-    const allQuestions =
-        document.querySelectorAll(".question");
+    document.querySelectorAll(".question")
+        .forEach(function(question) {
 
-    allQuestions.forEach(function(question) {
-        question.classList.remove("active");
-    });
+            question.classList.remove("active");
+
+        });
 
 
     document
@@ -1138,10 +1126,6 @@ function showQuestion() {
         currentQuestion === 0;
 
 
-    document.getElementById("nextButton").disabled =
-        currentQuestion === questions.length - 1;
-
-
     if (currentQuestion === questions.length - 1) {
 
         document.getElementById("nextButton").style.display =
@@ -1157,31 +1141,43 @@ function showQuestion() {
 }
 
 
-/* =========================
-   QUESTION TIMER
-========================= */
+/* ==============================
+   TIMER
+============================== */
 
-function startQuestionTimer() {
+function startTimer() {
 
     clearInterval(timer);
 
     questionTime = 30;
 
-    updateQuestionTimer();
+    updateTimer();
 
 
     timer = setInterval(function() {
 
         questionTime--;
 
-        updateQuestionTimer();
+        updateTimer();
 
 
         if (questionTime <= 0) {
 
             clearInterval(timer);
 
-            nextQuestion();
+            if (currentQuestion < questions.length - 1) {
+
+                currentQuestion++;
+
+                showQuestion();
+
+                startTimer();
+
+            } else {
+
+                submitTest();
+
+            }
 
         }
 
@@ -1190,10 +1186,10 @@ function startQuestionTimer() {
 }
 
 
-function updateQuestionTimer() {
+function updateTimer() {
 
     document.getElementById("timer").textContent =
-        "Question Time: 00:" +
+        "Time Left: 00:" +
         String(questionTime).padStart(2, "0");
 
 
@@ -1201,22 +1197,22 @@ function updateQuestionTimer() {
 
         document
             .getElementById("timer")
-            .classList.add("time-warning");
+            .classList.add("warning");
 
     } else {
 
         document
             .getElementById("timer")
-            .classList.remove("time-warning");
+            .classList.remove("warning");
 
     }
 
 }
 
 
-/* =========================
-   NEXT QUESTION
-========================= */
+/* ==============================
+   NEXT
+============================== */
 
 function nextQuestion() {
 
@@ -1226,20 +1222,16 @@ function nextQuestion() {
 
         showQuestion();
 
-        startQuestionTimer();
-
-    } else {
-
-        submitTest();
+        startTimer();
 
     }
 
 }
 
 
-/* =========================
-   PREVIOUS QUESTION
-========================= */
+/* ==============================
+   PREVIOUS
+============================== */
 
 function previousQuestion() {
 
@@ -1249,16 +1241,16 @@ function previousQuestion() {
 
         showQuestion();
 
-        startQuestionTimer();
+        startTimer();
 
     }
 
 }
 
 
-/* =========================
-   SUBMIT TEST
-========================= */
+/* ==============================
+   SUBMIT
+============================== */
 
 function submitTest() {
 
@@ -1301,20 +1293,24 @@ function submitTest() {
         }
 
 
-        let statusHTML;
+        const status =
+            isCorrect
+            ? '<div class="correct">✅ Correct</div>'
+            : '<div class="wrong">❌ Wrong</div>';
 
 
-        if (isCorrect) {
+        let wordRows = "";
 
-            statusHTML =
-                '<div class="correct">✅ Correct</div>';
+        question.words.forEach(function(word) {
 
-        } else {
+            wordRows += `
+                <tr>
+                    <td><strong>${word[0]}</strong></td>
+                    <td>${word[1]}</td>
+                </tr>
+            `;
 
-            statusHTML =
-                '<div class="wrong">❌ Wrong</div>';
-
-        }
+        });
 
 
         reviewHTML += `
@@ -1322,8 +1318,13 @@ function submitTest() {
         <div class="review">
 
             <h2>
-                Question ${index + 1}: ${question.title}
+                Question ${index + 1}
             </h2>
+
+            <p>
+                <strong>Question:</strong>
+                ${question.title}
+            </p>
 
             <p>
                 <strong>Your Answer:</strong>
@@ -1334,11 +1335,11 @@ function submitTest() {
                 }
             </p>
 
-            ${statusHTML}
+            ${status}
 
             <button
                 class="show-answer"
-                onclick="showExplanation(${index})">
+                onclick="showAnswer(${index})">
 
                 Show Answer
 
@@ -1346,17 +1347,59 @@ function submitTest() {
 
 
             <div
-                id="explanation${index}"
-                class="explanation">
+                class="answer-box"
+                id="answer${index}">
+
+                <div class="section-title">
+                    Question Pattern
+                </div>
+
+                <div class="pattern-box">
+                    ${question.pattern}
+                </div>
+
+
+                <div class="section-title">
+                    Word-by-word Explanation
+                </div>
+
+                <table class="word-table">
+
+                    <tr>
+                        <th>Word / Number</th>
+                        <th>Meaning / Role</th>
+                    </tr>
+
+                    ${wordRows}
+
+                </table>
+
+
+                <div class="section-title">
+                    Formula
+                </div>
+
+                <div class="formula">
+                    ${question.formula}
+                </div>
+
+
+                <div class="section-title">
+                    Calculation
+                </div>
+
+                <div class="formula">
+                    ${question.calculation}
+                </div>
+
+
+                <div class="section-title">
+                    Correct Answer
+                </div>
 
                 <p>
-                    <strong>Correct Answer:</strong>
-                    ${question.correct}%
+                    <strong>✅ ${question.correct}%</strong>
                 </p>
-
-                <hr>
-
-                ${question.explanation}
 
             </div>
 
@@ -1392,12 +1435,12 @@ function submitTest() {
         reviewHTML;
 
 
-    document.getElementById("result").style.display =
-        "block";
-
-
     document.getElementById("testArea").style.display =
         "none";
+
+
+    document.getElementById("result").style.display =
+        "block";
 
 
     document.getElementById("result")
@@ -1408,25 +1451,25 @@ function submitTest() {
 }
 
 
-/* =========================
+/* ==============================
    SHOW ANSWER
-========================= */
+============================== */
 
-function showExplanation(index) {
+function showAnswer(index) {
 
-    const explanation =
+    const answerBox =
         document.getElementById(
-            "explanation" + index
+            "answer" + index
         );
 
 
-    if (explanation.style.display === "block") {
+    if (answerBox.style.display === "block") {
 
-        explanation.style.display = "none";
+        answerBox.style.display = "none";
 
     } else {
 
-        explanation.style.display = "block";
+        answerBox.style.display = "block";
 
     }
 
