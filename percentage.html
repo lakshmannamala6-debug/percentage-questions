@@ -4,531 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SSC / RRB Percentage Test</title>
-
 <style>
-* { box-sizing: border-box; }
-
-body {
-    font-family: Arial, sans-serif;
-    background: #f2f5f9;
-    margin: 0;
-    padding: 20px;
-    color: #222;
-}
-
-.container {
-    max-width: 850px;
-    margin: auto;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-#startScreen,
-.question,
-#result {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-}
-
-#startScreen {
-    padding: 35px;
-    text-align: center;
-}
-
-#startScreen h2 {
-    font-size: 30px;
-    margin-bottom: 30px;
-}
-
-.info {
-    font-size: 19px;
-    margin: 18px 0;
-}
-
-.start-button,
-.nav-button,
-.mark-button,
-.submit-button,
-.show-answer {
-    border: none;
-    color: white;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 12px 20px;
-}
-
-.start-button {
-    margin-top: 20px;
-    background: #007bff;
-    padding: 15px 35px;
-    font-size: 20px;
-}
-
-.start-button:hover,
-.nav-button:hover { background: #0056b3; }
-
-#testArea,
-#result {
-    display: none;
-}
-
-.timer {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 23px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    position: sticky;
-    top: 10px;
-    z-index: 10;
-}
-
-.timer.warning {
-    background: #d93025;
-}
-
-.progress {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 15px;
-}
-
-.question {
-    display: none;
-    padding: 25px;
-}
-
-.question.active {
-    display: block;
-}
-
-.question h2 {
-    margin-top: 0;
-    line-height: 1.5;
-}
-
-.option {
-    display: block;
-    padding: 14px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.option:hover {
-    background: #f0f7ff;
-}
-
-.option input {
-    margin-right: 12px;
-}
-
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.nav-button {
-    background: #007bff;
-}
-
-.nav-button:disabled {
-    background: #999;
-    cursor: not-allowed;
-}
-
-.mark-button {
-    background: #f0ad4e;
-}
-
-.mark-button:hover {
-    background: #ec971f;
-}
-
-.mark-button.marked {
-    background: #dc3545;
-}
-
-.submit-container {
-    text-align: center;
-    margin-top: 25px;
-}
-
-.submit-button {
-    background: #198754;
-    font-size: 18px;
-    padding: 13px 30px;
-}
-
-.submit-button:hover {
-    background: #146c43;
-}
-
-#result {
-    padding: 25px;
-    margin-top: 20px;
-}
-
-.result-title {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.score {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin: 20px 0;
-}
-
-.review {
-    border-top: 1px solid #ddd;
-    padding: 25px 0;
-}
-
-.review h2 {
-    margin-bottom: 10px;
-}
-
-.correct {
-    color: #16803c;
-    font-weight: bold;
-}
-
-.wrong {
-    color: #d93025;
-    font-weight: bold;
-}
-
-.show-answer {
-    background: #6f42c1;
-    margin-top: 10px;
-}
-
-.show-answer:hover {
-    background: #56339b;
-}
-
-.answer-box {
-    display: none;
-    margin-top: 18px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-left: 4px solid #007bff;
-    border-radius: 6px;
-    line-height: 1.7;
-}
-
-.section-title {
-    font-size: 19px;
-    font-weight: bold;
-    margin-top: 18px;
-    margin-bottom: 8px;
-}
-
-.pattern,
-.formula,
-.calculation {
-    background: white;
-    padding: 14px;
-    border-radius: 6px;
-}
-
-.formula,
-.calculation {
-    font-family: "Courier New", monospace;
-}
-
-.word-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    background: white;
-}
-
-.word-table th,
-.word-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-.word-table th {
-    background: #eef3f8;
-}
-
-.marked-badge {
-    display: inline-block;
-    background: #dc3545;
-    color: white;
-    padding: 5px 9px;
-    border-radius: 5px;
-    font-size: 13px;
-    margin-left: 8px;
-}
-
-@media (max-width: 600px) {
-    body { padding: 10px; }
-
-    .question { padding: 18px; }
-
-    .option { font-size: 16px; }
-
-    .word-table { font-size: 14px; }
-
-    .navigation button {
-        flex: 1 1 100%;
-    }
-}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f2f5f9;margin:0;padding:20px;color:#222}
+.container{max-width:850px;margin:auto}
+h1{text-align:center}
+#startScreen,.question,#result{background:#fff;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.12)}
+#startScreen{padding:35px;text-align:center}
+.info{font-size:19px;margin:18px 0}
+.start-button,.nav-button,.mark-button,.submit-button,.show-answer{border:0;color:#fff;border-radius:7px;cursor:pointer;font-size:16px;padding:12px 20px}
+.start-button{background:#007bff;padding:15px 35px;font-size:20px;margin-top:20px}
+#testArea,#result{display:none}
+.timer{background:#222;color:#fff;text-align:center;padding:15px;border-radius:8px;font-size:23px;font-weight:bold;margin-bottom:15px;position:sticky;top:10px;z-index:10}
+.timer.warning{background:#d93025}
+.progress{text-align:center;font-size:18px;font-weight:bold;color:#555;margin-bottom:15px}
+.question{display:none;padding:25px}
+.question.active{display:block}
+.question h2{line-height:1.5}
+.option{display:block;padding:14px;margin:10px 0;border:1px solid #ddd;border-radius:7px;cursor:pointer;font-size:18px}
+.option:hover{background:#f0f7ff}
+.option input{margin-right:12px}
+.navigation{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.nav-button{background:#007bff}
+.nav-button:disabled{background:#999;cursor:not-allowed}
+.mark-button{background:#f0ad4e}
+.mark-button.marked{background:#dc3545}
+.submit-container{text-align:center;margin-top:25px}
+.submit-button{background:#198754;font-size:18px}
+#result{padding:25px;margin-top:20px}
+.result-title{text-align:center;font-size:30px;font-weight:bold}
+.score{text-align:center;font-size:25px;font-weight:bold;margin:20px 0}
+.review{border-top:1px solid #ddd;padding:25px 0}
+.correct{color:#16803c;font-weight:bold}
+.wrong{color:#d93025;font-weight:bold}
+.show-answer{background:#6f42c1}
+.answer-box{display:none;margin-top:18px;padding:20px;background:#f8f9fa;border-left:4px solid #007bff;border-radius:6px;line-height:1.7}
+.section-title{font-size:19px;font-weight:bold;margin-top:18px;margin-bottom:8px}
+.pattern,.formula,.calculation{background:#fff;padding:14px;border-radius:6px}
+.formula,.calculation{font-family:"Courier New",monospace}
+.word-table{width:100%;border-collapse:collapse;margin-top:10px;background:#fff}
+.word-table th,.word-table td{border:1px solid #ddd;padding:10px;text-align:left}
+.word-table th{background:#eef3f8}
+.marked-badge{display:inline-block;background:#dc3545;color:#fff;padding:5px 9px;border-radius:5px;font-size:13px}
+@media(max-width:600px){body{padding:10px}.question{padding:18px}.option{font-size:16px}.navigation button{flex:1 1 100%}}
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
 <h1>Percentage</h1>
 
-<!-- START SCREEN -->
 <div id="startScreen">
-    <h2>Percentage Test</h2>
-
-    <div class="info"><strong>Total Questions:</strong> 24</div>
-    <div class="info"><strong>Time per Question:</strong> 30 seconds</div>
-    <div class="info"><strong>Total Test Time:</strong> 12 minutes</div>
-
-    <p>
-        Correct answers and detailed explanations will be shown
-        only after submitting the test.
-    </p>
-
-    <button class="start-button" onclick="startTest()">
-        Start Test
-    </button>
+<h2>SSC / RRB Percentage Test</h2>
+<div class="info"><strong>Total Questions:</strong> 24</div>
+<div class="info"><strong>Time per Question:</strong> 30 seconds</div>
+<div class="info"><strong>Total Test Time:</strong> 12 minutes</div>
+<p>Correct answers and detailed explanations will be shown only after submitting the test.</p>
+<button class="start-button" type="button" onclick="startTest()">Start Test</button>
 </div>
 
-<!-- TEST AREA -->
 <div id="testArea">
-
-    <div id="timer" class="timer">Time Left: 00:30</div>
-
-    <div id="progress" class="progress">
-        Question 1 of 12
-    </div>
-
-    <!-- Q1 -->
-    <div class="question active" id="question0">
-        <h2>(A) What percent of 408 is 306?</h2>
-
-        <label class="option"><input type="radio" name="q1" value="25">1) 25%</label>
-        <label class="option"><input type="radio" name="q1" value="75">2) 75%</label>
-        <label class="option"><input type="radio" name="q1" value="50">3) 50%</label>
-        <label class="option"><input type="radio" name="q1" value="80">4) 80%</label>
-        <label class="option"><input type="radio" name="q1" value="60">5) 60%</label>
-    </div>
-
-    <!-- Q2 -->
-    <div class="question" id="question1">
-        <h2>(B) What percent of 600 is 450?</h2>
-
-        <label class="option"><input type="radio" name="q2" value="95">1) 95%</label>
-        <label class="option"><input type="radio" name="q2" value="45">2) 45%</label>
-        <label class="option"><input type="radio" name="q2" value="70">3) 70%</label>
-        <label class="option"><input type="radio" name="q2" value="85">4) 85%</label>
-        <label class="option"><input type="radio" name="q2" value="75">5) 75%</label>
-    </div>
-
-    <!-- Q3 -->
-    <div class="question" id="question2">
-        <h2>(C) What percent of 400 is 250?</h2>
-
-        <label class="option"><input type="radio" name="q3" value="87.5">1) 87.5%</label>
-        <label class="option"><input type="radio" name="q3" value="62.5">2) 62.5%</label>
-        <label class="option"><input type="radio" name="q3" value="60">3) 60%</label>
-        <label class="option"><input type="radio" name="q3" value="70">4) 70%</label>
-        <label class="option"><input type="radio" name="q3" value="80">5) 80%</label>
-    </div>
-
-    <!-- Q4 -->
-    <div class="question" id="question3">
-        <h2>(D) What percent of 600 is 375?</h2>
-
-        <label class="option"><input type="radio" name="q4" value="80">1) 80%</label>
-        <label class="option"><input type="radio" name="q4" value="60">2) 60%</label>
-        <label class="option"><input type="radio" name="q4" value="62.5">3) 62.5%</label>
-        <label class="option"><input type="radio" name="q4" value="40">4) 40%</label>
-        <label class="option"><input type="radio" name="q4" value="45">5) 45%</label>
-    </div>
-
-    <!-- Q5 -->
-    <div class="question" id="question4">
-        <h2>(E) 40 is what percent of 800?</h2>
-
-        <label class="option"><input type="radio" name="q5" value="5">1) 5%</label>
-        <label class="option"><input type="radio" name="q5" value="10">2) 10%</label>
-        <label class="option"><input type="radio" name="q5" value="15">3) 15%</label>
-        <label class="option"><input type="radio" name="q5" value="20">4) 20%</label>
-        <label class="option"><input type="radio" name="q5" value="25">5) 25%</label>
-    </div>
-
-    <!-- Q6 -->
-    <div class="question" id="question5">
-        <h2>(F) What percent of 500 is 125?</h2>
-
-        <label class="option"><input type="radio" name="q6" value="15">1) 15%</label>
-        <label class="option"><input type="radio" name="q6" value="20">2) 20%</label>
-        <label class="option"><input type="radio" name="q6" value="25">3) 25%</label>
-        <label class="option"><input type="radio" name="q6" value="30">4) 30%</label>
-        <label class="option"><input type="radio" name="q6" value="35">5) 35%</label>
-    </div>
-
-    <!-- Q7 -->
-    <div class="question" id="question6">
-        <h2>(G) 20% of a number is 80. What is the number?</h2>
-
-        <label class="option"><input type="radio" name="q7" value="200">1) 200</label>
-        <label class="option"><input type="radio" name="q7" value="300">2) 300</label>
-        <label class="option"><input type="radio" name="q7" value="400">3) 400</label>
-        <label class="option"><input type="radio" name="q7" value="500">4) 500</label>
-        <label class="option"><input type="radio" name="q7" value="600">5) 600</label>
-    </div>
-
-    <!-- Q8 -->
-    <div class="question" id="question7">
-        <h2>(H) A number is increased from 200 to 250. What is the percentage increase?</h2>
-
-        <label class="option"><input type="radio" name="q8" value="20">1) 20%</label>
-        <label class="option"><input type="radio" name="q8" value="25">2) 25%</label>
-        <label class="option"><input type="radio" name="q8" value="30">3) 30%</label>
-        <label class="option"><input type="radio" name="q8" value="35">4) 35%</label>
-        <label class="option"><input type="radio" name="q8" value="40">5) 40%</label>
-    </div>
-
-    <!-- Q9 -->
-    <div class="question" id="question8">
-        <h2>(I) A number is decreased from 500 to 400. What is the percentage decrease?</h2>
-
-        <label class="option"><input type="radio" name="q9" value="10">1) 10%</label>
-        <label class="option"><input type="radio" name="q9" value="15">2) 15%</label>
-        <label class="option"><input type="radio" name="q9" value="20">3) 20%</label>
-        <label class="option"><input type="radio" name="q9" value="25">4) 25%</label>
-        <label class="option"><input type="radio" name="q9" value="30">5) 30%</label>
-    </div>
-
-    <!-- Q10 -->
-    <div class="question" id="question9">
-        <h2>(J) 25% of 240 is equal to:</h2>
-
-        <label class="option"><input type="radio" name="q10" value="40">1) 40</label>
-        <label class="option"><input type="radio" name="q10" value="50">2) 50</label>
-        <label class="option"><input type="radio" name="q10" value="60">3) 60</label>
-        <label class="option"><input type="radio" name="q10" value="70">4) 70</label>
-        <label class="option"><input type="radio" name="q10" value="80">5) 80</label>
-    </div>
-
-    <!-- Q11 -->
-    <div class="question" id="question10">
-        <h2>(K) If 60% of a number is 180, find the number.</h2>
-
-        <label class="option"><input type="radio" name="q11" value="200">1) 200</label>
-        <label class="option"><input type="radio" name="q11" value="250">2) 250</label>
-        <label class="option"><input type="radio" name="q11" value="300">3) 300</label>
-        <label class="option"><input type="radio" name="q11" value="350">4) 350</label>
-        <label class="option"><input type="radio" name="q11" value="400">5) 400</label>
-    </div>
-
-    <!-- Q12 -->
-    <div class="question" id="question11">
-        <h2>(L) What percent of 800 is 200?</h2>
-
-        <label class="option"><input type="radio" name="q12" value="15">1) 15%</label>
-        <label class="option"><input type="radio" name="q12" value="20">2) 20%</label>
-        <label class="option"><input type="radio" name="q12" value="25">3) 25%</label>
-        <label class="option"><input type="radio" name="q12" value="30">4) 30%</label>
-        <label class="option"><input type="radio" name="q12" value="35">5) 35%</label>
-    </div>
-
-    <!-- NAVIGATION -->
-    <div class="navigation">
-
-        <button
-            class="nav-button"
-            id="previousButton"
-            onclick="previousQuestion()"
-            disabled>
-            Previous
-        </button>
-
-        <button
-            class="mark-button"
-            id="markButton"
-            onclick="markQuestion()">
-            Mark Question
-        </button>
-
-        <button
-            class="nav-button"
-            id="nextButton"
-            onclick="saveAndNext()">
-            Save & Next
-        </button>
-
-    </div>
-
-    <!-- SUBMIT IS HIDDEN UNTIL ALL 12 ARE ANSWERED -->
-    <div
-        class="submit-container"
-        id="submitContainer"
-        style="display:none;">
-
-        <button class="submit-button" onclick="submitTest()">
-            Submit Test
-        </button>
-
-    </div>
-
+<div id="timer" class="timer">Time Left: 00:30</div>
+<div id="progress" class="progress">Question 1 of 24</div>
+<div id="questionContainer"></div>
+<div class="navigation">
+<button class="nav-button" id="previousButton" type="button" onclick="previousQuestion()" disabled>Previous</button>
+<button class="mark-button" id="markButton" type="button" onclick="markQuestion()">Mark Question</button>
+<button class="nav-button" id="nextButton" type="button" onclick="saveAndNext()">Save &amp; Next</button>
+</div>
+<div class="submit-container" id="submitContainer" style="display:none">
+<button class="submit-button" type="button" onclick="submitTest()">Submit Test</button>
+</div>
 </div>
 
-<!-- RESULT -->
 <div id="result">
-
-    <div class="result-title">
-        Test Submitted Successfully!
-    </div>
-
-    <div class="score" id="score"></div>
-
-    <p style="text-align:center;">
-        Click <strong>Show Answer</strong> to see the
-        question pattern, word-by-word explanation,
-        formula and step-by-step calculation.
-    </p>
-
-    <div id="review"></div>
-
+<div class="result-title">Test Submitted Successfully!</div>
+<div class="score" id="score"></div>
+<p style="text-align:center">Click <strong>Show Answer</strong> to see the question pattern, word-by-word explanation, formula and calculation.</p>
+<div id="review"></div>
 </div>
-
 </div>
 
 <script>
-
 const questions = [
 {
  q:"(A) What percent of 408 is 306?", o:["25%","75%","50%","80%","60%"], a:"75%",
@@ -699,45 +255,70 @@ const questions = [
  calc:"(50 ÷ 400) × 100 = 12.5%"
 }
 ];
-
-
-let currentQuestion=0, questionTime=30, timer=null, submitted=false;
-let answeredQuestions=new Set(), markedQuestions=new Set();
+let currentQuestion=0;
+let questionTime=30;
+let timer=null;
+let submitted=false;
+let answeredQuestions=new Set();
+let markedQuestions=new Set();
 
 function renderQuestions(){
  const c=document.getElementById("questionContainer");
- c.innerHTML=questions.map((q,i)=>`<div class="question ${i===0?"active":""}" id="question${i}">
- <h2>${q.q}</h2>
- ${q.o.map((x,j)=>`<label class="option"><input type="radio" name="q${i}" value="${x}">${j+1}) ${x}</label>`).join("")}
- </div>`).join("");
+ c.innerHTML=questions.map((q,i)=>`
+  <div class="question ${i===0?"active":""}" id="question${i}">
+   <h2>${q.q}</h2>
+   ${q.o.map((x,j)=>`
+    <label class="option">
+     <input type="radio" name="q${i}" value="${x}">
+     ${j+1}) ${x}
+    </label>`).join("")}
+  </div>`).join("");
 }
 
 function startTest(){
+ clearInterval(timer);
  renderQuestions();
  document.getElementById("startScreen").style.display="none";
  document.getElementById("testArea").style.display="block";
- currentQuestion=0; submitted=false; answeredQuestions.clear(); markedQuestions.clear();
+ document.getElementById("result").style.display="none";
+ currentQuestion=0;
+ questionTime=30;
+ submitted=false;
+ answeredQuestions.clear();
+ markedQuestions.clear();
  document.getElementById("submitContainer").style.display="none";
- showQuestion(); startQuestionTimer();
+ showQuestion();
+ startQuestionTimer();
 }
 
 function showQuestion(){
  document.querySelectorAll(".question").forEach(q=>q.classList.remove("active"));
- document.getElementById("question"+currentQuestion).classList.add("active");
- document.getElementById("progress").textContent=`Question ${currentQuestion+1} of ${questions.length}`;
+ const q=document.getElementById("question"+currentQuestion);
+ if(q) q.classList.add("active");
+ document.getElementById("progress").textContent="Question "+(currentQuestion+1)+" of "+questions.length;
  document.getElementById("previousButton").disabled=currentQuestion===0;
  document.getElementById("nextButton").textContent=currentQuestion===questions.length-1?"Save Answer":"Save & Next";
- updateMarkButton(); checkTestCompletion();
+ updateMarkButton();
+ checkTestCompletion();
 }
 
 function startQuestionTimer(){
- clearInterval(timer); questionTime=30; updateTimer();
- timer=setInterval(()=>{
-  questionTime--; updateTimer();
+ clearInterval(timer);
+ questionTime=30;
+ updateTimer();
+ timer=setInterval(function(){
+  questionTime--;
+  updateTimer();
   if(questionTime<=0){
-   clearInterval(timer); saveCurrentAnswer();
-   if(currentQuestion<questions.length-1){currentQuestion++;showQuestion();startQuestionTimer();}
-   else checkTestCompletion();
+   clearInterval(timer);
+   saveCurrentAnswer();
+   if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+    startQuestionTimer();
+   }else{
+    checkTestCompletion();
+   }
   }
  },1000);
 }
@@ -748,26 +329,39 @@ function updateTimer(){
 }
 
 function saveCurrentAnswer(){
- const s=document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+ const s=document.querySelector('input[name="q'+currentQuestion+'"]:checked');
  if(s) answeredQuestions.add(currentQuestion);
  checkTestCompletion();
 }
 
 function saveAndNext(){
  saveCurrentAnswer();
- if(currentQuestion<questions.length-1){currentQuestion++;showQuestion();startQuestionTimer();}
- else if(answeredQuestions.size===questions.length){
-  document.getElementById("submitContainer").style.display="block";
-  alert("All 24 questions are answered. You can now submit the test.");
- }else alert("Please answer all 24 questions before submitting.");
+ if(currentQuestion<questions.length-1){
+  currentQuestion++;
+  showQuestion();
+  startQuestionTimer();
+ }else{
+  checkTestCompletion();
+  if(answeredQuestions.size===questions.length){
+   document.getElementById("submitContainer").style.display="block";
+   alert("All 24 questions are answered. You can now submit the test.");
+  }else{
+   alert("Please answer all 24 questions before submitting.");
+  }
+ }
 }
 
 function previousQuestion(){
- if(currentQuestion>0){currentQuestion--;showQuestion();startQuestionTimer();}
+ if(currentQuestion>0){
+  currentQuestion--;
+  showQuestion();
+  startQuestionTimer();
+ }
 }
 
 function markQuestion(){
- markedQuestions.has(currentQuestion)?markedQuestions.delete(currentQuestion):markedQuestions.add(currentQuestion);
+ if(markedQuestions.has(currentQuestion)) markedQuestions.delete(currentQuestion);
+ else markedQuestions.add(currentQuestion);
  updateMarkButton();
 }
 
@@ -781,44 +375,62 @@ function updateMarkButton(){
 function checkTestCompletion(){
  answeredQuestions.clear();
  for(let i=0;i<questions.length;i++){
-  if(document.querySelector(`input[name="q${i}"]:checked`)) answeredQuestions.add(i);
+  if(document.querySelector('input[name="q'+i+'"]:checked')) answeredQuestions.add(i);
  }
- document.getElementById("submitContainer").style.display=answeredQuestions.size===questions.length?"block":"none";
+ document.getElementById("submitContainer").style.display=
+   answeredQuestions.size===questions.length?"block":"none";
 }
 
 function submitTest(){
  if(submitted)return;
  checkTestCompletion();
- if(answeredQuestions.size!==questions.length){alert("Please answer all 24 questions before submitting the test.");return;}
- submitted=true;clearInterval(timer);
- let score=0,review="";
+ if(answeredQuestions.size!==questions.length){
+  alert("Please answer all 24 questions before submitting the test.");
+  return;
+ }
+ submitted=true;
+ clearInterval(timer);
+ let score=0;
+ let review="";
  questions.forEach((d,i)=>{
-  const s=document.querySelector(`input[name="q${i}"]:checked`);
-  const ua=s?s.value:"Not Answered", ok=ua===d.a; if(ok)score++;
+  const s=document.querySelector('input[name="q'+i+'"]:checked');
+  const ua=s?s.value:"Not Answered";
+  const ok=ua===d.a;
+  if(ok)score++;
   const rows=d.words.map(w=>`<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td></tr>`).join("");
-  review+=`<div class="review">
-   <h2>Question ${i+1} ${markedQuestions.has(i)?'<span class="marked-badge">Marked</span>':''}</h2>
-   <h3>${d.q}</h3>
-   <p><strong>Your Answer:</strong> ${ua}</p>
-   <p class="${ok?'correct':'wrong'}">${ok?'✅ Correct Answer':'❌ Wrong Answer'}</p>
-   <p><strong>Correct Answer:</strong> ${d.a}</p>
-   <button class="show-answer" onclick="showAnswer(${i})">Show Answer</button>
-   <div class="answer-box" id="answerBox${i}">
-    <div class="section-title">Question Pattern</div><div class="pattern">${d.pattern}</div>
-    <div class="section-title">Question</div><div class="pattern">${d.q}</div>
-    <div class="section-title">Word-by-word Explanation</div>
-    <table class="word-table"><tr><th>Word / Number</th><th>Meaning / Role</th></tr>${rows}</table>
-    <div class="section-title">Formula</div><div class="formula">${d.formula}</div>
-    <div class="section-title">Step-by-step Calculation</div><div class="calculation">${d.calc}</div>
-    <div class="section-title">Correct Answer</div><p class="correct">✅ ${d.a}</p>
-   </div>
-  </div>`;
+  review+=`
+   <div class="review">
+    <h2>Question ${i+1} ${markedQuestions.has(i)?'<span class="marked-badge">Marked</span>':""}</h2>
+    <h3>${d.q}</h3>
+    <p><strong>Your Answer:</strong> ${ua}</p>
+    <p class="${ok?"correct":"wrong"}">${ok?"✅ Correct Answer":"❌ Wrong Answer"}</p>
+    <p><strong>Correct Answer:</strong> ${d.a}</p>
+    <button class="show-answer" type="button" onclick="showAnswer(${i})">Show Answer</button>
+    <div class="answer-box" id="answerBox${i}">
+     <div class="section-title">Question Pattern</div>
+     <div class="pattern">${d.pattern}</div>
+     <div class="section-title">Question</div>
+     <div class="pattern">${d.q}</div>
+     <div class="section-title">Word-by-word Explanation</div>
+     <table class="word-table">
+      <tr><th>Word / Number</th><th>Meaning / Role</th></tr>
+      ${rows}
+     </table>
+     <div class="section-title">Formula</div>
+     <div class="formula">${d.formula}</div>
+     <div class="section-title">Step-by-step Calculation</div>
+     <div class="calculation">${d.calc}</div>
+     <div class="section-title">Correct Answer</div>
+     <p class="correct">✅ ${d.a}</p>
+    </div>
+   </div>`;
  });
- document.getElementById("score").innerHTML=`Score: ${score} / ${questions.length}<br>Percentage: ${((score/questions.length)*100).toFixed(2)}%`;
+ document.getElementById("score").innerHTML=
+   "Score: "+score+" / "+questions.length+"<br>Percentage: "+((score/questions.length)*100).toFixed(2)+"%";
  document.getElementById("review").innerHTML=review;
  document.getElementById("testArea").style.display="none";
  document.getElementById("result").style.display="block";
- document.getElementById("result").scrollIntoView({behavior:"smooth"});
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function showAnswer(i){
@@ -826,6 +438,5 @@ function showAnswer(i){
  b.style.display=b.style.display==="block"?"none":"block";
 }
 </script>
-
 </body>
 </html>
