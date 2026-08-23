@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Percentage Mock Test</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
             background: #f2f5f9;
             color: #222;
         }
 
-        /* HEADER */
+        /* =========================
+           HEADER
+        ========================= */
 
         .header {
             background: #007bff;
             color: white;
-            padding: 20px;
             text-align: center;
+            padding: 22px 15px;
         }
 
         .header h1 {
@@ -34,118 +42,198 @@
 
         .header p {
             margin: 8px 0 0;
+            font-size: 15px;
         }
 
-        /* TEST INFORMATION */
+
+        /* =========================
+           TEST INFORMATION
+        ========================= */
 
         .test-info {
-            max-width: 850px;
+            max-width: 900px;
             margin: 15px auto;
             padding: 15px;
+
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 2px 10px rgba(0,0,0,0.10);
 
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
             gap: 10px;
+
             text-align: center;
         }
 
         .info-box {
             padding: 10px;
-            border-radius: 7px;
-            background: #f2f5f9;
+
+            background: #f5f7fa;
+
+            border-radius: 8px;
         }
 
         .info-title {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
         }
 
         .info-value {
-            font-weight: bold;
             margin-top: 5px;
+            font-weight: bold;
+            font-size: 16px;
         }
 
         .timer {
             color: #dc3545;
         }
 
-        /* PROGRESS */
+
+        /* =========================
+           PROGRESS
+        ========================= */
 
         .progress-container {
-            max-width: 850px;
+            max-width: 900px;
             margin: 15px auto;
             padding: 0 10px;
         }
 
         .progress-background {
             height: 12px;
+
             background: #ddd;
+
             border-radius: 20px;
+
             overflow: hidden;
         }
 
         .progress-bar {
             height: 100%;
+
             width: 25%;
+
             background: #28a745;
-            transition: width 0.4s;
+
+            transition:
+                width 0.4s ease;
         }
 
-        /* QUESTION */
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
 
         .container {
-            max-width: 850px;
+            max-width: 900px;
+
             margin: auto;
+
             padding: 10px;
         }
 
+
+        /* =========================
+           QUESTION CARD
+        ========================= */
+
         .question-card {
             background: white;
+
             padding: 25px;
+
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+            box-shadow:
+                0 2px 10px rgba(0,0,0,0.10);
         }
+
+
+        /* =========================
+           QUESTION PATTERN
+        ========================= */
 
         .question-pattern {
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 8px;
-            margin-bottom: 20px;
+
+            margin-bottom: 18px;
         }
 
         .tag {
-            padding: 6px 10px;
+            padding: 7px 11px;
+
             border-radius: 20px;
+
             background: #e9f2ff;
+
             color: #0056b3;
-            font-size: 13px;
+
+            font-size: 12px;
+
             font-weight: bold;
         }
+
+
+        /* =========================
+           QUESTION NUMBER
+        ========================= */
 
         .question-number {
             color: #007bff;
-            font-size: 15px;
+
             font-weight: bold;
+
+            font-size: 15px;
+
+            margin-bottom: 8px;
         }
+
+
+        /* =========================
+           QUESTION TEXT
+        ========================= */
 
         .question-text {
-            font-size: 21px;
-            margin: 10px 0 20px;
+            font-size: 22px;
+
+            line-height: 1.5;
+
+            margin: 10px 0 22px;
         }
 
-        /* OPTIONS */
+
+        /* =========================
+           OPTIONS
+        ========================= */
 
         .option {
             display: block;
-            padding: 14px;
+
+            padding: 15px;
+
             margin: 10px 0;
+
             border: 1px solid #ddd;
+
             border-radius: 8px;
+
             cursor: pointer;
+
             transition: 0.2s;
+
+            font-size: 16px;
         }
 
         .option:hover {
@@ -154,128 +242,311 @@
 
         .option input {
             margin-right: 10px;
+
+            cursor: pointer;
         }
 
         .correct {
             background: #d4edda !important;
+
             border-color: #28a745 !important;
+
             color: #155724;
         }
 
         .wrong {
             background: #f8d7da !important;
+
             border-color: #dc3545 !important;
+
             color: #721c24;
         }
 
-        /* BUTTONS */
+
+        /* =========================
+           BUTTONS
+        ========================= */
 
         .buttons {
-            margin-top: 20px;
             display: flex;
+
             gap: 10px;
+
+            margin-top: 20px;
         }
 
         button {
             border: none;
-            padding: 12px 20px;
+
+            padding: 13px 22px;
+
             border-radius: 7px;
+
             cursor: pointer;
+
             font-size: 16px;
+
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.9;
         }
 
         .submit-btn {
             background: #007bff;
+
             color: white;
         }
 
         .next-btn {
             background: #28a745;
+
             color: white;
         }
 
         .restart-btn {
             background: #6f42c1;
+
             color: white;
         }
 
-        /* FEEDBACK */
+
+        /* =========================
+           FEEDBACK
+        ========================= */
 
         .feedback {
             display: none;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            line-height: 1.6;
+
+            margin-top: 25px;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            line-height: 1.7;
+
+            font-size: 15px;
         }
 
         .correct-feedback {
-            background: #d4edda;
+            background: #eef9f0;
+
             color: #155724;
+
+            border: 1px solid #b8dfc0;
         }
 
         .wrong-feedback {
-            background: #f8d7da;
+            background: #fff0f0;
+
             color: #721c24;
+
+            border: 1px solid #f1b7bb;
         }
 
-        /* RESULT */
 
-        .result {
-            display: none;
-            max-width: 850px;
-            margin: 30px auto;
-            padding: 30px;
+        /* =========================
+           SOLUTION
+        ========================= */
+
+        .solution-box {
+            margin-top: 15px;
+
+            padding: 18px;
+
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-            text-align: center;
+
+            border-radius: 8px;
+
+            border: 1px solid #ddd;
         }
 
-        .final-score {
-            font-size: 45px;
-            font-weight: bold;
+        .solution-box h3 {
+            margin-top: 15px;
+
             color: #007bff;
         }
 
-        .performance {
-            margin-top: 25px;
-            text-align: left;
+        .solution-box h3:first-child {
+            margin-top: 0;
         }
 
-        .performance-item {
-            padding: 12px;
-            margin: 8px 0;
+        .formula {
             background: #f5f5f5;
+
+            padding: 12px;
+
             border-radius: 7px;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            margin: 10px 0;
+
+            font-weight: bold;
         }
+
+        .final-answer {
+            padding: 12px;
+
+            background: #d4edda;
+
+            color: #155724;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            margin-top: 15px;
+        }
+
+
+        /* =========================
+           RESULT PAGE
+        ========================= */
+
+        .result {
+            display: none;
+
+            max-width: 900px;
+
+            margin: 30px auto;
+
+            padding: 30px;
+
+            background: white;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 2px 10px rgba(0,0,0,0.15);
+
+            text-align: center;
+        }
+
+        .result h2 {
+            color: #007bff;
+
+            margin-top: 0;
+        }
+
+        .final-score {
+            font-size: 50px;
+
+            font-weight: bold;
+
+            color: #007bff;
+
+            margin: 20px;
+        }
+
+        .result-message {
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           RESULT TABLE
+        ========================= */
 
         .result-table {
             width: 100%;
+
             border-collapse: collapse;
+
             margin-top: 20px;
         }
 
         .result-table th,
         .result-table td {
             border: 1px solid #ddd;
-            padding: 12px;
+
+            padding: 13px;
+
+            text-align: left;
         }
 
         .result-table th {
             background: #f2f5f9;
         }
 
-        /* MOBILE */
 
-        @media (max-width: 600px) {
+        /* =========================
+           PERFORMANCE PATTERN
+        ========================= */
+
+        .performance {
+            margin-top: 30px;
+
+            text-align: left;
+        }
+
+        .performance h3 {
+            color: #007bff;
+        }
+
+        .performance-item {
+            padding: 12px;
+
+            margin: 8px 0;
+
+            background: #f5f7fa;
+
+            border-radius: 7px;
+        }
+
+
+        /* =========================
+           SCORE BAR
+        ========================= */
+
+        .score-progress {
+            width: 100%;
+
+            height: 20px;
+
+            background: #ddd;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin: 20px 0;
+        }
+
+        .score-progress-bar {
+            width: 0%;
+
+            height: 100%;
+
+            background: #28a745;
+
+            transition:
+                width 0.5s;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
 
             .header h1 {
                 font-size: 23px;
             }
 
             .test-info {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns:
+                    repeat(2, 1fr);
+
                 margin: 10px;
             }
 
@@ -284,7 +555,13 @@
             }
 
             .question-text {
-                font-size: 18px;
+                font-size: 19px;
+            }
+
+            .option {
+                font-size: 15px;
+
+                padding: 13px;
             }
 
             .buttons {
@@ -294,56 +571,139 @@
             button {
                 width: 100%;
             }
+
+            .result {
+                margin: 15px;
+
+                padding: 20px;
+            }
+
+            .result-table th,
+            .result-table td {
+                padding: 9px;
+
+                font-size: 14px;
+            }
+
         }
 
     </style>
+
 </head>
+
 
 <body>
 
-<!-- HEADER -->
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <div class="header">
 
-    <h1>Percentage Mock Test</h1>
+    <h1>
+        Percentage Mock Test
+    </h1>
 
-    <p>SSC Quantitative Aptitude Practice</p>
+    <p>
+        SSC Quantitative Aptitude Practice
+    </p>
 
 </div>
 
 
-<!-- TEST INFORMATION -->
+<!-- =========================
+     TEST INFORMATION
+========================= -->
 
 <div class="test-info">
 
     <div class="info-box">
-        <div class="info-title">Questions</div>
+
+        <div class="info-title">
+            Question
+        </div>
+
         <div class="info-value">
-            <span id="questionNumber">1</span> / 4
+
+            <span id="questionNumber">
+                1
+            </span>
+
+            / 4
+
         </div>
+
     </div>
 
-    <div class="info-box">
-        <div class="info-title">Marks</div>
-        <div class="info-value">+1</div>
-    </div>
 
     <div class="info-box">
-        <div class="info-title">Negative</div>
-        <div class="info-value">0</div>
+
+        <div class="info-title">
+            Marks
+        </div>
+
+        <div class="info-value">
+            +1
+        </div>
+
     </div>
 
+
     <div class="info-box">
-        <div class="info-title">Time</div>
+
+        <div class="info-title">
+            Negative
+        </div>
+
+        <div class="info-value">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="info-box">
+
+        <div class="info-title">
+            Score
+        </div>
+
+        <div class="info-value">
+
+            <span id="score">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="info-box">
+
+        <div class="info-title">
+            Time
+        </div>
+
         <div class="info-value timer">
-            ⏱️ <span id="timer">02:00</span>
+
+            ⏱️
+
+            <span id="timer">
+                02:00
+            </span>
+
         </div>
+
     </div>
 
 </div>
 
 
-<!-- PROGRESS -->
+<!-- =========================
+     PROGRESS BAR
+========================= -->
 
 <div class="progress-container">
 
@@ -359,7 +719,9 @@
 </div>
 
 
-<!-- QUIZ -->
+<!-- =========================
+     QUIZ
+========================= -->
 
 <div class="container">
 
@@ -368,90 +730,207 @@
 </div>
 
 
-<!-- RESULT -->
+<!-- =========================
+     RESULT PAGE
+========================= -->
 
-<div class="result" id="resultPage">
+<div
+    class="result"
+    id="resultPage">
 
-    <h2>🎯 Test Completed</h2>
+    <h2>
+        🎯 Test Completed
+    </h2>
+
 
     <div class="final-score">
 
-        <span id="finalScore">0</span>/4
+        <span id="finalScore">
+            0
+        </span>
+
+        /4
 
     </div>
 
-    <p id="resultMessage"></p>
 
+    <div
+        class="result-message"
+        id="resultMessage">
+    </div>
+
+
+    <!-- SCORE PROGRESS -->
+
+    <div class="score-progress">
+
+        <div
+            class="score-progress-bar"
+            id="scoreProgressBar">
+        </div>
+
+    </div>
+
+
+    <!-- RESULT TABLE -->
 
     <table class="result-table">
 
         <tr>
-            <th>Performance</th>
-            <th>Result</th>
+
+            <th>
+                Performance
+            </th>
+
+            <th>
+                Result
+            </th>
+
         </tr>
 
-        <tr>
-            <td>Total Questions</td>
-            <td>4</td>
-        </tr>
 
         <tr>
-            <td>Attempted</td>
-            <td id="attempted">0</td>
+
+            <td>
+                Total Questions
+            </td>
+
+            <td>
+                4
+            </td>
+
         </tr>
 
-        <tr>
-            <td>Correct</td>
-            <td id="correctAnswers">0</td>
-        </tr>
 
         <tr>
-            <td>Wrong</td>
-            <td id="wrongAnswers">0</td>
+
+            <td>
+                Attempted
+            </td>
+
+            <td id="attempted">
+                0
+            </td>
+
         </tr>
 
-        <tr>
-            <td>Accuracy</td>
-            <td id="accuracy">0%</td>
-        </tr>
 
         <tr>
-            <td>Percentage</td>
-            <td id="percentageScore">0%</td>
+
+            <td>
+                Correct
+            </td>
+
+            <td id="correctAnswers">
+                0
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Wrong
+            </td>
+
+            <td id="wrongAnswers">
+                0
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Accuracy
+            </td>
+
+            <td id="accuracy">
+                0%
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Percentage
+            </td>
+
+            <td id="percentageScore">
+                0%
+            </td>
+
         </tr>
 
     </table>
 
 
+    <!-- =========================
+         PERFORMANCE PATTERN
+    ========================= -->
+
     <div class="performance">
 
-        <h3>📊 Performance Pattern</h3>
+        <h3>
+            📊 Performance Pattern
+        </h3>
+
 
         <div class="performance-item">
-            📚 Topic: Percentage
+
+            📚 Topic:
+            <b>Percentage</b>
+
         </div>
 
-        <div class="performance-item">
-            📝 Question Type: MCQ
-        </div>
 
         <div class="performance-item">
-            🎯 Difficulty: Easy to Moderate
+
+            📝 Question Type:
+            <b>Multiple Choice Question (MCQ)</b>
+
         </div>
 
-        <div class="performance-item">
-            ⏱️ Time Limit: 2 Minutes
-        </div>
 
         <div class="performance-item">
-            ⭐ Marking: +1 for correct answer
+
+            🎯 Difficulty:
+            <b>Easy to Moderate</b>
+
         </div>
 
+
         <div class="performance-item">
-            ❌ Negative Marking: 0
+
+            ⭐ Marking:
+            <b>+1 for correct answer</b>
+
+        </div>
+
+
+        <div class="performance-item">
+
+            ❌ Negative Marking:
+            <b>0</b>
+
+        </div>
+
+
+        <div class="performance-item">
+
+            ⏱️ Time:
+            <b>2 Minutes</b>
+
         </div>
 
     </div>
+
+
+    <br>
 
 
     <button
@@ -467,65 +946,736 @@
 
 <script>
 
+
+/* =====================================================
+   QUESTION DATA
+===================================================== */
+
+
 const questions = [
 
     {
-        question: "What percent of 408 is 306?",
+
+        question:
+            "What percent of 408 is 306?",
+
+
         options: [
+
             "25%",
+
             "75%",
+
             "50%",
+
             "80%",
+
             "60%"
+
         ],
+
+
         answer: 1,
-        difficulty: "Easy",
-        explanation: "(306 ÷ 408) × 100 = 75%"
+
+
+        difficulty:
+            "Easy",
+
+
+        pattern:
+            "What percent of A is B?",
+
+
+        shortcut:
+            "Percentage = (Given Value ÷ Total Value) × 100",
+
+
+        solution: `
+
+            <div class="solution-box">
+
+                <h3>
+                    📖 Detailed Solution
+                </h3>
+
+
+                <p>
+                    <b>Step 1: Identify the numbers</b>
+                </p>
+
+
+                <p>
+
+                    408 =
+                    <b>Total Value</b>
+
+                    <br>
+
+                    306 =
+                    <b>Given Value</b>
+
+                </p>
+
+
+                <p>
+                    <b>Step 2: Apply the formula</b>
+                </p>
+
+
+                <div class="formula">
+
+                    Percentage =
+                    (Given Value ÷ Total Value)
+                    × 100
+
+                </div>
+
+
+                <p>
+
+                    =
+                    (306 ÷ 408)
+                    × 100
+
+                </p>
+
+
+                <p>
+                    <b>Step 3: Simplify</b>
+                </p>
+
+
+                <p>
+
+                    306 ÷ 408
+                    =
+                    3/4
+
+                </p>
+
+
+                <p>
+
+                    Therefore,
+
+                </p>
+
+
+                <p>
+
+                    3/4 × 100
+
+                    =
+                    <b>75%</b>
+
+                </p>
+
+
+                <div class="final-answer">
+
+                    ✅ Final Answer:
+                    <b>75%</b>
+
+                </div>
+
+
+                <h3>
+                    🧠 Why?
+                </h3>
+
+
+                <p>
+
+                    The question asks:
+
+                    <b>
+                        "What percent of 408 is 306?"
+                    </b>
+
+                </p>
+
+
+                <p>
+
+                    Therefore, 408 is the
+                    <b>total</b> and 306 is the
+                    <b>given value</b>.
+
+                    So we divide the given value
+                    by the total value and multiply
+                    by 100.
+
+                </p>
+
+
+                <h3>
+                    📌 Question Pattern
+                </h3>
+
+
+                <p>
+
+                    <b>
+                        What percent of A is B?
+                    </b>
+
+                </p>
+
+
+                <div class="formula">
+
+                    Answer =
+                    (B ÷ A) × 100
+
+                </div>
+
+
+                <h3>
+                    ⚡ Shortcut
+                </h3>
+
+
+                <p>
+
+                    Remember:
+
+                    <b>
+                        IS ÷ OF × 100
+                    </b>
+
+                </p>
+
+
+                <p>
+
+                    Here:
+
+                    <br>
+
+                    IS = 306
+
+                    <br>
+
+                    OF = 408
+
+                </p>
+
+
+                <div class="formula">
+
+                    306 ÷ 408 × 100
+                    = 75%
+
+                </div>
+
+            </div>
+
+        `
+
     },
 
+
     {
-        question: "What percent of 600 is 450?",
+
+        question:
+            "What percent of 600 is 450?",
+
+
         options: [
+
             "95%",
+
             "45%",
+
             "70%",
+
             "85%",
+
             "75%"
+
         ],
+
+
         answer: 4,
-        difficulty: "Easy",
-        explanation: "(450 ÷ 600) × 100 = 75%"
+
+
+        difficulty:
+            "Easy",
+
+
+        pattern:
+            "What percent of A is B?",
+
+
+        shortcut:
+            "IS ÷ OF × 100",
+
+
+        solution: `
+
+            <div class="solution-box">
+
+                <h3>
+                    📖 Detailed Solution
+                </h3>
+
+
+                <p>
+
+                    600 =
+                    <b>Total Value</b>
+
+                    <br>
+
+                    450 =
+                    <b>Given Value</b>
+
+                </p>
+
+
+                <p>
+                    <b>Step 1: Apply formula</b>
+                </p>
+
+
+                <div class="formula">
+
+                    Percentage =
+                    (450 ÷ 600) × 100
+
+                </div>
+
+
+                <p>
+
+                    450 ÷ 600
+                    =
+                    3/4
+
+                </p>
+
+
+                <p>
+
+                    3/4 × 100
+                    =
+                    <b>75%</b>
+
+                </p>
+
+
+                <div class="final-answer">
+
+                    ✅ Final Answer:
+                    <b>75%</b>
+
+                </div>
+
+
+                <h3>
+                    🧠 Why?
+                </h3>
+
+
+                <p>
+
+                    The word
+                    <b>"of"</b>
+                    tells us the total number.
+
+                    Therefore:
+
+                    <br>
+
+                    OF = 600
+
+                </p>
+
+
+                <p>
+
+                    The word
+                    <b>"is"</b>
+                    tells us the given value.
+
+                    <br>
+
+                    IS = 450
+
+                </p>
+
+
+                <h3>
+                    📌 Question Pattern
+                </h3>
+
+
+                <div class="formula">
+
+                    What percent of A is B?
+
+                    <br><br>
+
+                    = (B ÷ A) × 100
+
+                </div>
+
+
+                <h3>
+                    ⚡ Shortcut
+                </h3>
+
+
+                <p>
+
+                    <b>
+                        IS ÷ OF × 100
+                    </b>
+
+                </p>
+
+            </div>
+
+        `
+
     },
 
+
     {
-        question: "What percent of 400 is 250?",
+
+        question:
+            "What percent of 400 is 250?",
+
+
         options: [
+
             "87.5%",
+
             "62.5%",
+
             "60%",
+
             "70%",
+
             "80%"
+
         ],
+
+
         answer: 1,
-        difficulty: "Moderate",
-        explanation: "(250 ÷ 400) × 100 = 62.5%"
+
+
+        difficulty:
+            "Moderate",
+
+
+        pattern:
+            "What percent of A is B?",
+
+
+        shortcut:
+            "Given Value ÷ Total Value × 100",
+
+
+        solution: `
+
+            <div class="solution-box">
+
+                <h3>
+                    📖 Detailed Solution
+                </h3>
+
+
+                <p>
+
+                    400 =
+                    <b>Total Value</b>
+
+                    <br>
+
+                    250 =
+                    <b>Given Value</b>
+
+                </p>
+
+
+                <p>
+                    <b>Step 1: Formula</b>
+                </p>
+
+
+                <div class="formula">
+
+                    Percentage =
+                    (250 ÷ 400) × 100
+
+                </div>
+
+
+                <p>
+
+                    250 ÷ 400
+                    =
+                    5/8
+
+                </p>
+
+
+                <p>
+
+                    5/8 × 100
+
+                    =
+                    <b>62.5%</b>
+
+                </p>
+
+
+                <div class="final-answer">
+
+                    ✅ Final Answer:
+                    <b>62.5%</b>
+
+                </div>
+
+
+                <h3>
+                    🧠 Why?
+                </h3>
+
+
+                <p>
+
+                    We need to find what percentage
+                    250 represents out of the total 400.
+
+                    Therefore:
+
+                </p>
+
+
+                <div class="formula">
+
+                    Given Value ÷ Total Value × 100
+
+                </div>
+
+
+                <h3>
+                    📌 Question Pattern
+                </h3>
+
+
+                <p>
+
+                    <b>
+                        What percent of A is B?
+                    </b>
+
+                </p>
+
+
+                <div class="formula">
+
+                    (B ÷ A) × 100
+
+                </div>
+
+
+                <h3>
+                    ⚡ Shortcut
+                </h3>
+
+
+                <p>
+
+                    <b>
+                        IS ÷ OF × 100
+                    </b>
+
+                </p>
+
+            </div>
+
+        `
+
     },
 
+
     {
-        question: "What percent of 600 is 375?",
+
+        question:
+            "What percent of 600 is 375?",
+
+
         options: [
+
             "80%",
+
             "60%",
+
             "62.5%",
+
             "40%",
+
             "45%"
+
         ],
+
+
         answer: 2,
-        difficulty: "Moderate",
-        explanation: "(375 ÷ 600) × 100 = 62.5%"
+
+
+        difficulty:
+            "Moderate",
+
+
+        pattern:
+            "What percent of A is B?",
+
+
+        shortcut:
+            "Given Value ÷ Total Value × 100",
+
+
+        solution: `
+
+            <div class="solution-box">
+
+                <h3>
+                    📖 Detailed Solution
+                </h3>
+
+
+                <p>
+
+                    600 =
+                    <b>Total Value</b>
+
+                    <br>
+
+                    375 =
+                    <b>Given Value</b>
+
+                </p>
+
+
+                <p>
+                    <b>Step 1: Apply formula</b>
+                </p>
+
+
+                <div class="formula">
+
+                    Percentage =
+                    (375 ÷ 600) × 100
+
+                </div>
+
+
+                <p>
+
+                    375 ÷ 600
+                    =
+                    5/8
+
+                </p>
+
+
+                <p>
+
+                    5/8 × 100
+
+                    =
+                    <b>62.5%</b>
+
+                </p>
+
+
+                <div class="final-answer">
+
+                    ✅ Final Answer:
+                    <b>62.5%</b>
+
+                </div>
+
+
+                <h3>
+                    🧠 Why?
+                </h3>
+
+
+                <p>
+
+                    The question asks for
+                    375 as a percentage of 600.
+
+                    Therefore:
+
+                </p>
+
+
+                <div class="formula">
+
+                    Given Value ÷ Total Value × 100
+
+                </div>
+
+
+                <h3>
+                    📌 Question Pattern
+                </h3>
+
+
+                <div class="formula">
+
+                    What percent of A is B?
+
+                    <br><br>
+
+                    Answer =
+                    (B ÷ A) × 100
+
+                </div>
+
+
+                <h3>
+                    ⚡ Shortcut
+                </h3>
+
+
+                <p>
+
+                    <b>
+                        IS ÷ OF × 100
+                    </b>
+
+                </p>
+
+
+                <p>
+
+                    IS = 375
+
+                    <br>
+
+                    OF = 600
+
+                </p>
+
+
+            </div>
+
+        `
+
     }
 
 ];
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 
 let currentQuestion = 0;
@@ -541,23 +1691,39 @@ let timeLeft = 120;
 let timerInterval;
 
 
-/* LOAD QUESTION */
+/* =====================================================
+   LOAD QUESTION
+===================================================== */
+
 
 function loadQuestion() {
 
     answered = false;
 
-    const q = questions[currentQuestion];
+
+    const q =
+        questions[currentQuestion];
 
 
     document.getElementById(
         "questionNumber"
-    ).textContent = currentQuestion + 1;
+    ).textContent =
+        currentQuestion + 1;
 
+
+    document.getElementById(
+        "score"
+    ).textContent =
+        score;
+
+
+    /* Progress */
 
     const progress =
-        ((currentQuestion + 1) /
-        questions.length) * 100;
+        ((currentQuestion + 1)
+        /
+        questions.length)
+        * 100;
 
 
     document.getElementById(
@@ -570,46 +1736,66 @@ function loadQuestion() {
 
         <div class="question-card">
 
+
             <div class="question-pattern">
 
+
                 <span class="tag">
+
                     📚 Percentage
+
                 </span>
 
+
                 <span class="tag">
+
                     📝 MCQ
+
                 </span>
 
+
                 <span class="tag">
+
                     ⭐ +1 Mark
+
                 </span>
 
+
                 <span class="tag">
-                    🎯 ${q.difficulty}
+
+                    🎯
+                    ${q.difficulty}
+
                 </span>
+
 
             </div>
 
 
             <div class="question-number">
 
-                Question ${currentQuestion + 1}
-                of ${questions.length}
+                Question
+                ${currentQuestion + 1}
+                of
+                ${questions.length}
 
             </div>
 
 
-            <h2 class="question-text">
+            <div class="question-text">
 
                 ${q.question}
 
-            </h2>
+            </div>
+
 
     `;
 
 
     q.options.forEach(
-        (option, index) => {
+
+        function(option, index) {
+
 
             html += `
 
@@ -617,51 +1803,72 @@ function loadQuestion() {
                     class="option"
                     id="option${index}">
 
+
                     <input
+
                         type="radio"
+
                         name="answer"
+
                         value="${index}">
 
-                    ${index + 1}) ${option}
+
+                    ${index + 1})
+                    ${option}
+
 
                 </label>
 
             `;
 
         }
+
     );
 
 
     html += `
 
-        <div class="buttons">
 
-            <button
-                class="submit-btn"
-                onclick="submitAnswer()">
-
-                ✅ Submit Answer
-
-            </button>
+            <div class="buttons">
 
 
-            <button
-                class="next-btn"
-                id="nextButton"
-                onclick="nextQuestion()"
-                style="display:none">
+                <button
 
-                🔄 Next Question
+                    class="submit-btn"
 
-            </button>
+                    onclick="submitAnswer()">
 
-        </div>
+                    ✅ Submit Answer
+
+                </button>
 
 
-        <div
-            class="feedback"
-            id="feedback">
-        </div>
+                <button
+
+                    class="next-btn"
+
+                    id="nextButton"
+
+                    onclick="nextQuestion()"
+
+                    style="display:none">
+
+                    🔄 Next Question
+
+                </button>
+
+
+            </div>
+
+
+            <div
+
+                class="feedback"
+
+                id="feedback">
+
+            </div>
+
 
         </div>
 
@@ -670,17 +1877,24 @@ function loadQuestion() {
 
     document.getElementById(
         "quiz"
-    ).innerHTML = html;
+    ).innerHTML =
+        html;
 
 }
 
 
-/* SUBMIT */
+/* =====================================================
+   SUBMIT ANSWER
+===================================================== */
+
 
 function submitAnswer() {
 
+
     if (answered) {
+
         return;
+
     }
 
 
@@ -697,6 +1911,7 @@ function submitAnswer() {
         );
 
         return;
+
     }
 
 
@@ -706,11 +1921,21 @@ function submitAnswer() {
 
 
     const selectedAnswer =
-        Number(selected.value);
+        Number(
+            selected.value
+        );
 
 
     const correctAnswer =
-        questions[currentQuestion].answer;
+        questions[
+            currentQuestion
+        ].answer;
+
+
+    const q =
+        questions[
+            currentQuestion
+        ];
 
 
     const feedback =
@@ -719,9 +1944,12 @@ function submitAnswer() {
         );
 
 
+    /* Highlight correct */
+
     const correctOption =
         document.getElementById(
-            "option" + correctAnswer
+            "option" +
+            correctAnswer
         );
 
 
@@ -730,16 +1958,51 @@ function submitAnswer() {
     );
 
 
+    /* Correct */
+
     if (
         selectedAnswer ===
         correctAnswer
     ) {
 
+
         score++;
 
 
-        feedback.innerHTML =
-            "🟢 Correct Answer!";
+        feedback.innerHTML = `
+
+
+            <h3>
+                🟢 Correct Answer!
+            </h3>
+
+
+            <p>
+
+                <b>
+                    Answer:
+                </b>
+
+                ${q.options[correctAnswer]}
+
+            </p>
+
+
+            ${q.solution}
+
+
+            <h3>
+                ⚡ Shortcut
+            </h3>
+
+
+            <div class="formula">
+
+                ${q.shortcut}
+
+            </div>
+
+        `;
 
 
         feedback.className =
@@ -747,7 +2010,11 @@ function submitAnswer() {
 
     }
 
+
+    /* Wrong */
+
     else {
+
 
         const wrongOption =
             document.getElementById(
@@ -761,45 +2028,82 @@ function submitAnswer() {
         );
 
 
-        feedback.innerHTML =
+        feedback.innerHTML = `
 
-            "🔴 Wrong Answer.<br>" +
 
-            "Correct Answer: " +
+            <h3>
+                🔴 Wrong Answer
+            </h3>
 
-            questions[
-                currentQuestion
-            ].options[
-                correctAnswer
-            ] +
 
-            "<br><br>" +
+            <p>
 
-            "📖 Formula: " +
+                <b>
+                    Your Answer:
+                </b>
 
-            questions[
-                currentQuestion
-            ].explanation;
+                ${q.options[selectedAnswer]}
 
-        
+            </p>
+
+
+            <p>
+
+                <b>
+                    Correct Answer:
+                </b>
+
+                ${q.options[correctAnswer]}
+
+            </p>
+
+
+            ${q.solution}
+
+
+            <h3>
+                ⚡ Shortcut
+            </h3>
+
+
+            <div class="formula">
+
+                ${q.shortcut}
+
+            </div>
+
+        `;
+
+
         feedback.className =
             "feedback wrong-feedback";
 
     }
 
 
+    /* Show feedback */
+
     feedback.style.display =
         "block";
 
 
+    /* Disable options */
+
     document.querySelectorAll(
         'input[name="answer"]'
     ).forEach(
-        input => {
-            input.disabled = true;
+
+        function(input) {
+
+            input.disabled =
+                true;
+
         }
+
     );
 
+
+    /* Hide Submit */
 
     document.querySelector(
         ".submit-btn"
@@ -807,17 +2111,31 @@ function submitAnswer() {
         "none";
 
 
+    /* Show Next */
+
     document.getElementById(
         "nextButton"
     ).style.display =
         "inline-block";
 
+
+    /* Update score */
+
+    document.getElementById(
+        "score"
+    ).textContent =
+        score;
+
 }
 
 
-/* NEXT */
+/* =====================================================
+   NEXT QUESTION
+===================================================== */
+
 
 function nextQuestion() {
+
 
     currentQuestion++;
 
@@ -830,6 +2148,7 @@ function nextQuestion() {
         showResult();
 
         return;
+
     }
 
 
@@ -838,9 +2157,13 @@ function nextQuestion() {
 }
 
 
-/* RESULT */
+/* =====================================================
+   SHOW RESULT
+===================================================== */
+
 
 function showResult() {
+
 
     clearInterval(
         timerInterval
@@ -876,18 +2199,27 @@ function showResult() {
 
 
     const wrong =
-        attempted - score;
+        attempted -
+        score;
 
 
     const percentage =
         (score / total) * 100;
 
 
-    const accuracy =
-        attempted === 0
-        ? 0
-        : (score / attempted) * 100;
+    let accuracy = 0;
 
+
+    if (attempted > 0) {
+
+        accuracy =
+            (score / attempted)
+            * 100;
+
+    }
+
+
+    /* Result values */
 
     document.getElementById(
         "finalScore"
@@ -916,43 +2248,69 @@ function showResult() {
     document.getElementById(
         "accuracy"
     ).textContent =
-        accuracy.toFixed(1) + "%";
+        accuracy.toFixed(1)
+        + "%";
 
 
     document.getElementById(
         "percentageScore"
     ).textContent =
+        percentage.toFixed(1)
+        + "%";
+
+
+    /* Score progress */
+
+    document.getElementById(
+        "scoreProgressBar"
+    ).style.width =
         percentage + "%";
 
+
+    /* Performance message */
 
     let message;
 
 
-    if (percentage >= 80) {
+    if (
+        percentage >= 80
+    ) {
+
 
         message =
             "🏆 Excellent Performance!";
 
+
     }
 
-    else if (percentage >= 60) {
+    else if (
+        percentage >= 60
+    ) {
+
 
         message =
             "👍 Good Performance!";
 
+
     }
 
-    else if (percentage >= 40) {
+    else if (
+        percentage >= 40
+    ) {
+
 
         message =
             "📚 Average Performance. Keep Practicing!";
+
 
     }
 
     else {
 
+
         message =
-            "💪 Need More Practice. Don't Give Up!";
+            "💪 More Practice Needed. Don't Give Up!";
+
 
     }
 
@@ -965,9 +2323,13 @@ function showResult() {
 }
 
 
-/* TIMER */
+/* =====================================================
+   TIMER
+===================================================== */
+
 
 function startTimer() {
+
 
     clearInterval(
         timerInterval
@@ -976,7 +2338,9 @@ function startTimer() {
 
     timerInterval =
         setInterval(
+
             function() {
+
 
                 let minutes =
                     Math.floor(
@@ -993,23 +2357,36 @@ function startTimer() {
                 ).textContent =
 
                     String(minutes)
-                    .padStart(2, "0")
+                    .padStart(
+                        2,
+                        "0"
+                    )
 
-                    + ":" +
+                    +
+
+                    ":"
+
+                    +
 
                     String(seconds)
-                    .padStart(2, "0");
+                    .padStart(
+                        2,
+                        "0"
+                    );
 
 
                 if (
                     timeLeft <= 0
                 ) {
 
+
                     clearInterval(
                         timerInterval
                     );
 
+
                     showResult();
+
 
                     return;
 
@@ -1018,26 +2395,42 @@ function startTimer() {
 
                 timeLeft--;
 
+
             },
+
             1000
+
         );
 
 }
 
 
-/* RESTART */
+/* =====================================================
+   RESTART TEST
+===================================================== */
+
 
 function restartTest() {
 
-    currentQuestion = 0;
 
-    score = 0;
+    currentQuestion =
+        0;
 
-    attempted = 0;
 
-    answered = false;
+    score =
+        0;
 
-    timeLeft = 120;
+
+    attempted =
+        0;
+
+
+    answered =
+        false;
+
+
+    timeLeft =
+        120;
 
 
     document.getElementById(
@@ -1064,20 +2457,32 @@ function restartTest() {
         "block";
 
 
+    document.getElementById(
+        "score"
+    ).textContent =
+        "0";
+
+
     loadQuestion();
+
 
     startTimer();
 
 }
 
 
-/* START */
+/* =====================================================
+   START TEST
+===================================================== */
+
 
 loadQuestion();
 
 startTimer();
 
+
 </script>
 
 </body>
+
 </html>
