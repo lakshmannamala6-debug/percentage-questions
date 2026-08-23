@@ -1,6 +1,4 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1276,9 +1274,3 @@ function showAnswer(index) {
 
 </body>
 </html>
-'''
-
-path = Path("/mnt/data/percentage-test-save-next-mark-submit.html")
-path.write_text(html, encoding="utf-8")
-print(f"Created: {path}")
-print(f"Lines: {len(html.splitlines())}")
