@@ -261,6 +261,8 @@ let timer=null;
 let submitted=false;
 let answeredQuestions=new Set();
 let markedQuestions=new Set();
+let remainingTimes=[];
+let timerQuestion=-1;
 
 function renderQuestions(){
  const c=document.getElementById("questionContainer");
@@ -304,11 +306,20 @@ function showQuestion(){
 
 function startQuestionTimer(){
  clearInterval(timer);
- questionTime=30;
+ timerQuestion=currentQuestion;
+ questionTime=remainingTimes[currentQuestion] ?? 30;
  updateTimer();
+
  timer=setInterval(function(){
-  questionTime--;
+  if(timerQuestion!==currentQuestion){
+   clearInterval(timer);
+   return;
+  }
+
+  questionTime=Math.max(0, questionTime-1);
+  remainingTimes[currentQuestion]=questionTime;
   updateTimer();
+
   if(questionTime<=0){
    clearInterval(timer);
    saveCurrentAnswer();
@@ -335,8 +346,12 @@ function saveCurrentAnswer(){
 }
 
 function saveAndNext(){
+ // Save this question's current timer value before moving away.
+ remainingTimes[currentQuestion]=questionTime;
  saveCurrentAnswer();
+
  if(currentQuestion<questions.length-1){
+  clearInterval(timer);
   currentQuestion++;
   showQuestion();
   startQuestionTimer();
@@ -353,8 +368,14 @@ function saveAndNext(){
 
 function previousQuestion(){
  if(currentQuestion>0){
+  // Preserve the exact remaining time of the question being left.
+  remainingTimes[currentQuestion]=questionTime;
+  clearInterval(timer);
+
   currentQuestion--;
   showQuestion();
+
+  // Resume the previous question from its saved remaining time.
   startQuestionTimer();
  }
 }
