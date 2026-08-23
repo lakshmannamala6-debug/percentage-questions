@@ -3,178 +3,1080 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Percentage Questions</title>
+
+    <title>Percentage Mock Test</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f5f9;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: auto;
-        }
-
-        h1 {
-            text-align: center;
             color: #222;
         }
 
-        .question {
-            background: white;
+        /* HEADER */
+
+        .header {
+            background: #007bff;
+            color: white;
             padding: 20px;
-            margin: 20px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        /* TEST INFORMATION */
+
+        .test-info {
+            max-width: 850px;
+            margin: 15px auto;
+            padding: 15px;
+            background: white;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: center;
         }
 
-        .question h2 {
-            margin-top: 0;
+        .info-box {
+            padding: 10px;
+            border-radius: 7px;
+            background: #f2f5f9;
         }
 
-        .options {
-            margin: 15px 0;
-            line-height: 2;
+        .info-title {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .info-value {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .timer {
+            color: #dc3545;
+        }
+
+        /* PROGRESS */
+
+        .progress-container {
+            max-width: 850px;
+            margin: 15px auto;
+            padding: 0 10px;
+        }
+
+        .progress-background {
+            height: 12px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 25%;
+            background: #28a745;
+            transition: width 0.4s;
+        }
+
+        /* QUESTION */
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .question-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .question-pattern {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #e9f2ff;
+            color: #0056b3;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .question-number {
+            color: #007bff;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 21px;
+            margin: 10px 0 20px;
+        }
+
+        /* OPTIONS */
+
+        .option {
+            display: block;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            background: #f0f7ff;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        .correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724;
+        }
+
+        .wrong {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
         }
 
         button {
-            background: #007bff;
-            color: white;
             border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
+            padding: 12px 20px;
+            border-radius: 7px;
             cursor: pointer;
             font-size: 16px;
         }
 
-        button:hover {
-            background: #0056b3;
+        .submit-btn {
+            background: #007bff;
+            color: white;
         }
 
-        .answer {
+        .next-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .restart-btn {
+            background: #6f42c1;
+            color: white;
+        }
+
+        /* FEEDBACK */
+
+        .feedback {
             display: none;
-            margin-top: 15px;
-            padding: 12px;
-            background: #e8f5e9;
-            border-radius: 6px;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .correct-feedback {
+            background: #d4edda;
             color: #155724;
         }
+
+        .wrong-feedback {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* RESULT */
+
+        .result {
+            display: none;
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .final-score {
+            font-size: 45px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .performance {
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .performance-item {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f5f5f5;
+            border-radius: 7px;
+        }
+
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .result-table th,
+        .result-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        .result-table th {
+            background: #f2f5f9;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .header h1 {
+                font-size: 23px;
+            }
+
+            .test-info {
+                grid-template-columns: repeat(2, 1fr);
+                margin: 10px;
+            }
+
+            .question-card {
+                padding: 18px;
+            }
+
+            .question-text {
+                font-size: 18px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- HEADER -->
 
-    <h1>Percentage Questions</h1>
+<div class="header">
 
-    <!-- Question A -->
-    <div class="question">
-        <h2>(A) What percent of 408 is 306?</h2>
+    <h1>Percentage Mock Test</h1>
 
-        <div class="options">
-            1) 25% <br>
-            2) 75% <br>
-            3) 50% <br>
-            4) 80% <br>
-            5) 60%
-        </div>
+    <p>SSC Quantitative Aptitude Practice</p>
 
-        <button onclick="showAnswer('answerA')">
-            Show Answer
-        </button>
+</div>
 
-        <div id="answerA" class="answer">
-            <strong>Answer: 75%</strong><br><br>
-            Formula: (306 ÷ 408) × 100 = 75%
+
+<!-- TEST INFORMATION -->
+
+<div class="test-info">
+
+    <div class="info-box">
+        <div class="info-title">Questions</div>
+        <div class="info-value">
+            <span id="questionNumber">1</span> / 4
         </div>
     </div>
 
-
-    <!-- Question B -->
-    <div class="question">
-        <h2>(B) What percent of 600 is 450?</h2>
-
-        <div class="options">
-            1) 95% <br>
-            2) 45% <br>
-            3) 70% <br>
-            4) 85% <br>
-            5) 75%
-        </div>
-
-        <button onclick="showAnswer('answerB')">
-            Show Answer
-        </button>
-
-        <div id="answerB" class="answer">
-            <strong>Answer: 75%</strong><br><br>
-            Formula: (450 ÷ 600) × 100 = 75%
-        </div>
+    <div class="info-box">
+        <div class="info-title">Marks</div>
+        <div class="info-value">+1</div>
     </div>
 
-
-    <!-- Question C -->
-    <div class="question">
-        <h2>(C) What percent of 400 is 250?</h2>
-
-        <div class="options">
-            1) 87.5% <br>
-            2) 62.5% <br>
-            3) 60% <br>
-            4) 70% <br>
-            5) 80%
-        </div>
-
-        <button onclick="showAnswer('answerC')">
-            Show Answer
-        </button>
-
-        <div id="answerC" class="answer">
-            <strong>Answer: 62.5%</strong><br><br>
-            Formula: (250 ÷ 400) × 100 = 62.5%
-        </div>
+    <div class="info-box">
+        <div class="info-title">Negative</div>
+        <div class="info-value">0</div>
     </div>
 
-
-    <!-- Question D -->
-    <div class="question">
-        <h2>(D) What percent of 600 is 375?</h2>
-
-        <div class="options">
-            1) 80% <br>
-            2) 60% <br>
-            3) 62.5% <br>
-            4) 40% <br>
-            5) 45%
-        </div>
-
-        <button onclick="showAnswer('answerD')">
-            Show Answer
-        </button>
-
-        <div id="answerD" class="answer">
-            <strong>Answer: 62.5%</strong><br><br>
-            Formula: (375 ÷ 600) × 100 = 62.5%
+    <div class="info-box">
+        <div class="info-title">Time</div>
+        <div class="info-value timer">
+            ⏱️ <span id="timer">02:00</span>
         </div>
     </div>
 
 </div>
 
 
-<script>
-    function showAnswer(answerId) {
-        const answer = document.getElementById(answerId);
+<!-- PROGRESS -->
 
-        if (answer.style.display === "none" || answer.style.display === "") {
-            answer.style.display = "block";
-        } else {
-            answer.style.display = "none";
-        }
+<div class="progress-container">
+
+    <div class="progress-background">
+
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div class="container">
+
+    <div id="quiz"></div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div class="result" id="resultPage">
+
+    <h2>🎯 Test Completed</h2>
+
+    <div class="final-score">
+
+        <span id="finalScore">0</span>/4
+
+    </div>
+
+    <p id="resultMessage"></p>
+
+
+    <table class="result-table">
+
+        <tr>
+            <th>Performance</th>
+            <th>Result</th>
+        </tr>
+
+        <tr>
+            <td>Total Questions</td>
+            <td>4</td>
+        </tr>
+
+        <tr>
+            <td>Attempted</td>
+            <td id="attempted">0</td>
+        </tr>
+
+        <tr>
+            <td>Correct</td>
+            <td id="correctAnswers">0</td>
+        </tr>
+
+        <tr>
+            <td>Wrong</td>
+            <td id="wrongAnswers">0</td>
+        </tr>
+
+        <tr>
+            <td>Accuracy</td>
+            <td id="accuracy">0%</td>
+        </tr>
+
+        <tr>
+            <td>Percentage</td>
+            <td id="percentageScore">0%</td>
+        </tr>
+
+    </table>
+
+
+    <div class="performance">
+
+        <h3>📊 Performance Pattern</h3>
+
+        <div class="performance-item">
+            📚 Topic: Percentage
+        </div>
+
+        <div class="performance-item">
+            📝 Question Type: MCQ
+        </div>
+
+        <div class="performance-item">
+            🎯 Difficulty: Easy to Moderate
+        </div>
+
+        <div class="performance-item">
+            ⏱️ Time Limit: 2 Minutes
+        </div>
+
+        <div class="performance-item">
+            ⭐ Marking: +1 for correct answer
+        </div>
+
+        <div class="performance-item">
+            ❌ Negative Marking: 0
+        </div>
+
+    </div>
+
+
+    <button
+        class="restart-btn"
+        onclick="restartTest()">
+
+        🔄 Restart Test
+
+    </button>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+    {
+        question: "What percent of 408 is 306?",
+        options: [
+            "25%",
+            "75%",
+            "50%",
+            "80%",
+            "60%"
+        ],
+        answer: 1,
+        difficulty: "Easy",
+        explanation: "(306 ÷ 408) × 100 = 75%"
+    },
+
+    {
+        question: "What percent of 600 is 450?",
+        options: [
+            "95%",
+            "45%",
+            "70%",
+            "85%",
+            "75%"
+        ],
+        answer: 4,
+        difficulty: "Easy",
+        explanation: "(450 ÷ 600) × 100 = 75%"
+    },
+
+    {
+        question: "What percent of 400 is 250?",
+        options: [
+            "87.5%",
+            "62.5%",
+            "60%",
+            "70%",
+            "80%"
+        ],
+        answer: 1,
+        difficulty: "Moderate",
+        explanation: "(250 ÷ 400) × 100 = 62.5%"
+    },
+
+    {
+        question: "What percent of 600 is 375?",
+        options: [
+            "80%",
+            "60%",
+            "62.5%",
+            "40%",
+            "45%"
+        ],
+        answer: 2,
+        difficulty: "Moderate",
+        explanation: "(375 ÷ 600) × 100 = 62.5%"
     }
+
+];
+
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let attempted = 0;
+
+let answered = false;
+
+let timeLeft = 120;
+
+let timerInterval;
+
+
+/* LOAD QUESTION */
+
+function loadQuestion() {
+
+    answered = false;
+
+    const q = questions[currentQuestion];
+
+
+    document.getElementById(
+        "questionNumber"
+    ).textContent = currentQuestion + 1;
+
+
+    const progress =
+        ((currentQuestion + 1) /
+        questions.length) * 100;
+
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        progress + "%";
+
+
+    let html = `
+
+        <div class="question-card">
+
+            <div class="question-pattern">
+
+                <span class="tag">
+                    📚 Percentage
+                </span>
+
+                <span class="tag">
+                    📝 MCQ
+                </span>
+
+                <span class="tag">
+                    ⭐ +1 Mark
+                </span>
+
+                <span class="tag">
+                    🎯 ${q.difficulty}
+                </span>
+
+            </div>
+
+
+            <div class="question-number">
+
+                Question ${currentQuestion + 1}
+                of ${questions.length}
+
+            </div>
+
+
+            <h2 class="question-text">
+
+                ${q.question}
+
+            </h2>
+
+    `;
+
+
+    q.options.forEach(
+        (option, index) => {
+
+            html += `
+
+                <label
+                    class="option"
+                    id="option${index}">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="${index}">
+
+                    ${index + 1}) ${option}
+
+                </label>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+        <div class="buttons">
+
+            <button
+                class="submit-btn"
+                onclick="submitAnswer()">
+
+                ✅ Submit Answer
+
+            </button>
+
+
+            <button
+                class="next-btn"
+                id="nextButton"
+                onclick="nextQuestion()"
+                style="display:none">
+
+                🔄 Next Question
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="feedback"
+            id="feedback">
+        </div>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "quiz"
+    ).innerHTML = html;
+
+}
+
+
+/* SUBMIT */
+
+function submitAnswer() {
+
+    if (answered) {
+        return;
+    }
+
+
+    const selected =
+        document.querySelector(
+            'input[name="answer"]:checked'
+        );
+
+
+    if (!selected) {
+
+        alert(
+            "Please select one option."
+        );
+
+        return;
+    }
+
+
+    answered = true;
+
+    attempted++;
+
+
+    const selectedAnswer =
+        Number(selected.value);
+
+
+    const correctAnswer =
+        questions[currentQuestion].answer;
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    const correctOption =
+        document.getElementById(
+            "option" + correctAnswer
+        );
+
+
+    correctOption.classList.add(
+        "correct"
+    );
+
+
+    if (
+        selectedAnswer ===
+        correctAnswer
+    ) {
+
+        score++;
+
+
+        feedback.innerHTML =
+            "🟢 Correct Answer!";
+
+
+        feedback.className =
+            "feedback correct-feedback";
+
+    }
+
+    else {
+
+        const wrongOption =
+            document.getElementById(
+                "option" +
+                selectedAnswer
+            );
+
+
+        wrongOption.classList.add(
+            "wrong"
+        );
+
+
+        feedback.innerHTML =
+
+            "🔴 Wrong Answer.<br>" +
+
+            "Correct Answer: " +
+
+            questions[
+                currentQuestion
+            ].options[
+                correctAnswer
+            ] +
+
+            "<br><br>" +
+
+            "📖 Formula: " +
+
+            questions[
+                currentQuestion
+            ].explanation;
+
+        
+        feedback.className =
+            "feedback wrong-feedback";
+
+    }
+
+
+    feedback.style.display =
+        "block";
+
+
+    document.querySelectorAll(
+        'input[name="answer"]'
+    ).forEach(
+        input => {
+            input.disabled = true;
+        }
+    );
+
+
+    document.querySelector(
+        ".submit-btn"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "nextButton"
+    ).style.display =
+        "inline-block";
+
+}
+
+
+/* NEXT */
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        showResult();
+
+        return;
+    }
+
+
+    loadQuestion();
+
+}
+
+
+/* RESULT */
+
+function showResult() {
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    document.querySelector(
+        ".container"
+    ).style.display =
+        "none";
+
+
+    document.querySelector(
+        ".test-info"
+    ).style.display =
+        "none";
+
+
+    document.querySelector(
+        ".progress-container"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "resultPage"
+    ).style.display =
+        "block";
+
+
+    const total =
+        questions.length;
+
+
+    const wrong =
+        attempted - score;
+
+
+    const percentage =
+        (score / total) * 100;
+
+
+    const accuracy =
+        attempted === 0
+        ? 0
+        : (score / attempted) * 100;
+
+
+    document.getElementById(
+        "finalScore"
+    ).textContent =
+        score;
+
+
+    document.getElementById(
+        "attempted"
+    ).textContent =
+        attempted;
+
+
+    document.getElementById(
+        "correctAnswers"
+    ).textContent =
+        score;
+
+
+    document.getElementById(
+        "wrongAnswers"
+    ).textContent =
+        wrong;
+
+
+    document.getElementById(
+        "accuracy"
+    ).textContent =
+        accuracy.toFixed(1) + "%";
+
+
+    document.getElementById(
+        "percentageScore"
+    ).textContent =
+        percentage + "%";
+
+
+    let message;
+
+
+    if (percentage >= 80) {
+
+        message =
+            "🏆 Excellent Performance!";
+
+    }
+
+    else if (percentage >= 60) {
+
+        message =
+            "👍 Good Performance!";
+
+    }
+
+    else if (percentage >= 40) {
+
+        message =
+            "📚 Average Performance. Keep Practicing!";
+
+    }
+
+    else {
+
+        message =
+            "💪 Need More Practice. Don't Give Up!";
+
+    }
+
+
+    document.getElementById(
+        "resultMessage"
+    ).textContent =
+        message;
+
+}
+
+
+/* TIMER */
+
+function startTimer() {
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    timerInterval =
+        setInterval(
+            function() {
+
+                let minutes =
+                    Math.floor(
+                        timeLeft / 60
+                    );
+
+
+                let seconds =
+                    timeLeft % 60;
+
+
+                document.getElementById(
+                    "timer"
+                ).textContent =
+
+                    String(minutes)
+                    .padStart(2, "0")
+
+                    + ":" +
+
+                    String(seconds)
+                    .padStart(2, "0");
+
+
+                if (
+                    timeLeft <= 0
+                ) {
+
+                    clearInterval(
+                        timerInterval
+                    );
+
+                    showResult();
+
+                    return;
+
+                }
+
+
+                timeLeft--;
+
+            },
+            1000
+        );
+
+}
+
+
+/* RESTART */
+
+function restartTest() {
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    attempted = 0;
+
+    answered = false;
+
+    timeLeft = 120;
+
+
+    document.getElementById(
+        "resultPage"
+    ).style.display =
+        "none";
+
+
+    document.querySelector(
+        ".container"
+    ).style.display =
+        "block";
+
+
+    document.querySelector(
+        ".test-info"
+    ).style.display =
+        "grid";
+
+
+    document.querySelector(
+        ".progress-container"
+    ).style.display =
+        "block";
+
+
+    loadQuestion();
+
+    startTimer();
+
+}
+
+
+/* START */
+
+loadQuestion();
+
+startTimer();
+
 </script>
 
 </body>
